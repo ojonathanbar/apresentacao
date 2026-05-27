@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_prospeccao" targetNamespace="http://bpmn.io/schema/bpmn">
+
+  <bpmn:process id="Process_prospeccao" name="ProspecÃ§Ã£o GBP - Papo de Alcance" isExecutable="false">
+
+    <bpmn:startEvent id="Start_1" name="Lead&#10;identificado">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+
+    <bpmn:task id="Task_minerar" name="Minerar lead&#10;Maps + Instagram&#10;+ Meta Library">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_relatorio" name="Preencher relatÃ³rio&#10;GBP e identificar&#10;gaps prioritÃ¡rios">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_audio" name="Gravar Ã¡udio com&#10;pontuaÃ§Ã£o e gap&#10;especÃ­fico + enviar">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:exclusiveGateway id="GW_respondeu" name="Respondeu&#10;em 48h?">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_5_sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_5_nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:task id="Task_followup1" name="Follow-up 1:&#10;'RelatÃ³rio pronto,&#10;posso enviar?'">
+      <bpmn:incoming>Flow_5_nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_6_fu</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:exclusiveGateway id="GW_followup1" name="Respondeu&#10;ao follow-up?">
+      <bpmn:incoming>Flow_6_fu</bpmn:incoming>
+      <bpmn:outgoing>Flow_fu_sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_fu_nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:endEvent id="End_descartado" name="Arquivado&#10;(tentar em 30 dias)">
+      <bpmn:incoming>Flow_fu_nao</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:task id="Task_pdf" name="Enviar PDF do&#10;relatÃ³rio GBP">
+      <bpmn:incoming>Flow_5_sim</bpmn:incoming>
+      <bpmn:incoming>Flow_fu_sim</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:exclusiveGateway id="GW_reacao" name="ReaÃ§Ã£o&#10;ao PDF?">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_8_interesse</bpmn:outgoing>
+      <bpmn:outgoing>Flow_8_nao</bpmn:outgoing>
+      <bpmn:outgoing>Flow_8_sem</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:endEvent id="End_seminteresse" name="Arquivado&#10;sem interesse">
+      <bpmn:incoming>Flow_8_nao</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:task id="Task_fu_pdf" name="Follow-up suave:&#10;'O que achou&#10;do relatÃ³rio?'">
+      <bpmn:incoming>Flow_8_sem</bpmn:incoming>
+      <bpmn:outgoing>Flow_back_reacao</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_proposta" name="Propor reuniÃ£o&#10;de 15 minutos&#10;por chamada">
+      <bpmn:incoming>Flow_8_interesse</bpmn:incoming>
+      <bpmn:incoming>Flow_back_reacao</bpmn:incoming>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:exclusiveGateway id="GW_aceita" name="Aceita&#10;reuniÃ£o?">
+      <bpmn:incoming>Flow_9</bpmn:incoming>
+      <bpmn:outgoing>Flow_10_sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_10_nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:task id="Task_fu_reuniao" name="Follow-up em&#10;3 dias com&#10;novo convite">
+      <bpmn:incoming>Flow_10_nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_back_aceita</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_reuniao" name="Realizar reuniÃ£o&#10;e apresentar&#10;proposta completa">
+      <bpmn:incoming>Flow_10_sim</bpmn:incoming>
+      <bpmn:incoming>Flow_back_aceita</bpmn:incoming>
+      <bpmn:outgoing>Flow_11</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:exclusiveGateway id="GW_fechou" name="Fechou&#10;contrato?">
+      <bpmn:incoming>Flow_11</bpmn:incoming>
+      <bpmn:outgoing>Flow_12_sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_12_nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:task id="Task_fu_pos" name="Follow-up&#10;pÃ³s-reuniÃ£o&#10;(objeÃ§Ã£o + ajuste)">
+      <bpmn:incoming>Flow_12_nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_back_fechou</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Task_onboarding" name="Onboarding:&#10;acessos + briefing&#10;+ inÃ­cio do serviÃ§o">
+      <bpmn:incoming>Flow_12_sim</bpmn:incoming>
+      <bpmn:incoming>Flow_back_fechou</bpmn:incoming>
+      <bpmn:outgoing>Flow_13</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:endEvent id="End_cliente" name="Cliente ativo">
+      <bpmn:incoming>Flow_13</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_1" targetRef="Task_minerar"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_minerar" targetRef="Task_relatorio"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_relatorio" targetRef="Task_audio"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_audio" targetRef="GW_respondeu"/>
+    <bpmn:sequenceFlow id="Flow_5_sim" name="Sim" sourceRef="GW_respondeu" targetRef="Task_pdf"/>
+    <bpmn:sequenceFlow id="Flow_5_nao" name="NÃ£o (48h)" sourceRef="GW_respondeu" targetRef="Task_followup1"/>
+    <bpmn:sequenceFlow id="Flow_6_fu" sourceRef="Task_followup1" targetRef="GW_followup1"/>
+    <bpmn:sequenceFlow id="Flow_fu_sim" name="Sim" sourceRef="GW_followup1" targetRef="Task_pdf"/>
+    <bpmn:sequenceFlow id="Flow_fu_nao" name="NÃ£o" sourceRef="GW_followup1" targetRef="End_descartado"/>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_pdf" targetRef="GW_reacao"/>
+    <bpmn:sequenceFlow id="Flow_8_interesse" name="Interessante!" sourceRef="GW_reacao" targetRef="Task_proposta"/>
+    <bpmn:sequenceFlow id="Flow_8_nao" name="Sem interesse" sourceRef="GW_reacao" targetRef="End_seminteresse"/>
+    <bpmn:sequenceFlow id="Flow_8_sem" name="Sem resposta 24h" sourceRef="GW_reacao" targetRef="Task_fu_pdf"/>
+    <bpmn:sequenceFlow id="Flow_back_reacao" sourceRef="Task_fu_pdf" targetRef="Task_proposta"/>
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_proposta" targetRef="GW_aceita"/>
+    <bpmn:sequenceFlow id="Flow_10_sim" name="Sim" sourceRef="GW_aceita" targetRef="Task_reuniao"/>
+    <bpmn:sequenceFlow id="Flow_10_nao" name="NÃ£o agora" sourceRef="GW_aceita" targetRef="Task_fu_reuniao"/>
+    <bpmn:sequenceFlow id="Flow_back_aceita" sourceRef="Task_fu_reuniao" targetRef="Task_reuniao"/>
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_reuniao" targetRef="GW_fechou"/>
+    <bpmn:sequenceFlow id="Flow_12_sim" name="Sim" sourceRef="GW_fechou" targetRef="Task_onboarding"/>
+    <bpmn:sequenceFlow id="Flow_12_nao" name="NÃ£o" sourceRef="GW_fechou" targetRef="Task_fu_pos"/>
+    <bpmn:sequenceFlow id="Flow_back_fechou" sourceRef="Task_fu_pos" targetRef="Task_onboarding"/>
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Task_onboarding" targetRef="End_cliente"/>
+
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_prospeccao">
+
+      <bpmndi:BPMNShape id="S_Start_1" bpmnElement="Start_1">
+        <dc:Bounds x="152" y="242" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="140" y="285" width="60" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_minerar" bpmnElement="Task_minerar">
+        <dc:Bounds x="240" y="220" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_relatorio" bpmnElement="Task_relatorio">
+        <dc:Bounds x="430" y="220" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_audio" bpmnElement="Task_audio">
+        <dc:Bounds x="620" y="220" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_GW_respondeu" bpmnElement="GW_respondeu" isMarkerVisible="true">
+        <dc:Bounds x="815" y="235" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="798" y="292" width="84" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_followup1" bpmnElement="Task_followup1">
+        <dc:Bounds x="790" y="390" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_GW_followup1" bpmnElement="GW_followup1" isMarkerVisible="true">
+        <dc:Bounds x="975" y="405" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="958" y="462" width="84" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_End_descartado" bpmnElement="End_descartado">
+        <dc:Bounds x="977" y="530" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="952" y="573" width="86" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_pdf" bpmnElement="Task_pdf">
+        <dc:Bounds x="1000" y="220" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_GW_reacao" bpmnElement="GW_reacao" isMarkerVisible="true">
+        <dc:Bounds x="1195" y="235" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1180" y="292" width="80" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_End_seminteresse" bpmnElement="End_seminteresse">
+        <dc:Bounds x="1197" y="400" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1174" y="443" width="82" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_fu_pdf" bpmnElement="Task_fu_pdf">
+        <dc:Bounds x="1170" y="110" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_proposta" bpmnElement="Task_proposta">
+        <dc:Bounds x="1360" y="220" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_GW_aceita" bpmnElement="GW_aceita" isMarkerVisible="true">
+        <dc:Bounds x="1555" y="235" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1539" y="292" width="82" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_fu_reuniao" bpmnElement="Task_fu_reuniao">
+        <dc:Bounds x="1530" y="390" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_reuniao" bpmnElement="Task_reuniao">
+        <dc:Bounds x="1720" y="220" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_GW_fechou" bpmnElement="GW_fechou" isMarkerVisible="true">
+        <dc:Bounds x="1915" y="235" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1899" y="292" width="82" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_fu_pos" bpmnElement="Task_fu_pos">
+        <dc:Bounds x="1890" y="390" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_onboarding" bpmnElement="Task_onboarding">
+        <dc:Bounds x="2080" y="220" width="130" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_End_cliente" bpmnElement="End_cliente">
+        <dc:Bounds x="2272" y="242" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2254" y="285" width="72" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- EDGES -->
+      <bpmndi:BPMNEdge id="E_Flow_1" bpmnElement="Flow_1">
+        <di:waypoint x="188" y="260"/><di:waypoint x="240" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_2" bpmnElement="Flow_2">
+        <di:waypoint x="370" y="260"/><di:waypoint x="430" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_3" bpmnElement="Flow_3">
+        <di:waypoint x="560" y="260"/><di:waypoint x="620" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_4" bpmnElement="Flow_4">
+        <di:waypoint x="750" y="260"/><di:waypoint x="815" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_5_sim" bpmnElement="Flow_5_sim">
+        <di:waypoint x="865" y="260"/><di:waypoint x="1000" y="260"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="924" y="242" width="20" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_5_nao" bpmnElement="Flow_5_nao">
+        <di:waypoint x="840" y="285"/><di:waypoint x="840" y="390"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="848" y="330" width="48" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_6_fu" bpmnElement="Flow_6_fu">
+        <di:waypoint x="920" y="430"/><di:waypoint x="975" y="430"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_fu_sim" bpmnElement="Flow_fu_sim">
+        <di:waypoint x="1025" y="405"/><di:waypoint x="1065" y="405"/><di:waypoint x="1065" y="300"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1030" y="385" width="20" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_fu_nao" bpmnElement="Flow_fu_nao">
+        <di:waypoint x="1000" y="455"/><di:waypoint x="995" y="530"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1005" y="485" width="20" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_7" bpmnElement="Flow_7">
+        <di:waypoint x="1130" y="260"/><di:waypoint x="1195" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_8_interesse" bpmnElement="Flow_8_interesse">
+        <di:waypoint x="1245" y="260"/><di:waypoint x="1360" y="260"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1270" y="242" width="60" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_8_nao" bpmnElement="Flow_8_nao">
+        <di:waypoint x="1220" y="285"/><di:waypoint x="1215" y="400"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1156" y="335" width="55" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_8_sem" bpmnElement="Flow_8_sem">
+        <di:waypoint x="1220" y="235"/><di:waypoint x="1220" y="190"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1228" y="198" width="65" height="27"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_back_reacao" bpmnElement="Flow_back_reacao">
+        <di:waypoint x="1300" y="150"/><di:waypoint x="1425" y="150"/><di:waypoint x="1425" y="220"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_9" bpmnElement="Flow_9">
+        <di:waypoint x="1490" y="260"/><di:waypoint x="1555" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_10_sim" bpmnElement="Flow_10_sim">
+        <di:waypoint x="1605" y="260"/><di:waypoint x="1720" y="260"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1650" y="242" width="20" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_10_nao" bpmnElement="Flow_10_nao">
+        <di:waypoint x="1580" y="285"/><di:waypoint x="1580" y="390"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1588" y="330" width="60" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_back_aceita" bpmnElement="Flow_back_aceita">
+        <di:waypoint x="1660" y="430"/><di:waypoint x="1785" y="430"/><di:waypoint x="1785" y="300"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_11" bpmnElement="Flow_11">
+        <di:waypoint x="1850" y="260"/><di:waypoint x="1915" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_12_sim" bpmnElement="Flow_12_sim">
+        <di:waypoint x="1965" y="260"/><di:waypoint x="2080" y="260"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2010" y="242" width="20" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_12_nao" bpmnElement="Flow_12_nao">
+        <di:waypoint x="1940" y="285"/><di:waypoint x="1955" y="390"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1963" y="330" width="20" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_back_fechou" bpmnElement="Flow_back_fechou">
+        <di:waypoint x="2020" y="430"/><di:waypoint x="2145" y="430"/><di:waypoint x="2145" y="300"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_Flow_13" bpmnElement="Flow_13">
+        <di:waypoint x="2210" y="260"/><di:waypoint x="2272" y="260"/>
+      </bpmndi:BPMNEdge>
+
+    </bpmndi:BPMNPlane>
