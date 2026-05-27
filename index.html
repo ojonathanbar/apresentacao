@@ -11,54 +11,74 @@
         :root { --dark: #1e293b; --blue: #2563eb; --blue-light: #eff6ff; --gray: #f8fafc; --border: #e2e8f0; --accent: #10b981; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: #cbd5e1; display: flex; min-height: 100vh; }
-        
+
         /* PAINEL DE CONTROLE */
         #painel { width: 450px; background: #fff; padding: 25px; border-right: 1px solid var(--border); height: 100vh; overflow-y: auto; position: fixed; box-shadow: 2px 0 15px rgba(0,0,0,0.1); z-index: 10; }
+        .brand-panel { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid var(--blue-light); }
+        .brand-panel h2 { font-family: 'Montserrat', sans-serif; font-size: 20px; color: var(--blue); font-weight: 800; display: flex; align-items: center; gap: 8px;}
+        .section-title { font-size: 13px; font-weight: 700; color: var(--dark); text-transform: uppercase; margin: 20px 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px;}
+        
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter'; }
-        
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; }
+
         .service-card { background: var(--gray); border: 1px solid var(--border); padding: 15px; border-radius: 8px; margin-bottom: 12px; }
-        .sub-options { background: #fff; padding: 10px; border-radius: 6px; border: 1px dashed var(--border); margin-top: 10px; }
-        .sub-options .input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 12px; }
-        .sub-options input { width: 60px; padding: 4px; }
+        .service-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-weight: 700; font-size: 13px; color: var(--dark);}
+        .sub-options { background: #fff; padding: 10px; border-radius: 6px; border: 1px dashed var(--border); margin-top: 10px; font-size: 12px;}
+        .input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .input-row input { width: 60px; padding: 4px; }
         
-        .btn-gerar { width: 100%; background: var(--blue); color: white; border: none; padding: 16px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 20px; }
+        .btn-gerar { width: 100%; background: var(--blue); color: white; border: none; padding: 16px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 20px; margin-bottom: 40px; }
 
         /* PREVIEW PDF */
         #preview { margin-left: 450px; flex: 1; padding: 40px; display: flex; justify-content: center; }
-        .page { background: white; width: 800px; min-height: 1131px; padding: 50px 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
+        .page { background: white; width: 800px; min-height: 1131px; padding: 50px 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; }
         
-        .category-block { margin-bottom: 35px; display: none; }
-        .cat-title { font-family: 'Montserrat', sans-serif; font-size: 18px; color: var(--dark); border-bottom: 2px solid var(--blue-light); padding-bottom: 8px; margin-bottom: 20px; }
+        .header-prop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .cat-title { font-family: 'Montserrat', sans-serif; font-size: 18px; color: var(--dark); border-bottom: 2px solid var(--blue-light); padding-bottom: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;}
+        .item-servico { margin-bottom: 25px; }
+        .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--blue); margin-bottom: 10px; }
+        
+        /* LISTAS */
         .serv-list { list-style: none; padding-left: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
         .serv-list li { font-size: 12.5px; color: #334155; position: relative; padding-left: 20px; }
         .serv-list li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--accent); position: absolute; left: 0; }
         
-        .price-box { background: var(--blue-light); border-radius: 8px; padding: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .val-destaque { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; color: var(--blue); }
-        .footer-contato { background: var(--dark); color: white; padding: 25px 60px; position: absolute; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center;}
-
+        .price-box { background: var(--blue-light); border-radius: 8px; padding: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #dbeafe;}
+        .val-destaque { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; color: var(--blue); }
+        .val-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
+        
         @media print { #painel { display: none; } #preview { margin-left: 0; padding: 0; } .page { box-shadow: none; } }
     </style>
 </head>
 <body>
 
     <div id="painel">
-        <h2>Papo de Alcance</h2>
+        <div class="brand-panel"><h2>Papo de Alcance</h2><p>Gerador de Propostas</p></div>
         <div class="form-group"><label>Cliente</label><input type="text" id="nomeCliente" value="Barbearia No Trato!" oninput="atualizar()"></div>
         
+        <div class="section-title">Módulo 1: Fundação</div>
+        <select id="parc-fundacao" onchange="atualizar()"><option value="1">À vista</option><option value="12" selected>12x Cartão</option></select>
+        <div class="service-card"><input type="checkbox" id="chk-gmn" checked onchange="atualizar()"> GMN<input type="number" id="val-gmn" value="597" oninput="atualizar()"></div>
+        <div class="service-card"><input type="checkbox" id="chk-lp" checked onchange="atualizar()"> Landing Page<input type="number" id="val-lp" value="797" oninput="atualizar()"></div>
+
+        <div class="section-title">Módulo 2: Presença</div>
+        <select id="parc-presenca" onchange="atualizar()"><option value="1">Recorrente</option></select>
         <div class="service-card">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <input type="checkbox" id="chk-social" checked onchange="atualizar()"> <strong>Gestão de Social Media</strong>
-            </div>
-            <input type="number" id="val-social" value="897" oninput="atualizar()" placeholder="Valor Mensal">
-            
+            <input type="checkbox" id="chk-social" checked onchange="atualizar()"> Social Media
+            <input type="number" id="val-social" value="897" oninput="atualizar()">
             <div class="sub-options">
-                <div class="input-row"><input type="number" id="qtd-posts" value="12" oninput="atualizar()"> Posts no Feed</div>
-                <div class="input-row"><input type="number" id="qtd-reels" value="4" oninput="atualizar()"> Roteiros de Reels</div>
-                <div class="input-row"><input type="number" id="qtd-stories" value="20" oninput="atualizar()"> Stories Mensais</div>
+                <div class="input-row"><input type="number" id="qtd-posts" value="12" oninput="atualizar()"> Posts</div>
+                <div class="input-row"><input type="number" id="qtd-reels" value="4" oninput="atualizar()"> Reels</div>
+                <div class="input-row"><input type="number" id="qtd-stories" value="20" oninput="atualizar()"> Stories</div>
             </div>
+        </div>
+
+        <div class="section-title">Módulo 3: Tráfego</div>
+        <div class="service-card">
+            <input type="checkbox" id="chk-ads" checked onchange="atualizar()"> Tráfego Pago
+            <input type="number" id="val-ads" value="697" oninput="atualizar()">
+            <select id="tipo-ads" onchange="atualizar()"><option value="meta">Meta Ads</option><option value="google">Google Ads</option></select>
         </div>
 
         <button class="btn-gerar" onclick="window.print()">Salvar PDF</button>
@@ -66,42 +86,84 @@
 
     <div id="preview">
         <div class="page">
-            <h1 id="display-cliente">Barbearia No Trato!</h1>
-            
-            <div id="cat-presenca" class="category-block" style="display:block;">
-                <h2 class="cat-title"><i class="fa-solid fa-hashtag"></i> Fase 2: Gestão de Presença</h2>
-                <h3>Social Media: Gestão Estratégica</h3>
-                <div id="desc-social"></div>
+            <div class="header-prop">
+                <div><h1>Papo de Alcance</h1></div>
+                <div style="text-align:right">Proposta para:<br><strong id="display-cliente"></strong></div>
+            </div>
 
-                <div class="price-box">
-                    <div>Investimento Mensal</div>
-                    <div id="val-box-presenca" class="val-destaque">R$ 897</div>
+            <div id="cat-fundacao" class="category-block">
+                <h2 class="cat-title">Fase 1: Fundação & Estrutura</h2>
+                <div id="box-gmn" class="item-servico">
+                    <h3>Google Meu Negócio</h3>
+                    <ul class="serv-list"><li>Mapeamento de palavras-chave locais</li><li>Otimização de geolocalização</li><li>Configuração de gatilhos orgânicos</li><li>Resposta estratégica a avaliações</li></ul>
                 </div>
+                <div id="box-lp" class="item-servico">
+                    <h3>Landing Page de Alta Conversão</h3>
+                    <ul class="serv-list"><li>Design mobile-first veloz</li><li>Botões de agendamento sem atrito</li><li>Copywriting focado em fechamento</li><li>Otimização técnica de SEO</li></ul>
+                </div>
+                <div class="price-box"><div class="val-sub">Investimento de Estruturação</div><div id="val-box-fundacao" class="val-destaque"></div></div>
+            </div>
+
+            <div id="cat-presenca" class="category-block">
+                <h2 class="cat-title">Fase 2: Presença & Autoridade</h2>
+                <div id="box-social" class="item-servico">
+                    <h3>Gestão de Social Media</h3>
+                    <div id="desc-social"></div>
+                </div>
+                <div class="price-box"><div class="val-sub">Mensalidade de Gestão</div><div id="val-box-presenca" class="val-destaque"></div></div>
+            </div>
+
+            <div id="cat-trafego" class="category-block">
+                <h2 class="cat-title">Fase 3: Escala & Vendas</h2>
+                <div id="box-ads" class="item-servico">
+                    <h3 id="title-ads">Gestão de Tráfego</h3>
+                    <div id="desc-ads"></div>
+                </div>
+                <div class="price-box"><div class="val-sub">Honorários de Aceleração</div><div id="val-box-trafego" class="val-destaque"></div></div>
             </div>
         </div>
     </div>
 
     <script>
-        function formataBRL(valor) { return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+        const taxasNuTap = { 12: 0.1238 };
+        function formataBRL(v) { return Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+        
+        function renderPreco(valor, parcelas) {
+            if (parcelas > 1) {
+                let total = valor / (1 - taxasNuTap[parcelas]);
+                return `<div class="val-destaque">${parcelas}x de ${formataBRL(total/parcelas)}</div><div class="val-sub">ou ${formataBRL(valor)} à vista</div>`;
+            }
+            return `<div class="val-destaque">${formataBRL(valor)}</div>`;
+        }
 
         function atualizar() {
             document.getElementById('display-cliente').innerText = document.getElementById('nomeCliente').value;
             
-            // Lógica Social Media
-            let posts = document.getElementById('qtd-posts').value;
-            let reels = document.getElementById('qtd-reels').value;
-            let stories = document.getElementById('qtd-stories').value;
-            let valor = document.getElementById('val-social').value;
+            // Fundação
+            let vGmn = parseFloat(document.getElementById('val-gmn').value || 0);
+            let vLp = parseFloat(document.getElementById('val-lp').value || 0);
+            let totalFundacao = (document.getElementById('chk-gmn').checked ? vGmn : 0) + (document.getElementById('chk-lp').checked ? vLp : 0);
+            document.getElementById('cat-fundacao').style.display = totalFundacao > 0 ? 'block' : 'none';
+            document.getElementById('val-box-fundacao').innerHTML = renderPreco(totalFundacao, parseInt(document.getElementById('parc-fundacao').value));
 
-            let html = `<ul class="serv-list">
-                <li><strong>${posts} Postagens no Feed:</strong> Design autoral e copy persuasiva.</li>
-                <li><strong>${reels} Roteiros de Reels:</strong> Direcionados para atração e viralização.</li>
-                <li><strong>${stories} Stories:</strong> Sequência estratégica para engajamento diário.</li>
-                <li><strong>Copywriting Persuasivo:</strong> Legendas focadas em converter leitura em agendamento.</li>
-            </ul>`;
-            
-            document.getElementById('desc-social').innerHTML = html;
-            document.getElementById('val-box-presenca').innerText = formataBRL(valor);
+            // Social
+            if(document.getElementById('chk-social').checked) {
+                document.getElementById('cat-presenca').style.display = 'block';
+                let posts = document.getElementById('qtd-posts').value;
+                let reels = document.getElementById('qtd-reels').value;
+                let stories = document.getElementById('qtd-stories').value;
+                document.getElementById('desc-social').innerHTML = `<ul class="serv-list"><li>${posts} Posts no Feed</li><li>${reels} Roteiros de Reels</li><li>${stories} Stories estratégicos</li><li>Copywriting Persuasivo</li></ul>`;
+                document.getElementById('val-box-presenca').innerHTML = renderPreco(document.getElementById('val-social').value, 1);
+            } else { document.getElementById('cat-presenca').style.display = 'none'; }
+
+            // Tráfego
+            if(document.getElementById('chk-ads').checked) {
+                document.getElementById('cat-trafego').style.display = 'block';
+                let tipo = document.getElementById('tipo-ads').value;
+                document.getElementById('title-ads').innerText = tipo === 'meta' ? "Captação via Meta Ads" : "Captação via Google Ads";
+                document.getElementById('desc-ads').innerHTML = `<ul class="serv-list"><li>Gestão de campanha geolocalizada</li><li>Otimização diária de orçamento</li><li>Testes A/B de criativos</li><li>Relatórios de performance</li></ul>`;
+                document.getElementById('val-box-trafego').innerHTML = renderPreco(document.getElementById('val-ads').value, 1);
+            } else { document.getElementById('cat-trafego').style.display = 'none'; }
         }
         window.onload = atualizar;
     </script>
