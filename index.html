@@ -21,6 +21,8 @@
         .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; margin-top: 4px; }
         .service-list { list-style: none; margin: 10px 0; }
         .service-list li { font-size: 12px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .sub-control { font-size: 11px; margin-top: 8px; display: flex; gap: 5px; flex-wrap: wrap; }
+        .sub-control input { width: 45px; padding: 3px; }
         
         /* PREVIEW */
         #preview { margin-left: 450px; flex: 1; padding: 40px; display: flex; justify-content: center; }
@@ -63,8 +65,10 @@
         <div class="section-title">Módulo 2: Presença</div>
         <select id="parc-mod2" onchange="render()"><option value="1">Mensal</option><option value="6">Semestral</option></select>
         <input type="checkbox" id="c-social" checked onchange="render()"> Ativar Social Media <input type="number" id="v-social" value="897" oninput="render()">
-        <div style="font-size:11px; margin-top:10px;">
-            Posts: <input type="number" id="n-posts" value="12" style="width:40px" oninput="render()">
+        <div class="sub-control">
+            <input type="number" id="n-posts" value="12" oninput="render()"> Posts |
+            <input type="number" id="n-reels" value="4" oninput="render()"> Reels |
+            <input type="number" id="n-stories" value="20" oninput="render()"> Stories
         </div>
     </div>
 
@@ -72,6 +76,10 @@
         <div class="section-title">Módulo 3: Tráfego</div>
         <select id="parc-mod3" onchange="render()"><option value="1">Recorrente</option></select>
         <input type="checkbox" id="c-ads" checked onchange="render()"> Ativar Tráfego <input type="number" id="v-ads" value="697" oninput="render()">
+        <select id="tipo-ads" onchange="render()" style="margin-top:5px">
+            <option value="Meta Ads (Instagram/Facebook)">Meta Ads</option>
+            <option value="Google Ads (Pesquisa/Maps)">Google Ads</option>
+        </select>
     </div>
     
     <button onclick="window.print()" style="width:100%; padding:15px; background:var(--blue); color:white; border:none; border-radius:6px; cursor:pointer;">Gerar PDF</button>
@@ -130,17 +138,21 @@
         // --- MÓDULO 2 ---
         let v2 = parseFloat(document.getElementById('v-social').value || 0);
         let nPosts = document.getElementById('n-posts').value;
+        let nReels = document.getElementById('n-reels').value;
+        let nStories = document.getElementById('n-stories').value;
+        
         if(document.getElementById('c-social').checked) {
             document.getElementById('box-mod2').style.display = 'block';
-            document.getElementById('list-mod2').innerHTML = `<div class="serv-card" style="grid-column: span 2"><h4>Gestão Estratégica de Redes Sociais</h4><ul><li>${nPosts} Artes mensais com foco em atração de clientes</li><li>Roteirização de Reels com foco em viralização e alcance</li><li>Gestão diária de Stories para retenção de audiência</li><li>Copywriting persuasivo focado em agendamento/venda</li><li>Análise de métricas e otimização constante do calendário</li></ul></div>`;
+            document.getElementById('list-mod2').innerHTML = `<div class="serv-card" style="grid-column: span 2"><h4>Gestão Estratégica de Redes Sociais</h4><ul><li>${nPosts} Artes mensais com foco em atração de clientes</li><li>${nReels} Roteiros de Reels com foco em viralização e alcance</li><li>${nStories} Stories estratégicos para retenção de audiência</li><li>Copywriting persuasivo focado em agendamento/venda</li><li>Análise de métricas e otimização constante</li></ul></div>`;
             document.getElementById('val-mod2').innerText = fmt(v2);
         } else { document.getElementById('box-mod2').style.display = 'none'; }
 
         // --- MÓDULO 3 ---
         let v3 = parseFloat(document.getElementById('v-ads').value || 0);
+        let tipoAds = document.getElementById('tipo-ads').value;
         if(document.getElementById('c-ads').checked) {
             document.getElementById('box-mod3').style.display = 'block';
-            document.getElementById('list-mod3').innerHTML = `<div class="serv-card" style="grid-column: span 2"><h4>Gestão de Tráfego Pago (Ads)</h4><ul><li>Configuração de campanhas baseadas em geolocalização e raio</li><li>Otimização diária de orçamento visando o menor CPA (Custo por Aquisição)</li><li>Testes A/B de criativos para encontrar o anúncio campeão</li><li>Relatórios de transparência focados em retorno sobre investimento (ROI)</li><li>Gestão ativa de lances para dominar o leilão local</li></ul></div>`;
+            document.getElementById('list-mod3').innerHTML = `<div class="serv-card" style="grid-column: span 2"><h4>Gestão de Tráfego Pago - ${tipoAds}</h4><ul><li>Configuração de campanhas baseadas em geolocalização e raio</li><li>Otimização diária de orçamento visando o menor CPA</li><li>Testes A/B de criativos para encontrar o anúncio campeão</li><li>Relatórios de transparência focados em retorno (ROI)</li><li>Gestão ativa de lances para dominar o leilão local</li></ul></div>`;
             document.getElementById('val-mod3').innerText = fmt(v3);
         } else { document.getElementById('box-mod3').style.display = 'none'; }
     }
