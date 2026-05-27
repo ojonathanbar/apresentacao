@@ -16,7 +16,7 @@
         #painel { width: 450px; background: #fff; padding: 25px; border-right: 1px solid var(--border); height: 100vh; overflow-y: auto; position: fixed; box-shadow: 2px 0 15px rgba(0,0,0,0.1); z-index: 10; }
         .brand-panel { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid var(--blue-light); }
         .brand-panel h2 { font-family: 'Montserrat', sans-serif; font-size: 20px; color: var(--blue); font-weight: 800; display: flex; align-items: center; gap: 8px;}
-        .section-title { font-size: 13px; font-weight: 700; color: var(--dark); text-transform: uppercase; margin: 20px 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px;}
+        .section-title { font-size: 13px; font-weight: 700; color: var(--dark); text-transform: uppercase; margin: 25px 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px;}
         
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
@@ -36,7 +36,7 @@
         
         .header-prop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .cat-title { font-family: 'Montserrat', sans-serif; font-size: 18px; color: var(--dark); border-bottom: 2px solid var(--blue-light); padding-bottom: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;}
-        .item-servico { margin-bottom: 25px; }
+        .item-servico { margin-bottom: 20px; }
         .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--blue); margin-bottom: 10px; }
         
         /* LISTAS */
@@ -59,8 +59,10 @@
         
         <div class="section-title">Módulo 1: Fundação</div>
         <select id="parc-fundacao" onchange="atualizar()"><option value="1">À vista</option><option value="12" selected>12x Cartão</option></select>
-        <div class="service-card"><input type="checkbox" id="chk-gmn" checked onchange="atualizar()"> GMN<input type="number" id="val-gmn" value="597" oninput="atualizar()"></div>
-        <div class="service-card"><input type="checkbox" id="chk-lp" checked onchange="atualizar()"> Landing Page<input type="number" id="val-lp" value="797" oninput="atualizar()"></div>
+        <div class="service-card"><input type="checkbox" id="chk-gmn" checked onchange="atualizar()"> GMN <input type="number" id="val-gmn" value="597" oninput="atualizar()"></div>
+        <div class="service-card"><input type="checkbox" id="chk-lp" checked onchange="atualizar()"> Landing Page <input type="number" id="val-lp" value="797" oninput="atualizar()"></div>
+        <div class="service-card"><input type="checkbox" id="chk-inst" onchange="atualizar()"> Site Institucional <input type="number" id="val-inst" value="1500" oninput="atualizar()"></div>
+        <div class="service-card"><input type="checkbox" id="chk-ecom" onchange="atualizar()"> E-commerce <input type="number" id="val-ecom" value="2500" oninput="atualizar()"></div>
 
         <div class="section-title">Módulo 2: Presença</div>
         <select id="parc-presenca" onchange="atualizar()"><option value="1">Recorrente</option></select>
@@ -93,14 +95,10 @@
 
             <div id="cat-fundacao" class="category-block">
                 <h2 class="cat-title">Fase 1: Fundação & Estrutura</h2>
-                <div id="box-gmn" class="item-servico">
-                    <h3>Google Meu Negócio</h3>
-                    <ul class="serv-list"><li>Mapeamento de palavras-chave locais</li><li>Otimização de geolocalização</li><li>Configuração de gatilhos orgânicos</li><li>Resposta estratégica a avaliações</li></ul>
-                </div>
-                <div id="box-lp" class="item-servico">
-                    <h3>Landing Page de Alta Conversão</h3>
-                    <ul class="serv-list"><li>Design mobile-first veloz</li><li>Botões de agendamento sem atrito</li><li>Copywriting focado em fechamento</li><li>Otimização técnica de SEO</li></ul>
-                </div>
+                <div id="box-gmn" class="item-servico"><h3>Google Meu Negócio</h3><ul class="serv-list"><li>Mapeamento de palavras-chave locais</li><li>Otimização de geolocalização</li><li>Configuração de gatilhos orgânicos</li><li>Resposta estratégica a avaliações</li></ul></div>
+                <div id="box-lp" class="item-servico"><h3>Landing Page</h3><ul class="serv-list"><li>Design mobile-first veloz</li><li>Botões de agendamento sem atrito</li><li>Copywriting focado em fechamento</li><li>Otimização técnica de SEO</li></ul></div>
+                <div id="box-inst" class="item-servico"><h3>Site Institucional</h3><ul class="serv-list"><li>Design corporativo profissional</li><li>Portfólio de serviços completo</li><li>Mapa e canais de contato</li><li>SEO On-Page</li></ul></div>
+                <div id="box-ecom" class="item-servico"><h3>E-commerce</h3><ul class="serv-list"><li>Cadastro de produtos</li><li>Integração de pagamentos</li><li>Configuração logística</li><li>Gestão de estoque</li></ul></div>
                 <div class="price-box"><div class="val-sub">Investimento de Estruturação</div><div id="val-box-fundacao" class="val-destaque"></div></div>
             </div>
 
@@ -125,35 +123,32 @@
     </div>
 
     <script>
-        const taxasNuTap = { 12: 0.1238 };
         function formataBRL(v) { return Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
         
-        function renderPreco(valor, parcelas) {
-            if (parcelas > 1) {
-                let total = valor / (1 - taxasNuTap[parcelas]);
-                return `<div class="val-destaque">${parcelas}x de ${formataBRL(total/parcelas)}</div><div class="val-sub">ou ${formataBRL(valor)} à vista</div>`;
-            }
-            return `<div class="val-destaque">${formataBRL(valor)}</div>`;
-        }
-
         function atualizar() {
             document.getElementById('display-cliente').innerText = document.getElementById('nomeCliente').value;
             
             // Fundação
-            let vGmn = parseFloat(document.getElementById('val-gmn').value || 0);
-            let vLp = parseFloat(document.getElementById('val-lp').value || 0);
-            let totalFundacao = (document.getElementById('chk-gmn').checked ? vGmn : 0) + (document.getElementById('chk-lp').checked ? vLp : 0);
+            let totalFundacao = 0;
+            ['gmn', 'lp', 'inst', 'ecom'].forEach(id => {
+                let check = document.getElementById(`chk-${id}`);
+                let box = document.getElementById(`box-${id}`);
+                if(check.checked) {
+                    box.style.display = 'block';
+                    totalFundacao += parseFloat(document.getElementById(`val-${id}`).value || 0);
+                } else { box.style.display = 'none'; }
+            });
             document.getElementById('cat-fundacao').style.display = totalFundacao > 0 ? 'block' : 'none';
-            document.getElementById('val-box-fundacao').innerHTML = renderPreco(totalFundacao, parseInt(document.getElementById('parc-fundacao').value));
+            document.getElementById('val-box-fundacao').innerText = formataBRL(totalFundacao);
 
             // Social
             if(document.getElementById('chk-social').checked) {
                 document.getElementById('cat-presenca').style.display = 'block';
-                let posts = document.getElementById('qtd-posts').value;
-                let reels = document.getElementById('qtd-reels').value;
-                let stories = document.getElementById('qtd-stories').value;
-                document.getElementById('desc-social').innerHTML = `<ul class="serv-list"><li>${posts} Posts no Feed</li><li>${reels} Roteiros de Reels</li><li>${stories} Stories estratégicos</li><li>Copywriting Persuasivo</li></ul>`;
-                document.getElementById('val-box-presenca').innerHTML = renderPreco(document.getElementById('val-social').value, 1);
+                let p = document.getElementById('qtd-posts').value;
+                let r = document.getElementById('qtd-reels').value;
+                let s = document.getElementById('qtd-stories').value;
+                document.getElementById('desc-social').innerHTML = `<ul class="serv-list"><li>${p} Posts no Feed</li><li>${r} Roteiros de Reels</li><li>${s} Stories estratégicos</li><li>Copywriting Persuasivo</li></ul>`;
+                document.getElementById('val-box-presenca').innerText = formataBRL(document.getElementById('val-social').value);
             } else { document.getElementById('cat-presenca').style.display = 'none'; }
 
             // Tráfego
@@ -162,7 +157,7 @@
                 let tipo = document.getElementById('tipo-ads').value;
                 document.getElementById('title-ads').innerText = tipo === 'meta' ? "Captação via Meta Ads" : "Captação via Google Ads";
                 document.getElementById('desc-ads').innerHTML = `<ul class="serv-list"><li>Gestão de campanha geolocalizada</li><li>Otimização diária de orçamento</li><li>Testes A/B de criativos</li><li>Relatórios de performance</li></ul>`;
-                document.getElementById('val-box-trafego').innerHTML = renderPreco(document.getElementById('val-ads').value, 1);
+                document.getElementById('val-box-trafego').innerText = formataBRL(document.getElementById('val-ads').value);
             } else { document.getElementById('cat-trafego').style.display = 'none'; }
         }
         window.onload = atualizar;
