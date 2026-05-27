@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Papo de Alcance — Proposal Builder</title>
 
@@ -35,9 +35,9 @@ body{
     min-height:100vh;
 }
 
-/* ===================== */
+/* ========================= */
 /* PAINEL */
-/* ===================== */
+/* ========================= */
 
 #panel{
     width:420px;
@@ -97,8 +97,7 @@ body{
 }
 
 .form-group input,
-.form-group textarea,
-.form-group select{
+.form-group textarea{
     width:100%;
     padding:12px;
     border:none;
@@ -132,7 +131,7 @@ body{
 }
 
 .check input[type="number"]{
-    width:100px;
+    width:110px;
     padding:10px;
     border:none;
     border-radius:8px;
@@ -175,19 +174,9 @@ body{
     font-size:15px;
 }
 
-.info{
-    margin-top:20px;
-    padding:16px;
-    background:rgba(255,255,255,.04);
-    border-radius:14px;
-    color:#94a3b8;
-    line-height:1.7;
-    font-size:13px;
-}
-
-/* ===================== */
+/* ========================= */
 /* PREVIEW */
-/* ===================== */
+/* ========================= */
 
 #preview{
     flex:1;
@@ -206,9 +195,9 @@ body{
     0 20px 50px rgba(0,0,0,.15);
 }
 
-/* ===================== */
+/* ========================= */
 /* HERO */
-/* ===================== */
+/* ========================= */
 
 .hero{
     background:#020617;
@@ -292,9 +281,9 @@ body{
     font-weight:800;
 }
 
-/* ===================== */
+/* ========================= */
 /* CONTENT */
-/* ===================== */
+/* ========================= */
 
 .content{
     padding:55px;
@@ -352,9 +341,9 @@ body{
     font-weight:bold;
 }
 
-/* ===================== */
+/* ========================= */
 /* PRICE */
-/* ===================== */
+/* ========================= */
 
 .price-box{
     margin-top:24px;
@@ -383,30 +372,38 @@ body{
     margin-top:24px;
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:14px;
 }
 
 .installment-card{
     background:white;
     border:1px solid #dbeafe;
     border-radius:16px;
-    padding:16px;
+    padding:18px;
 }
 
-.installment-card-top{
+.installment-top{
     display:flex;
     justify-content:space-between;
-    margin-bottom:10px;
-    gap:10px;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
 }
 
-.installment-card-top strong:last-child{
+.installment-top strong:last-child{
     color:#2563eb;
+    font-size:18px;
 }
 
-/* ===================== */
+.installment-lines{
+    color:#475569;
+    line-height:1.9;
+    font-size:14px;
+}
+
+/* ========================= */
 /* TIMELINE */
-/* ===================== */
+/* ========================= */
 
 .timeline{
     border-left:2px solid #dbeafe;
@@ -435,11 +432,17 @@ body{
 
 .timeline-item [contenteditable]{
     outline:none;
+    padding:2px 4px;
+    border-radius:4px;
 }
 
-/* ===================== */
+.timeline-item [contenteditable]:hover{
+    background:#f1f5f9;
+}
+
+/* ========================= */
 /* CTA */
-/* ===================== */
+/* ========================= */
 
 .cta{
     background:#020617;
@@ -471,9 +474,9 @@ body{
     font-weight:700;
 }
 
-/* ===================== */
+/* ========================= */
 /* PRINT */
-/* ===================== */
+/* ========================= */
 
 @page{
     size:A4;
@@ -504,9 +507,9 @@ body{
 
 }
 
-/* ===================== */
+/* ========================= */
 /* RESPONSIVO */
-/* ===================== */
+/* ========================= */
 
 @media(max-width:1200px){
 
@@ -536,7 +539,9 @@ body{
 
 <body>
 
+<!-- ========================= -->
 <!-- PAINEL -->
+<!-- ========================= -->
 
 <div id="panel">
 
@@ -595,47 +600,35 @@ body{
         </div>
 
         <div class="check">
-
             <div class="check-left">
                 <input type="checkbox" id="c-gmn" checked onchange="render()">
                 GMN
             </div>
-
             <input type="number" id="v-gmn" value="597" oninput="render()">
-
         </div>
 
         <div class="check">
-
             <div class="check-left">
                 <input type="checkbox" id="c-lp" checked onchange="render()">
                 Landing Page
             </div>
-
             <input type="number" id="v-lp" value="997" oninput="render()">
-
         </div>
 
         <div class="check">
-
             <div class="check-left">
                 <input type="checkbox" id="c-site" onchange="render()">
                 Site Institucional
             </div>
-
             <input type="number" id="v-site" value="2497" oninput="render()">
-
         </div>
 
         <div class="check">
-
             <div class="check-left">
                 <input type="checkbox" id="c-ecom" onchange="render()">
                 E-commerce
             </div>
-
             <input type="number" id="v-ecom" value="3997" oninput="render()">
-
         </div>
 
     </div>
@@ -649,53 +642,26 @@ body{
         </div>
 
         <div class="check">
-
             <div class="check-left">
                 <input type="checkbox" id="c-social" checked onchange="render()">
                 Gestão de Conteúdo
             </div>
-
             <input type="number" id="v-social" value="1497" oninput="render()">
-
         </div>
 
         <div class="metric-input">
-
             <label>Posts</label>
-
-            <input
-                type="number"
-                id="n-posts"
-                value="12"
-                oninput="render()"
-            >
-
+            <input type="number" id="n-posts" value="12" oninput="render()">
         </div>
 
         <div class="metric-input">
-
             <label>Reels</label>
-
-            <input
-                type="number"
-                id="n-reels"
-                value="8"
-                oninput="render()"
-            >
-
+            <input type="number" id="n-reels" value="8" oninput="render()">
         </div>
 
         <div class="metric-input">
-
             <label>Stories</label>
-
-            <input
-                type="number"
-                id="n-stories"
-                value="20"
-                oninput="render()"
-            >
-
+            <input type="number" id="n-stories" value="20" oninput="render()">
         </div>
 
     </div>
@@ -709,38 +675,24 @@ body{
         </div>
 
         <div class="check">
-
             <div class="check-left">
                 <input type="checkbox" id="c-meta" checked onchange="render()">
                 Meta Ads
             </div>
-
             <input type="number" id="v-meta" value="997" oninput="render()">
-
         </div>
 
         <div class="check">
-
             <div class="check-left">
                 <input type="checkbox" id="c-google" checked onchange="render()">
                 Google Ads
             </div>
-
             <input type="number" id="v-google" value="997" oninput="render()">
-
         </div>
 
         <div class="form-group">
-
-            <label>Verba de Anúncios</label>
-
-            <input
-                type="number"
-                id="adBudget"
-                value="1500"
-                oninput="render()"
-            >
-
+            <label>Verba Recomendada</label>
+            <input type="number" id="adBudget" value="1500" oninput="render()">
         </div>
 
     </div>
@@ -752,314 +704,311 @@ body{
         GERAR PDF
     </button>
 
-    <div class="info">
-
-        O preview mostra exatamente como o PDF será exportado.
-
-    </div>
-
 </div>
 
+<!-- ========================= -->
 <!-- PREVIEW -->
+<!-- ========================= -->
 
 <div id="preview">
 
-    <div class="page">
+<div class="page">
 
-        <!-- HERO -->
+<!-- HERO -->
 
-        <section class="hero">
+<section class="hero">
 
-            <div class="brand">
+    <div class="brand">
 
-                <div>
-
-                    <h2>
-                        Papo de <span>Alcance</span>
-                    </h2>
-
-                    <p>
-                        Estratégia • Posicionamento • Crescimento
-                    </p>
-
-                </div>
-
-                <div class="whatsapp">
-
-                    <small>WhatsApp</small>
-
-                    <strong>
-                        (41) 99816-1160
-                    </strong>
-
-                </div>
-
-            </div>
-
-            <div class="badge">
-                Proposta Estratégica de Crescimento
-            </div>
-
-            <h1>
-                Estratégia Digital<br>
-                Orientada para Resultado
-            </h1>
-
-            <p>
-                Estruturação completa da presença digital da empresa,
-                fortalecendo autoridade, aquisição e crescimento previsível.
-            </p>
-
-            <div class="client-box">
-
-                <strong>
-                    Proposta desenvolvida para:
-                </strong>
-
-                <div
-                    class="client-name"
-                    id="out-client"
-                ></div>
-
-            </div>
-
-        </section>
-
-        <!-- CONTENT -->
-
-        <div class="content">
-
-            <!-- DIAGNÓSTICO -->
-
-            <section class="section">
-
-                <h2 class="section-title">
-                    Diagnóstico Estratégico
-                </h2>
-
-                <p
-                    class="section-sub"
-                    id="out-diagnostic"
-                ></p>
-
-            </section>
-
-            <!-- FUNDAÇÃO -->
-
-            <section
-                class="section"
-                id="foundationSection"
-            >
-
-                <h2 class="section-title">
-                    Fundação Digital
-                </h2>
-
-                <p class="section-sub">
-                    Estruturação dos ativos digitais essenciais
-                    para posicionamento, autoridade e conversão.
-                </p>
-
-                <div
-                    class="cards"
-                    id="foundationCards"
-                ></div>
-
-                <div class="price-box">
-
-                    <div class="price-label">
-                        Investimento Setup
-                    </div>
-
-                    <div
-                        class="price"
-                        id="foundationPrice"
-                    ></div>
-
-                    <div
-                        class="installments"
-                        id="foundationInstallments"
-                    ></div>
-
-                </div>
-
-            </section>
-
-            <!-- SOCIAL -->
-
-            <section
-                class="section"
-                id="socialSection"
-            >
-
-                <h2 class="section-title">
-                    Social Media
-                </h2>
-
-                <p class="section-sub">
-                    Conteúdo estratégico para posicionamento,
-                    retenção e geração contínua de demanda.
-                </p>
-
-                <div
-                    class="cards"
-                    id="socialCards"
-                ></div>
-
-                <div class="price-box">
-
-                    <div class="price-label">
-                        Investimento Mensal
-                    </div>
-
-                    <div
-                        class="price"
-                        id="socialPrice"
-                    ></div>
-
-                </div>
-
-            </section>
-
-            <!-- ADS -->
-
-            <section
-                class="section"
-                id="adsSection"
-            >
-
-                <h2 class="section-title">
-                    Tráfego Pago
-                </h2>
-
-                <p class="section-sub">
-                    Campanhas estratégicas orientadas para geração
-                    de leads e aquisição previsível de clientes.
-                </p>
-
-                <div
-                    class="cards"
-                    id="adsCards"
-                ></div>
-
-                <div class="price-box">
-
-                    <div class="price-label">
-                        Gestão de Tráfego
-                    </div>
-
-                    <div
-                        class="price"
-                        id="adsPrice"
-                    ></div>
-
-                    <div style="margin-top:18px; color:#475569;">
-
-                        Verba recomendada:
-                        <strong id="adBudgetOut"></strong>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- CRONOGRAMA -->
-
-            <section class="section">
-
-                <h2 class="section-title">
-                    Cronograma de Execução
-                </h2>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-
-                        <h4 contenteditable="true">
-                            Semana 1 — Planejamento Estratégico
-                        </h4>
-
-                        <p contenteditable="true">
-                            Diagnóstico aprofundado, definição de objetivos e estrutura estratégica inicial.
-                        </p>
-
-                    </div>
-
-                    <div class="timeline-item">
-
-                        <h4 contenteditable="true">
-                            Semana 2 — Estruturação Digital
-                        </h4>
-
-                        <p contenteditable="true">
-                            Desenvolvimento dos ativos digitais e implementação operacional.
-                        </p>
-
-                    </div>
-
-                    <div class="timeline-item">
-
-                        <h4 contenteditable="true">
-                            Semana 3 — Ativação de Campanhas
-                        </h4>
-
-                        <p contenteditable="true">
-                            Início das campanhas e publicação do calendário estratégico.
-                        </p>
-
-                    </div>
-
-                    <div class="timeline-item">
-
-                        <h4 contenteditable="true">
-                            Semana 4 — Otimização & Escala
-                        </h4>
-
-                        <p contenteditable="true">
-                            Ajustes de performance, análise de métricas e otimização de resultados.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </div>
-
-        <!-- CTA -->
-
-        <section class="cta">
+        <div>
 
             <h2>
-                Vamos iniciar seu crescimento digital?
+                Papo de <span>Alcance</span>
             </h2>
 
             <p>
-                Após aprovação da proposta,
-                iniciaremos imediatamente o planejamento
-                estratégico e implementação operacional.
+                Estratégia • Posicionamento • Crescimento
             </p>
 
-            <a href="#" class="cta-btn">
-                APROVAR PROPOSTA
-            </a>
+        </div>
 
-            <p style="margin-top:30px; font-size:14px;">
+        <div class="whatsapp">
 
-                Atendimento via WhatsApp:
+            <small>WhatsApp</small>
 
-                <strong style="color:white;">
-                    (41) 99816-1160
-                </strong>
+            <strong>
+                (41) 99816-1160
+            </strong>
 
-            </p>
-
-        </section>
+        </div>
 
     </div>
 
+    <div class="badge">
+        Proposta Estratégica de Crescimento
+    </div>
+
+    <h1>
+        Estratégia Digital<br>
+        Orientada para Resultado
+    </h1>
+
+    <p>
+        Estruturação completa da presença digital da empresa,
+        fortalecendo autoridade, aquisição e crescimento previsível.
+    </p>
+
+    <div class="client-box">
+
+        <strong>
+            Proposta desenvolvida para:
+        </strong>
+
+        <div
+            class="client-name"
+            id="out-client"
+        ></div>
+
+    </div>
+
+</section>
+
+<!-- CONTENT -->
+
+<div class="content">
+
+    <!-- DIAGNÓSTICO -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Diagnóstico Estratégico
+        </h2>
+
+        <p
+            class="section-sub"
+            id="out-diagnostic"
+        ></p>
+
+    </section>
+
+    <!-- FUNDAÇÃO -->
+
+    <section
+        class="section"
+        id="foundationSection"
+    >
+
+        <h2 class="section-title">
+            Fundação Digital
+        </h2>
+
+        <p class="section-sub">
+            Estruturação dos ativos digitais essenciais
+            para posicionamento, autoridade e conversão.
+        </p>
+
+        <div
+            class="cards"
+            id="foundationCards"
+        ></div>
+
+        <div class="price-box">
+
+            <div class="price-label">
+                Investimento Setup
+            </div>
+
+            <div
+                class="price"
+                id="foundationPrice"
+            ></div>
+
+            <!-- PARCELAMENTO -->
+
+            <div
+                class="installments"
+                id="foundationInstallments"
+            ></div>
+
+        </div>
+
+    </section>
+
+    <!-- SOCIAL -->
+
+    <section
+        class="section"
+        id="socialSection"
+    >
+
+        <h2 class="section-title">
+            Social Media
+        </h2>
+
+        <p class="section-sub">
+            Conteúdo estratégico para posicionamento,
+            retenção e geração contínua de demanda.
+        </p>
+
+        <div
+            class="cards"
+            id="socialCards"
+        ></div>
+
+        <div class="price-box">
+
+            <div class="price-label">
+                Investimento Mensal
+            </div>
+
+            <div
+                class="price"
+                id="socialPrice"
+            ></div>
+
+        </div>
+
+    </section>
+
+    <!-- ADS -->
+
+    <section
+        class="section"
+        id="adsSection"
+    >
+
+        <h2 class="section-title">
+            Tráfego Pago
+        </h2>
+
+        <p class="section-sub">
+            Campanhas estratégicas orientadas para geração
+            de leads e aquisição previsível de clientes.
+        </p>
+
+        <div
+            class="cards"
+            id="adsCards"
+        ></div>
+
+        <div class="price-box">
+
+            <div class="price-label">
+                Gestão de Tráfego
+            </div>
+
+            <div
+                class="price"
+                id="adsPrice"
+            ></div>
+
+            <div style="margin-top:18px; color:#475569;">
+
+                Verba recomendada:
+                <strong id="adBudgetOut"></strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CRONOGRAMA EDITÁVEL -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Cronograma de Execução
+        </h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <h4 contenteditable="true">
+                    Semana 1 — Planejamento Estratégico
+                </h4>
+
+                <p contenteditable="true">
+                    Diagnóstico aprofundado, definição de objetivos e estrutura estratégica inicial.
+                </p>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <h4 contenteditable="true">
+                    Semana 2 — Estruturação Digital
+                </h4>
+
+                <p contenteditable="true">
+                    Desenvolvimento dos ativos digitais e implementação operacional.
+                </p>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <h4 contenteditable="true">
+                    Semana 3 — Ativação de Campanhas
+                </h4>
+
+                <p contenteditable="true">
+                    Início das campanhas e publicação do calendário estratégico.
+                </p>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <h4 contenteditable="true">
+                    Semana 4 — Otimização & Escala
+                </h4>
+
+                <p contenteditable="true">
+                    Ajustes de performance, análise de métricas e otimização de resultados.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>
+        Vamos iniciar seu crescimento digital?
+    </h2>
+
+    <p>
+        Após aprovação da proposta,
+        iniciaremos imediatamente o planejamento
+        estratégico e implementação operacional.
+    </p>
+
+    <a href="#" class="cta-btn">
+        APROVAR PROPOSTA
+    </a>
+
+    <p style="margin-top:30px; font-size:14px;">
+
+        Atendimento via WhatsApp:
+
+        <strong style="color:white;">
+            (41) 99816-1160
+        </strong>
+
+    </p>
+
+</section>
+
+</div>
 </div>
 
 <script>
@@ -1090,7 +1039,7 @@ function render(){
 
     let foundationHTML = '';
     let foundationTotal = 0;
-    let installmentHTML = '';
+    let installmentsHTML = '';
 
     const foundation = [
 
@@ -1165,11 +1114,11 @@ function render(){
 
             `;
 
-            installmentHTML += `
+            installmentsHTML += `
 
                 <div class="installment-card">
 
-                    <div class="installment-card-top">
+                    <div class="installment-top">
 
                         <strong>
                             ${s.title}
@@ -1181,25 +1130,25 @@ function render(){
 
                     </div>
 
-                    <div style="line-height:1.9; color:#475569;">
+                    <div class="installment-lines">
 
                         • 3x de
                         <strong>
-                            ${money(value/3)}
+                            ${money(value / 3)}
                         </strong>
 
                         <br>
 
                         • 6x de
                         <strong>
-                            ${money(value/6)}
+                            ${money(value / 6)}
                         </strong>
 
                         <br>
 
                         • 12x de
                         <strong>
-                            ${money(value/12)}
+                            ${money(value / 12)}
                         </strong>
 
                         no cartão via Nubank Tap
@@ -1221,7 +1170,7 @@ function render(){
     money(foundationTotal);
 
     document.getElementById('foundationInstallments').innerHTML =
-    installmentHTML;
+    installmentsHTML;
 
     document.getElementById('foundationSection').style.display =
     foundationHTML ? 'block' : 'none';
