@@ -3,441 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposta Comercial - No Trato!</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Gerador de Propostas - Papo de Alcance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
-            --primary: #1a1a1a;
-            --secondary: #2c3e50;
-            --accent: #D4AF37; /* Dourado Barbearia */
-            --text-dark: #333333;
-            --text-light: #5f6368;
-            --bg-gray: #f8f9fa;
+            --dark: #0f172a;
+            --blue: #2563eb;
+            --gray: #f8fafc;
+            --border: #e2e8f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #e2e2e2;
-            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            background-color: #cbd5e1;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
+            min-height: 100vh;
         }
 
-        /* BOTÃO DE IMPRESSÃO */
-        .btn-print {
-            background-color: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: 0.3s;
+        /* PAINEL ESQUERDO (CONTROLES) */
+        #painel {
+            width: 400px;
+            background: #fff;
+            padding: 30px;
+            border-right: 1px solid var(--border);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
         }
 
-        .btn-print:hover {
-            background-color: var(--accent);
-            color: #000;
+        h2.title { font-family: 'Montserrat', sans-serif; font-size: 20px; color: var(--dark); margin-bottom: 25px; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 5px; text-transform: uppercase; }
+        .form-group input[type="text"], .form-group input[type="number"] { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter', sans-serif; }
+
+        .service-card {
+            background: var(--gray);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
-        /* PÁGINA A4 FORMATADA */
-        .page-a4 {
-            background-color: #fff;
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm 20mm;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
+        .service-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-weight: 600; font-size: 14px;}
+        .service-header input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+
+        .btn-gerar {
+            width: 100%; background: var(--blue); color: white; border: none; padding: 15px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; margin-top: 10px; transition: 0.2s;
+        }
+        .btn-gerar:hover { background: #1d4ed8; }
+
+        /* PAINEL DIREITO (PDF VIEW) */
+        #preview { margin-left: 400px; flex: 1; padding: 40px; display: flex; justify-content: center; }
+
+        .page {
+            background: white; width: 800px; min-height: 1131px; padding: 60px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: relative;
         }
 
-        /* HEADER DA PROPOSTA */
-        .header-proposta {
-            border-bottom: 3px solid var(--accent);
-            padding-bottom: 25px;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
+        .header-prop { border-bottom: 3px solid var(--blue); padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .brand h1 { font-family: 'Montserrat', sans-serif; font-size: 26px; color: var(--dark); }
+        .brand span { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+        .client { text-align: right; font-size: 14px; color: #334155; }
 
-        .brand h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-        }
+        .doc-title { font-family: 'Montserrat', sans-serif; font-size: 22px; text-align: center; margin-bottom: 40px; color: var(--dark); }
 
-        .brand span {
-            font-size: 14px;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-            display: block;
-            margin-top: 5px;
-        }
+        .item-servico { margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px dashed var(--border); display: none; }
+        .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 16px; color: var(--blue); margin-bottom: 8px; }
+        .item-servico p { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 10px; text-align: justify; }
+        .item-valor { font-weight: 700; color: var(--dark); font-size: 15px; display: flex; justify-content: space-between; background: var(--gray); padding: 10px; border-radius: 4px; }
 
-        .client-info {
-            text-align: right;
-            font-size: 14px;
-            line-height: 1.6;
-        }
+        .total-box { margin-top: 40px; background: var(--dark); color: white; padding: 20px; border-radius: 8px; text-align: right; }
+        .total-box span { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; display: block; margin-bottom: 5px;}
+        .total-box h2 { font-family: 'Montserrat', sans-serif; font-size: 28px; }
 
-        .client-info strong {
-            color: var(--primary);
-            font-size: 16px;
-            font-family: 'Montserrat', sans-serif;
-        }
+        .footer { position: absolute; bottom: 40px; left: 60px; right: 60px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid var(--border); padding-top: 20px; }
 
-        /* TÍTULO PRINCIPAL */
-        .doc-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* FASES DO PROJETO */
-        .phase-section {
-            margin-bottom: 40px;
-            page-break-inside: avoid;
-        }
-
-        .phase-header {
-            background-color: var(--bg-gray);
-            border-left: 5px solid var(--accent);
-            padding: 15px 20px;
-            margin-bottom: 20px;
-        }
-
-        .phase-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 18px;
-            color: var(--primary);
-            text-transform: uppercase;
-        }
-
-        .phase-header p {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-top: 5px;
-            font-style: italic;
-        }
-
-        /* DETALHAMENTO DOS SERVIÇOS */
-        .service-list {
-            list-style: none;
-            padding-left: 10px;
-        }
-
-        .service-list li {
-            margin-bottom: 20px;
-            position: relative;
-            padding-left: 25px;
-            line-height: 1.6;
-        }
-
-        .service-list li::before {
-            content: '\f0da';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 2px;
-            color: var(--accent);
-            font-size: 18px;
-        }
-
-        .service-title {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 15px;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .service-desc {
-            font-size: 14px;
-            color: var(--text-light);
-            text-align: justify;
-        }
-
-        .service-note {
-            display: block;
-            font-size: 12px;
-            color: #888;
-            margin-top: 5px;
-            background: #fff9e6;
-            padding: 5px 10px;
-            border-radius: 4px;
-            border-left: 2px solid #f1c40f;
-            width: fit-content;
-        }
-
-        /* TABELAS DE VALORES */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        th {
-            background-color: var(--primary);
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-            padding: 12px 15px;
-            text-align: left;
-        }
-
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            color: var(--text-dark);
-        }
-
-        tr:last-child td {
-            font-weight: 700;
-            background-color: var(--bg-gray);
-            border-bottom: 2px solid var(--accent);
-        }
-
-        .align-right { text-align: right; }
-        .align-center { text-align: center; }
-
-        /* FOOTER */
-        .doc-footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-light);
-        }
-
-        /* MODO DE IMPRESSÃO - REMOVE TUDO QUE NÃO FOR A PÁGINA */
         @media print {
-            body {
-                background-color: #fff;
-                padding: 0;
-            }
-            .btn-print {
-                display: none;
-            }
-            .page-a4 {
-                box-shadow: none;
-                width: 100%;
-                min-height: auto;
-                padding: 15mm;
-            }
-            @page {
-                size: A4;
-                margin: 0;
-            }
+            body { background: white; }
+            #painel { display: none; }
+            #preview { margin-left: 0; padding: 0; }
+            .page { box-shadow: none; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-print" onclick="window.print()">
-        <i class="fa-solid fa-file-pdf"></i> Salvar Proposta em PDF
-    </button>
-
-    <div class="page-a4">
+    <div id="painel">
+        <h2 class="title"><i class="fa-solid fa-file-signature"></i> Montar Proposta</h2>
         
-        <div class="header-proposta">
-            <div class="brand">
-                <h1>Papo de Alcance</h1>
-                <span>Consultoria & SEO Local</span>
-            </div>
-            <div class="client-info">
-                Proposta Comercial elaborada para:<br>
-                <strong>Barbearia No Trato!</strong><br>
-                A/C: Diana (Gestão de Elite)
-            </div>
+        <div class="form-group">
+            <label>Nome do Cliente / Empresa</label>
+            <input type="text" id="nomeCliente" value="Barbearia No Trato!" oninput="atualizar()">
         </div>
 
-        <h2 class="doc-title">Escopo de Serviços e Implementação</h2>
-
-        <div class="phase-section">
-            <div class="phase-header">
-                <h2>Fase 1: Fundação</h2>
-                <p>O Alicerce Técnico e Estruturação Digital</p>
+        <div class="service-card">
+            <div class="service-header">
+                <input type="checkbox" id="chk-gmn" checked onchange="atualizar()">
+                <label for="chk-gmn" style="margin:0;">1. Google Meu Negócio</label>
             </div>
-            
-            <ul class="service-list">
-                <li>
-                    <span class="service-title">Estruturação GMN (Google Meu Negócio) Profissional</span>
-                    <span class="service-desc">Otimização completa do perfil com foco em rankeamento orgânico local. Inclui a definição precisa de categorias comerciais, mapeamento e inserção de palavras-chave, atualização minuciosa de horários de funcionamento, configuração de botões de contato e cadastro completo do catálogo de serviços oferecidos.</span>
-                    <span class="service-note">*Nota Exclusiva: Captação de mídias e fotos em 360º não está inclusa neste escopo, sendo orçada à parte.</span>
-                </li>
-                <li>
-                    <span class="service-title">Site / Landing Page de Alta Conversão</span>
-                    <span class="service-desc">Criação de uma página otimizada para capturar visitantes do Google e transformá-los em clientes, com botões de agendamento rápido e design responsivo focado em smartphones.</span>
-                </li>
-                <li>
-                    <span class="service-title">Setup Técnico de Redes Sociais</span>
-                    <span class="service-desc">Padronização estética e funcional do perfil. Envolve a definição da identidade visual (paleta de cores e tipologia de fontes), estabelecimento do tom da marca, vinculação técnica correta da página do Facebook com o Instagram e a configuração/ativação do calendário estratégico de postagens.</span>
-                </li>
-            </ul>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ativo de Estruturação</th>
-                        <th class="align-center">Tipo</th>
-                        <th class="align-right">Investimento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Estruturação GMN (Google Meu Negócio) Profissional</td>
-                        <td class="align-center">Único</td>
-                        <td class="align-right">R$ 597,00</td>
-                    </tr>
-                    <tr>
-                        <td>Site / Landing Page de Alta Conversão</td>
-                        <td class="align-center">Único</td>
-                        <td class="align-right">R$ 797,00</td>
-                    </tr>
-                    <tr>
-                        <td>Setup Técnico das Redes Sociais</td>
-                        <td class="align-center">Único</td>
-                        <td class="align-right">Incluso</td>
-                    </tr>
-                    <tr>
-                        <td>TOTAL ÚNICO DA FUNDAÇÃO</td>
-                        <td class="align-center">-</td>
-                        <td class="align-right">R$ 1.394,00</td>
-                    </tr>
-                </tbody>
-            </table>
+            <input type="number" id="val-gmn" value="597" placeholder="R$ Valor" oninput="atualizar()">
         </div>
 
-        <div class="phase-section">
-            <div class="phase-header">
-                <h2>Fase 2: Presença</h2>
-                <p>Gestão de Autoridade e Branding Diário</p>
+        <div class="service-card">
+            <div class="service-header">
+                <input type="checkbox" id="chk-site" checked onchange="atualizar()">
+                <label for="chk-site" style="margin:0;">2. Landing Page (Site)</label>
             </div>
-            
-            <ul class="service-list">
-                <li>
-                    <span class="service-title">Social Media (Gestão de Conteúdo)</span>
-                    <span class="service-desc">Criação, design e agendamento de 12 postagens mensais de alta qualidade (artes e carrosséis). Além disso, inclui a criação de roteiros estratégicos para vídeos curtos (Reels) focados em retenção, acompanhados da edição profissional.</span>
-                    <span class="service-note">*A captação bruta das imagens para os Reels é realizada pelo cliente diretamente no local.</span>
-                </li>
-                <li>
-                    <span class="service-title">Gestão Mensal Google Meu Negócio</span>
-                    <span class="service-desc">Manutenção da ficha para garantir alta relevância perante o algoritmo. Inclui postagens de atualizações frequentes com o uso de palavras-chave locais, resposta profissional e otimizada a todas as avaliações recebidas, e atualização contínua de fotos e informações gerais.</span>
-                </li>
-            </ul>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Gestão de Crescimento Mensal</th>
-                        <th class="align-center">Frequência</th>
-                        <th class="align-right">Investimento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Social Media (12 posts + Roteiros de Reels + Edição)</td>
-                        <td class="align-center">Mensal</td>
-                        <td class="align-right">R$ 897,00</td>
-                    </tr>
-                    <tr>
-                        <td>Gestão Ativa e Manutenção do Google Meu Negócio</td>
-                        <td class="align-center">Mensal</td>
-                        <td class="align-right">R$ 197,00</td>
-                    </tr>
-                    <tr>
-                        <td>Relatórios de Performance & Insights</td>
-                        <td class="align-center">Mensal</td>
-                        <td class="align-right">Incluso</td>
-                    </tr>
-                    <tr>
-                        <td>INVESTIMENTO MENSAL FASE 2</td>
-                        <td class="align-center">-</td>
-                        <td class="align-right">R$ 1.094,00 / mês</td>
-                    </tr>
-                </tbody>
-            </table>
+            <input type="number" id="val-site" value="797" placeholder="R$ Valor" oninput="atualizar()">
         </div>
 
-        <div class="phase-section" style="page-break-before: auto;">
-            <div class="phase-header">
-                <h2>Fase 3: Tráfego</h2>
-                <p>Escala, Anúncios e Captação Ativa de Vendas</p>
+        <div class="service-card">
+            <div class="service-header">
+                <input type="checkbox" id="chk-social" checked onchange="atualizar()">
+                <label for="chk-social" style="margin:0;">3. Gestão de Redes Sociais</label>
             </div>
-            
-            <ul class="service-list">
-                <li>
-                    <span class="service-title">Gestão Estratégica Meta Ads (Instagram e Facebook)</span>
-                    <span class="service-desc">Aceleração de captação através de anúncios geolocalizados direcionados estritamente para o público-alvo da No Trato! na região. Inclui a estruturação das campanhas, testes A/B de criativos, monitoramento diário do custo por mensagem (agendamento) e ajustes de escala para maximizar o retorno do orçamento investido pela barbearia.</span>
-                </li>
-            </ul>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Aceleração e Distribuição Ativa</th>
-                        <th class="align-center">Frequência</th>
-                        <th class="align-right">Investimento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Gestão Estratégica Meta Ads (Serviço da Agência)</td>
-                        <td class="align-center">Mensal</td>
-                        <td class="align-right">R$ 697,00</td>
-                    </tr>
-                    <tr>
-                        <td>Verba de Anúncio (Paga direto à plataforma Meta)</td>
-                        <td class="align-center">Mensal</td>
-                        <td class="align-right">À combinar</td>
-                    </tr>
-                    <tr>
-                        <td style="color: var(--primary);"><strong>OPERAÇÃO TOTAL (Mensalidade Fases 2 + 3)</strong></td>
-                        <td class="align-center">-</td>
-                        <td class="align-right"><strong>R$ 1.791,00 / mês</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+            <input type="number" id="val-social" value="897" placeholder="R$ Valor Mensal" oninput="atualizar()">
         </div>
 
-        <div class="doc-footer">
-            Documento confidencial elaborado por Papo de Alcance.<br>
-            Validade da proposta: 15 dias a partir do envio.
+        <div class="service-card">
+            <div class="service-header">
+                <input type="checkbox" id="chk-ads" onchange="atualizar()">
+                <label for="chk-ads" style="margin:0;">4. Tráfego Pago (Ads)</label>
+            </div>
+            <input type="number" id="val-ads" value="697" placeholder="R$ Valor Mensal" oninput="atualizar()">
         </div>
 
+        <button class="btn-gerar" onclick="window.print()"><i class="fa-solid fa-print"></i> Gerar PDF</button>
     </div>
 
+    <div id="preview">
+        <div class="page">
+            <div class="header-prop">
+                <div class="brand">
+                    <h1>Papo de Alcance</h1>
+                    <span>Consultoria Estratégica & SEO Local</span>
+                </div>
+                <div class="client">
+                    Proposta para:<br>
+                    <strong id="display-cliente" style="color: var(--dark); font-size: 16px;">Barbearia No Trato!</strong>
+                </div>
+            </div>
+
+            <h2 class="doc-title">Escopo Comercial de Serviços</h2>
+
+            <div id="box-gmn" class="item-servico">
+                <h3>Estruturação Google Meu Negócio (SEO Local)</h3>
+                <p>Otimização completa do perfil da empresa no Google Maps para dominar as buscas locais. Inclui o mapeamento de palavras-chave estratégicas para a região, reestruturação de categorias comerciais, atualização de informações de contato, cadastro de catálogo de serviços e configuração de mecanismos de ranqueamento para atrair clientes no momento exato em que buscam pelo serviço.</p>
+                <div class="item-valor"><span>Investimento Único:</span> <span id="out-gmn">R$ 0,00</span></div>
+            </div>
+
+            <div id="box-site" class="item-servico">
+                <h3>Desenvolvimento de Landing Page de Conversão</h3>
+                <p>Criação de uma página web (site) estruturada para capturar a atenção do usuário e facilitar o agendamento de forma intuitiva. Design responsivo e focado 100% na experiência mobile, com integração direta para botões de WhatsApp ou sistemas de agendamento externos.</p>
+                <div class="item-valor"><span>Investimento Único:</span> <span id="out-site">R$ 0,00</span></div>
+            </div>
+
+            <div id="box-social" class="item-servico">
+                <h3>Gestão de Conteúdo e Social Media</h3>
+                <p>Posicionamento de autoridade contínuo nas redes sociais. Este escopo inclui a criação de 12 postagens mensais e a roteirização estratégica de vídeos curtos (Reels) focados na transformação visual e estilo de vida da marca. O serviço contempla o direcionamento criativo, edição de vídeos brutos captados pelo cliente e a gestão orgânica do feed para gerar desejo e engajamento constante na região.</p>
+                <div class="item-valor"><span>Mensalidade Operacional:</span> <span id="out-social">R$ 0,00</span></div>
+            </div>
+
+            <div id="box-ads" class="item-servico">
+                <h3>Gestão de Tráfego Pago (Meta Ads)</h3>
+                <p>Aceleração de captação de clientes através de anúncios patrocinados no Instagram e Facebook. Criação de campanhas geolocalizadas em um raio estratégico ao redor do estabelecimento, com testes A/B de criativos e otimização diária de verba para garantir o menor custo por agendamento gerado. (Verba da plataforma não inclusa).</p>
+                <div class="item-valor"><span>Mensalidade de Gestão:</span> <span id="out-ads">R$ 0,00</span></div>
+            </div>
+
+            <div class="total-box">
+                <span>Investimento Total do Projeto (Mês 1)</span>
+                <h2 id="total-geral">R$ 0,00</h2>
+            </div>
+
+            <div class="footer">
+                Documento gerado por Papo de Alcance. Os valores apresentados são válidos por 15 dias corridos.<br>
+                Contato Comercial: +55 41 99816-1160
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function formataBRL(valor) {
+            return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function atualizar() {
+            document.getElementById('display-cliente').innerText = document.getElementById('nomeCliente').value;
+
+            let total = 0;
+
+            // GMN
+            if(document.getElementById('chk-gmn').checked) {
+                document.getElementById('box-gmn').style.display = 'block';
+                let v = parseFloat(document.getElementById('val-gmn').value || 0);
+                document.getElementById('out-gmn').innerText = formataBRL(v);
+                total += v;
+            } else { document.getElementById('box-gmn').style.display = 'none'; }
+
+            // SITE
+            if(document.getElementById('chk-site').checked) {
+                document.getElementById('box-site').style.display = 'block';
+                let v = parseFloat(document.getElementById('val-site').value || 0);
+                document.getElementById('out-site').innerText = formataBRL(v);
+                total += v;
+            } else { document.getElementById('box-site').style.display = 'none'; }
+
+            // SOCIAL
+            if(document.getElementById('chk-social').checked) {
+                document.getElementById('box-social').style.display = 'block';
+                let v = parseFloat(document.getElementById('val-social').value || 0);
+                document.getElementById('out-social').innerText = formataBRL(v);
+                total += v;
+            } else { document.getElementById('box-social').style.display = 'none'; }
+
+            // ADS
+            if(document.getElementById('chk-ads').checked) {
+                document.getElementById('box-ads').style.display = 'block';
+                let v = parseFloat(document.getElementById('val-ads').value || 0);
+                document.getElementById('out-ads').innerText = formataBRL(v);
+                total += v;
+            } else { document.getElementById('box-ads').style.display = 'none'; }
+
+            document.getElementById('total-geral').innerText = formataBRL(total);
+        }
+
+        window.onload = atualizar;
+    </script>
 </body>
 </html>
