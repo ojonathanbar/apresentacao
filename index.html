@@ -69,8 +69,37 @@
         .cat-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: var(--dark); border-bottom: 2px solid var(--blue-light); padding-bottom: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;}
         
         .item-servico { margin-bottom: 20px; padding-left: 15px; border-left: 2px solid var(--border); }
-        .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--blue); margin-bottom: 6px; font-weight: 700;}
-        .item-servico p { font-size: 13px; color: #475569; line-height: 1.6; text-align: justify; }
+        .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--blue); margin-bottom: 12px; font-weight: 700;}
+        
+        /* LAYOUT DE LISTAS EM DUAS COLUNAS */
+        .serv-list {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+            margin-bottom: 5px;
+        }
+        .serv-list li {
+            font-size: 12.5px;
+            color: #334155;
+            position: relative;
+            padding-left: 20px;
+            line-height: 1.4;
+        }
+        .serv-list li::before {
+            content: '\f058'; /* fa-circle-check FontAwesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent); /* Verde destaque */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 13px;
+        }
+        .serv-list-note {
+            font-size: 11px; color: #94a3b8; margin-top: 8px; font-style: italic;
+        }
 
         /* BOX DE PREÇO ESTRATÉGICO */
         .price-box { background: var(--blue-light); border-radius: 8px; padding: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #dbeafe;}
@@ -209,22 +238,42 @@
                     
                     <div id="box-gmn" class="item-servico">
                         <h3>Otimização Avançada no Google Meu Negócio</h3>
-                        <p>Estruturação técnica do perfil da empresa no Google Maps para dominar as buscas locais. Inclui mapeamento de palavras-chave estratégicas, reestruturação de categorias e configuração de mecanismos para atração orgânica.</p>
+                        <ul class="serv-list">
+                            <li>Mapeamento estratégico de palavras-chave locais.</li>
+                            <li>Reestruturação técnica de categorias comerciais.</li>
+                            <li>Ajuste de geolocalização e área de cobertura.</li>
+                            <li>Configuração de gatilhos para atração orgânica.</li>
+                        </ul>
                     </div>
 
                     <div id="box-lp" class="item-servico">
                         <h3>Desenvolvimento de Landing Page de Conversão</h3>
-                        <p>Criação de uma página web veloz e focada 100% em conversão (mobile-first). Estruturada com gatilhos mentais visuais e botões diretos para facilitar o agendamento do cliente sem atritos.</p>
+                        <ul class="serv-list">
+                            <li>Design mobile-first de altíssima velocidade.</li>
+                            <li>Estruturação de fluxo com gatilhos mentais visuais.</li>
+                            <li>Botões diretos (WhatsApp/Agendamento) sem atritos.</li>
+                            <li>Design focado exclusivamente em geração de leads.</li>
+                        </ul>
                     </div>
 
                     <div id="box-inst" class="item-servico">
                         <h3>Desenvolvimento de Site Institucional Corporativo</h3>
-                        <p>Construção de um portal completo focado em transmitir credibilidade, apresentar portfólio de serviços e estruturar um canal formal. Inclui otimização SEO técnica para indexação nos motores de busca.</p>
+                        <ul class="serv-list">
+                            <li>Páginas estruturadas para transmitir autoridade e credibilidade.</li>
+                            <li>Apresentação visual avançada de portfólio de serviços.</li>
+                            <li>Estruturação de múltiplos canais formais de contato e rotas.</li>
+                            <li>Otimização técnica (SEO On-Page) para os motores de busca.</li>
+                        </ul>
                     </div>
 
                     <div id="box-ecom" class="item-servico">
                         <h3>Implementação de E-commerce (Loja Virtual)</h3>
-                        <p>Estruturação de plataforma de vendas online. Inclui cadastro inicial de catálogo, integração com gateways de pagamento seguros, gestão de estoque e configuração de logística de envios.</p>
+                        <ul class="serv-list">
+                            <li>Cadastro e estruturação inicial de catálogo de produtos.</li>
+                            <li>Integração com gateways avançados e seguros de pagamento.</li>
+                            <li>Configuração do painel de controle e gestão de estoque.</li>
+                            <li>Integração com sistemas logísticos para cálculo de frete.</li>
+                        </ul>
                     </div>
 
                     <div class="price-box">
@@ -239,7 +288,7 @@
                     
                     <div id="box-social" class="item-servico">
                         <h3>Social Media: Gestão Estratégica de Conteúdo</h3>
-                        <p id="desc-social">Texto gerado via JS.</p>
+                        <div id="desc-social">Texto gerado via JS.</div>
                     </div>
 
                     <div class="price-box" style="background: #f8fafc; border-color: #e2e8f0;">
@@ -254,7 +303,7 @@
                     
                     <div id="box-ads" class="item-servico">
                         <h3 id="title-ads">Gestão de Tráfego Pago</h3>
-                        <p id="desc-ads">Texto gerado via JS.</p>
+                        <div id="desc-ads">Texto gerado via JS.</div>
                     </div>
 
                     <div class="price-box" style="background: #f8fafc; border-color: #e2e8f0;">
@@ -269,7 +318,7 @@
             <div class="footer-contato">
                 <div class="f-brand">
                     Papo de Alcance
-                    <span>CNPJ / Consultoria em Vendas Locais</span>
+                    <span>Consultoria Especializada em Vendas Locais</span>
                 </div>
                 <div class="f-whats">
                     <i class="fa-brands fa-whatsapp"></i> +55 41 99816-1160
@@ -280,25 +329,23 @@
 
     <script>
         const taxasNuTap = {
-            2: 0.0579,  // 5,79%
-            3: 0.0609,  // 6,09%
-            4: 0.0799,  // 7,99%
-            5: 0.0809,  // 8,09%
-            6: 0.0819,  // 8,19%
-            10: 0.1105, // 11,05%
-            12: 0.1238  // 12,38%
+            2: 0.0579,
+            3: 0.0609,
+            4: 0.0799,
+            5: 0.0809,
+            6: 0.0819,
+            10: 0.1105,
+            12: 0.1238
         };
 
         function formataBRL(valor) {
             return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
 
-        // Função ajustada para focar SOMENTE na parcela e no valor à vista (ocultando o repasse final)
         function renderPrecoEstrategico(valorLiquidoAvista, parcelas, tipo) {
             if(valorLiquidoAvista === 0) return "";
             
             if(parcelas > 1) {
-                // O cálculo permanece idêntico para a sua segurança financeira
                 let taxaSelecionada = taxasNuTap[parcelas] || 0;
                 let valorTotalComJuros = valorLiquidoAvista / (1 - taxaSelecionada);
                 let valorDaParcela = valorTotalComJuros / parcelas;
@@ -341,7 +388,6 @@
                 document.getElementById('cat-fundacao').style.display = 'none';
             }
 
-
             // --- CÁLCULO PRESENÇA ---
             if(document.getElementById('chk-social').checked) {
                 document.getElementById('cat-presenca').style.display = 'block';
@@ -361,19 +407,20 @@
                 let optStories = document.getElementById('opt-stories').checked;
                 let optSazonal = document.getElementById('opt-sazonal').checked;
 
-                let txtSocial = `Desenvolvimento visual focado em engajamento local. Contempla a criação estratégica de <strong>${qtdPosts} postagens mensais</strong> para o feed.`;
-                let extras = [];
-                if(optReels) extras.push("elaboração de roteiros para vídeos curtos (Reels)");
-                if(optStories) extras.push("gestão ativa de Stories");
-                if(optSazonal) extras.push("planejamento sazonal");
+                let txtSocial = `<ul class="serv-list">`;
+                txtSocial += `<li>Criação visual de <strong>${qtdPosts} postagens mensais</strong> (Artes e Carrosséis).</li>`;
+                txtSocial += `<li><strong>Copywriting persuasivo:</strong> Legendas desenvolvidas para reter e converter clientes.</li>`;
                 
-                if(extras.length > 0) txtSocial += " Inclui também: " + extras.join(", ") + ".";
+                if(optReels) txtSocial += `<li>Roteirização estratégica direcionada para vídeos curtos (Reels).</li>`;
+                if(optStories) txtSocial += `<li>Gestão ativa com estratégias diárias para retenção nos Stories.</li>`;
+                if(optSazonal) txtSocial += `<li>Planejamento de calendário comercial focado em datas comemorativas.</li>`;
+                
+                txtSocial += `</ul>`;
                 document.getElementById('desc-social').innerHTML = txtSocial;
 
             } else {
                 document.getElementById('cat-presenca').style.display = 'none';
             }
-
 
             // --- CÁLCULO TRÁFEGO ---
             if(document.getElementById('chk-ads').checked) {
@@ -385,18 +432,27 @@
 
                 let tipoAds = document.getElementById('tipo-ads').value;
                 let titleAds = document.getElementById('title-ads');
-                let descAds = document.getElementById('desc-ads');
-
+                
+                let descAds = `<ul class="serv-list">`;
                 if(tipoAds === 'meta') {
-                    titleAds.innerText = "Captação Ativa via Meta Ads";
-                    descAds.innerText = "Criação e gestão de campanhas geolocalizadas no Instagram e Facebook. Otimização diária de verba para buscar o menor custo por agendamento/venda da região. (Orçamento da plataforma definido pelo cliente).";
+                    titleAds.innerText = "Captação Ativa via Meta Ads (Instagram/FB)";
+                    descAds += `<li>Configuração de campanhas geolocalizadas em raio estipulado (Ex: 5km a 10km).</li>`;
+                    descAds += `<li>Testes A/B avançados de criativos (imagens vs vídeos) e chamadas para ação.</li>`;
+                    descAds += `<li>Otimização diária de orçamento voltada para menor custo por lead/agendamento.</li>`;
                 } else if(tipoAds === 'google') {
-                    titleAds.innerText = "Rede de Pesquisa Google Ads";
-                    descAds.innerText = "Interceptação de clientes com alta intenção de compra. Estruturação de lances para colocar a empresa no topo do Google quando pesquisarem pelo seu serviço na cidade. (Orçamento da plataforma definido pelo cliente).";
+                    titleAds.innerText = "Captação via Rede de Pesquisa (Google Ads)";
+                    descAds += `<li>Interceptação de alta intenção de compra no exato momento da busca local.</li>`;
+                    descAds += `<li>Mapeamento avançado, inclusão e negativação diária de palavras-chave.</li>`;
+                    descAds += `<li>Gestão de lances estratégicos para posicionar a marca nas primeiras posições.</li>`;
                 } else {
-                    titleAds.innerText = "Estratégia Omnichannel (Google + Meta)";
-                    descAds.innerText = "Presença onipresente. Unimos a intenção de compra da pesquisa do Google com a criação de desejo visual do Instagram. Máquina completa de aquisição de novos clientes e remarketing. (Orçamento da plataforma definido pelo cliente).";
+                    titleAds.innerText = "Estratégia Omnichannel (Google + Meta Ads)";
+                    descAds += `<li>Ativação de campanhas de intenção imediata através do Google Ads.</li>`;
+                    descAds += `<li>Criação de desejo e branding visual na região através de Meta Ads.</li>`;
+                    descAds += `<li>Estratégias de Remarketing cruzado (Perseguir e recapturar visitantes).</li>`;
+                    descAds += `<li>Análise e otimização global e unificada da verba entre as plataformas.</li>`;
                 }
+                descAds += `</ul><div class="serv-list-note">*A verba direcionada para veiculação de mídia é paga diretamente à respectiva plataforma pelo cliente, não estando inclusa nestes honorários de prestação de serviço.</div>`;
+                document.getElementById('desc-ads').innerHTML = descAds;
 
             } else {
                 document.getElementById('cat-trafego').style.display = 'none';
