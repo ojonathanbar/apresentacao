@@ -279,8 +279,6 @@
     </div>
 
     <script>
-        // Tabela de taxas exatas do NuTap atualizadas (Antecipado 2 Dias)
-        // Para que o valor caia líquido (repasse), a fórmula correta é dividir por (1 - Taxa).
         const taxasNuTap = {
             2: 0.0579,  // 5,79%
             3: 0.0609,  // 6,09%
@@ -295,19 +293,19 @@
             return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
 
-        // Nova função matemática de repasse real (Para não perder centavos na maquininha)
+        // Função ajustada para focar SOMENTE na parcela e no valor à vista (ocultando o repasse final)
         function renderPrecoEstrategico(valorLiquidoAvista, parcelas, tipo) {
             if(valorLiquidoAvista === 0) return "";
             
             if(parcelas > 1) {
-                // Aplica a fórmula matemática correta de repasse: Valor Líquido / (1 - Taxa da Maquininha)
+                // O cálculo permanece idêntico para a sua segurança financeira
                 let taxaSelecionada = taxasNuTap[parcelas] || 0;
                 let valorTotalComJuros = valorLiquidoAvista / (1 - taxaSelecionada);
                 let valorDaParcela = valorTotalComJuros / parcelas;
                 
                 return `
                     <div class="val-destaque">${parcelas}x de ${formataBRL(valorDaParcela)}</div>
-                    <div class="val-sub">Total repassado: ${formataBRL(valorTotalComJuros)} (ou ${formataBRL(valorLiquidoAvista)} no Pix)</div>
+                    <div class="val-sub">ou ${formataBRL(valorLiquidoAvista)} à vista no Pix</div>
                 `;
             } else {
                 let subtexto = tipo === 'recorrente' ? "Mensalidade no Pix" : "Investimento Único no Pix";
@@ -353,7 +351,7 @@
                 
                 let valorBasePresenca = v;
                 if(parcPresenca > 1) {
-                    valorBasePresenca = v * parcPresenca; // Se for pacote semestral, multiplica o valor x6 antes de gerar o parcelamento
+                    valorBasePresenca = v * parcPresenca; 
                 }
                 
                 document.getElementById('val-box-presenca').innerHTML = renderPrecoEstrategico(valorBasePresenca, parcPresenca, 'recorrente');
