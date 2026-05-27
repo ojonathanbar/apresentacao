@@ -1,4 +1,94 @@
-<!-- SUBSTITUA SOMENTE ESTA PARTE DO SEU SCRIPT -->
+<!-- FUNDAÇÃO -->
+
+<section class="section" id="foundationSection">
+
+    <h2 class="section-title">
+        Fundação Digital
+    </h2>
+
+    <p class="section-sub">
+        Estruturação dos ativos digitais essenciais
+        para posicionamento, autoridade e conversão.
+    </p>
+
+    <div class="cards" id="foundationCards"></div>
+
+    <div class="price-box">
+
+        <div class="price-label">
+            Investimento Setup
+        </div>
+
+        <div class="price" id="foundationPrice"></div>
+
+        <!-- PARCELAMENTOS -->
+
+        <div
+            class="installments"
+            id="foundationInstallments"
+        ></div>
+
+    </div>
+
+</section>
+
+<!-- CRONOGRAMA -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        Cronograma de Execução
+    </h2>
+
+    <p class="section-sub">
+        Clique nos textos abaixo para editar livremente cada proposta.
+    </p>
+
+    <button
+        onclick="addTimelineItem()"
+        style="
+            padding:12px 18px;
+            border:none;
+            border-radius:12px;
+            background:#2563eb;
+            color:white;
+            font-weight:700;
+            cursor:pointer;
+            margin-bottom:24px;
+        "
+    >
+        + Adicionar Etapa
+    </button>
+
+    <div class="timeline" id="timeline">
+
+        <div class="timeline-item">
+
+            <h4 contenteditable="true">
+                Semana 1 — Planejamento Estratégico
+            </h4>
+
+            <p contenteditable="true">
+                Diagnóstico aprofundado, definição de objetivos e estrutura estratégica inicial.
+            </p>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <h4 contenteditable="true">
+                Semana 2 — Estruturação Digital
+            </h4>
+
+            <p contenteditable="true">
+                Desenvolvimento dos ativos digitais e implementação operacional.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 <script>
 
@@ -16,11 +106,15 @@ function money(v){
 
 function render(){
 
+    // CLIENTE
+
     document.getElementById('out-client').innerText =
     document.getElementById('clientName').value;
 
     document.getElementById('out-diagnostic').innerText =
     document.getElementById('diagnostic').value;
+
+    // FOUNDATION
 
     let foundationHTML = '';
     let foundationTotal = 0;
@@ -86,6 +180,8 @@ function render(){
 
             foundationTotal += value;
 
+            // CARDS
+
             foundationHTML += `
 
                 <div class="card">
@@ -100,9 +196,7 @@ function render(){
 
             `;
 
-            /* ========================= */
-            /* NOVO CARD DE PARCELAMENTO */
-            /* ========================= */
+            // PARCELAMENTO DESTACADO
 
             installmentsHTML += `
 
@@ -151,8 +245,6 @@ function render(){
                         </div>
 
                     </div>
-
-                    <!-- BLOCO DE DESTAQUE -->
 
                     <div style="
                         margin-top:18px;
@@ -237,126 +329,6 @@ function render(){
 
     document.getElementById('foundationInstallments').innerHTML =
     installmentsHTML;
-
-    // SOCIAL
-
-    if(document.getElementById('c-social').checked){
-
-        const posts =
-        document.getElementById('n-posts').value;
-
-        const reels =
-        document.getElementById('n-reels').value;
-
-        const stories =
-        document.getElementById('n-stories').value;
-
-        document.getElementById('socialCards').innerHTML = `
-
-            <div class="card">
-
-                <h3>
-                    Posicionamento & Conteúdo
-                </h3>
-
-                <ul>
-
-                    <li>${posts} posts estratégicos mensais</li>
-
-                    <li>${reels} roteiros de reels</li>
-
-                    <li>${stories} stories estratégicos</li>
-
-                    <li>Copywriting persuasivo</li>
-
-                    <li>Calendário editorial</li>
-
-                </ul>
-
-            </div>
-
-        `;
-
-        document.getElementById('socialPrice').innerText =
-        money(
-            document.getElementById('v-social').value
-        );
-
-    }
-
-    // ADS
-
-    let adsHTML = '';
-    let adsTotal = 0;
-
-    if(document.getElementById('c-meta').checked){
-
-        adsTotal += parseFloat(
-            document.getElementById('v-meta').value || 0
-        );
-
-        adsHTML += `
-
-            <div class="card">
-
-                <h3>
-                    Meta Ads
-                </h3>
-
-                <ul>
-
-                    <li>Campanhas Instagram/Facebook</li>
-
-                    <li>Remarketing estratégico</li>
-
-                    <li>Segmentação geográfica</li>
-
-                </ul>
-
-            </div>
-
-        `;
-    }
-
-    if(document.getElementById('c-google').checked){
-
-        adsTotal += parseFloat(
-            document.getElementById('v-google').value || 0
-        );
-
-        adsHTML += `
-
-            <div class="card">
-
-                <h3>
-                    Google Ads
-                </h3>
-
-                <ul>
-
-                    <li>Google Pesquisa e Maps</li>
-
-                    <li>Palavras-chave estratégicas</li>
-
-                    <li>Captação qualificada</li>
-
-                </ul>
-
-            </div>
-
-        `;
-    }
-
-    document.getElementById('adsCards').innerHTML =
-    adsHTML;
-
-    document.getElementById('adsPrice').innerText =
-    money(adsTotal);
-
-    document.getElementById('adBudgetOut').innerText =
-    money(
-        document.getElementById('adBudget').value
-    );
 
 }
 
