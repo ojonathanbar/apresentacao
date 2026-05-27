@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Papo de Alcance — Proposal Builder</title>
 
@@ -50,19 +50,16 @@ body{
 .logo h1{
     font-family:'Montserrat',sans-serif;
     font-size:34px;
-    line-height:1;
     font-weight:800;
 }
 
-.logo h1 span{
+.logo span{
     color:var(--accent);
 }
 
 .logo p{
-    margin-top:12px;
+    margin-top:10px;
     color:#94a3b8;
-    line-height:1.7;
-    font-size:14px;
 }
 
 .block{
@@ -108,7 +105,6 @@ body{
 
 .form-group textarea{
     min-height:100px;
-    resize:vertical;
 }
 
 .check{
@@ -129,22 +125,17 @@ body{
     display:flex;
     align-items:center;
     gap:10px;
-    font-size:14px;
 }
 
 .check input[type="number"],
 .check select{
     width:100%;
+    margin-top:10px;
     padding:10px;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
     background:#0f172a;
     color:white;
-    margin-top:10px;
-}
-
-.parcelamento{
-    margin-top:10px;
 }
 
 .generate-btn{
@@ -157,7 +148,6 @@ body{
     color:white;
     font-weight:700;
     cursor:pointer;
-    font-size:15px;
 }
 
 /* PREVIEW */
@@ -386,9 +376,24 @@ body{
     outline:none;
 }
 
-.timeline-item h4:hover,
-.timeline-item p:hover{
-    background:#f1f5f9;
+/* CTA */
+
+.cta{
+    background:#020617;
+    color:white;
+    padding:55px;
+    text-align:center;
+}
+
+.cta h2{
+    font-size:38px;
+    margin-bottom:20px;
+    font-family:'Montserrat',sans-serif;
+}
+
+.cta p{
+    color:#cbd5e1;
+    line-height:1.8;
 }
 
 /* PRINT */
@@ -436,6 +441,8 @@ body{
         <p>Gerador profissional de propostas comerciais.</p>
     </div>
 
+    <!-- CLIENTE -->
+
     <div class="block">
 
         <div class="block-title">Cliente</div>
@@ -458,10 +465,7 @@ body{
 
         <div class="block-title">Fundação Digital</div>
 
-        <!-- GMN -->
-
         <div class="check">
-
             <div class="check-top">
                 <div class="check-left">
                     <input type="checkbox" id="c-gmn" checked onchange="render()">
@@ -471,20 +475,14 @@ body{
 
             <input type="number" id="v-gmn" value="597" oninput="render()">
 
-            <div class="parcelamento">
-                <select id="p-gmn" onchange="render()">
-                    <option value="3">3x</option>
-                    <option value="6">6x</option>
-                    <option value="12" selected>12x</option>
-                </select>
-            </div>
-
+            <select id="p-gmn" onchange="render()">
+                <option value="3">3x</option>
+                <option value="6">6x</option>
+                <option value="12" selected>12x</option>
+            </select>
         </div>
 
-        <!-- LP -->
-
         <div class="check">
-
             <div class="check-top">
                 <div class="check-left">
                     <input type="checkbox" id="c-lp" checked onchange="render()">
@@ -494,20 +492,14 @@ body{
 
             <input type="number" id="v-lp" value="997" oninput="render()">
 
-            <div class="parcelamento">
-                <select id="p-lp" onchange="render()">
-                    <option value="3">3x</option>
-                    <option value="6">6x</option>
-                    <option value="12" selected>12x</option>
-                </select>
-            </div>
-
+            <select id="p-lp" onchange="render()">
+                <option value="3">3x</option>
+                <option value="6">6x</option>
+                <option value="12" selected>12x</option>
+            </select>
         </div>
 
-        <!-- SITE -->
-
         <div class="check">
-
             <div class="check-top">
                 <div class="check-left">
                     <input type="checkbox" id="c-site" onchange="render()">
@@ -517,20 +509,14 @@ body{
 
             <input type="number" id="v-site" value="2497" oninput="render()">
 
-            <div class="parcelamento">
-                <select id="p-site" onchange="render()">
-                    <option value="3">3x</option>
-                    <option value="6">6x</option>
-                    <option value="12" selected>12x</option>
-                </select>
-            </div>
-
+            <select id="p-site" onchange="render()">
+                <option value="3">3x</option>
+                <option value="6">6x</option>
+                <option value="12" selected>12x</option>
+            </select>
         </div>
 
-        <!-- ECOM -->
-
         <div class="check">
-
             <div class="check-top">
                 <div class="check-left">
                     <input type="checkbox" id="c-ecom" onchange="render()">
@@ -540,14 +526,80 @@ body{
 
             <input type="number" id="v-ecom" value="3997" oninput="render()">
 
-            <div class="parcelamento">
-                <select id="p-ecom" onchange="render()">
-                    <option value="3">3x</option>
-                    <option value="6">6x</option>
-                    <option value="12" selected>12x</option>
-                </select>
+            <select id="p-ecom" onchange="render()">
+                <option value="3">3x</option>
+                <option value="6">6x</option>
+                <option value="12" selected>12x</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- SOCIAL -->
+
+    <div class="block">
+
+        <div class="block-title">Social Media</div>
+
+        <div class="check">
+            <div class="check-top">
+                <div class="check-left">
+                    <input type="checkbox" id="c-social" checked onchange="render()">
+                    Gestão de Conteúdo
+                </div>
             </div>
 
+            <input type="number" id="v-social" value="1497" oninput="render()">
+        </div>
+
+        <div class="form-group">
+            <label>Posts</label>
+            <input type="number" id="n-posts" value="12" oninput="render()">
+        </div>
+
+        <div class="form-group">
+            <label>Reels</label>
+            <input type="number" id="n-reels" value="8" oninput="render()">
+        </div>
+
+        <div class="form-group">
+            <label>Stories</label>
+            <input type="number" id="n-stories" value="20" oninput="render()">
+        </div>
+
+    </div>
+
+    <!-- ADS -->
+
+    <div class="block">
+
+        <div class="block-title">Tráfego Pago</div>
+
+        <div class="check">
+            <div class="check-top">
+                <div class="check-left">
+                    <input type="checkbox" id="c-meta" checked onchange="render()">
+                    Meta Ads
+                </div>
+            </div>
+
+            <input type="number" id="v-meta" value="997" oninput="render()">
+        </div>
+
+        <div class="check">
+            <div class="check-top">
+                <div class="check-left">
+                    <input type="checkbox" id="c-google" checked onchange="render()">
+                    Google Ads
+                </div>
+            </div>
+
+            <input type="number" id="v-google" value="997" oninput="render()">
+        </div>
+
+        <div class="form-group">
+            <label>Verba Recomendada</label>
+            <input type="number" id="adBudget" value="1500" oninput="render()">
         </div>
 
     </div>
@@ -621,17 +673,9 @@ body{
             Fundação Digital
         </h2>
 
-        <p class="section-sub">
-            Estruturação dos ativos digitais essenciais para posicionamento e conversão.
-        </p>
-
         <div class="cards" id="foundationCards"></div>
 
         <div class="price-box">
-
-            <div style="margin-bottom:10px;font-size:12px;color:#64748b;">
-                INVESTIMENTO TOTAL
-            </div>
 
             <div class="price" id="foundationPrice"></div>
 
@@ -641,7 +685,46 @@ body{
 
     </section>
 
-    <!-- CRONOGRAMA -->
+    <!-- SOCIAL -->
+
+    <section class="section" id="socialSection">
+
+        <h2 class="section-title">
+            Social Media
+        </h2>
+
+        <div class="cards" id="socialCards"></div>
+
+        <div class="price-box">
+            <div class="price" id="socialPrice"></div>
+        </div>
+
+    </section>
+
+    <!-- ADS -->
+
+    <section class="section" id="adsSection">
+
+        <h2 class="section-title">
+            Tráfego Pago
+        </h2>
+
+        <div class="cards" id="adsCards"></div>
+
+        <div class="price-box">
+
+            <div class="price" id="adsPrice"></div>
+
+            <div style="margin-top:16px;">
+                Verba recomendada:
+                <strong id="adBudgetOut"></strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TIMELINE -->
 
     <section class="section">
 
@@ -649,50 +732,29 @@ body{
             Cronograma de Execução
         </h2>
 
-        <p class="section-sub">
-            Clique nos textos abaixo para editar livremente cada proposta.
-        </p>
-
-        <button
-            onclick="addTimelineItem()"
-            style="
-                padding:12px 18px;
-                border:none;
-                border-radius:12px;
-                background:#2563eb;
-                color:white;
-                font-weight:700;
-                cursor:pointer;
-                margin-bottom:24px;
-            "
-        >
+        <button onclick="addTimelineItem()" style="
+            padding:12px 18px;
+            border:none;
+            border-radius:12px;
+            background:#2563eb;
+            color:white;
+            font-weight:700;
+            cursor:pointer;
+            margin-bottom:24px;
+        ">
             + Adicionar Etapa
         </button>
 
         <div class="timeline" id="timeline">
 
             <div class="timeline-item">
-
-                <h4 contenteditable="true">
-                    Semana 1 — Planejamento Estratégico
-                </h4>
-
-                <p contenteditable="true">
-                    Diagnóstico aprofundado e definição estratégica.
-                </p>
-
+                <h4 contenteditable="true">Semana 1 — Planejamento Estratégico</h4>
+                <p contenteditable="true">Diagnóstico aprofundado e estrutura estratégica.</p>
             </div>
 
             <div class="timeline-item">
-
-                <h4 contenteditable="true">
-                    Semana 2 — Estruturação Digital
-                </h4>
-
-                <p contenteditable="true">
-                    Desenvolvimento dos ativos digitais.
-                </p>
-
+                <h4 contenteditable="true">Semana 2 — Estruturação Digital</h4>
+                <p contenteditable="true">Desenvolvimento dos ativos digitais.</p>
             </div>
 
         </div>
@@ -700,6 +762,23 @@ body{
     </section>
 
 </div>
+
+<section class="cta">
+
+    <h2>
+        Vamos iniciar seu crescimento digital?
+    </h2>
+
+    <p>
+        Após aprovação da proposta iniciaremos imediatamente o planejamento estratégico.
+    </p>
+
+    <p style="margin-top:24px;">
+        WhatsApp:
+        <strong>(41) 99816-1160</strong>
+    </p>
+
+</section>
 
 </div>
 </div>
@@ -725,6 +804,8 @@ function render(){
 
     document.getElementById('out-diagnostic').innerText =
     document.getElementById('diagnostic').value;
+
+    // FOUNDATION
 
     let foundationHTML = '';
     let foundationTotal = 0;
@@ -808,18 +889,11 @@ function render(){
 
                 <div class="installment-card">
 
-                    <strong style="
-                        display:block;
-                        margin-bottom:8px;
-                        font-size:18px;
-                    ">
+                    <strong style="display:block;margin-bottom:8px;font-size:18px;">
                         ${s.title}
                     </strong>
 
-                    <div style="
-                        color:#64748b;
-                        margin-bottom:16px;
-                    ">
+                    <div style="color:#64748b;margin-bottom:16px;">
                         Valor total:
                         ${money(value)}
                     </div>
@@ -829,28 +903,19 @@ function render(){
                         <div style="
                             text-transform:uppercase;
                             font-size:12px;
-                            letter-spacing:.08em;
                             color:#93c5fd;
                             margin-bottom:10px;
                         ">
                             Via Nubank Tap
                         </div>
 
-                        <div style="
-                            color:#cbd5e1;
-                            margin-bottom:8px;
-                        ">
-                            Apenas
-                        </div>
+                        <div>Apenas</div>
 
                         <div class="big">
                             ${parcelas}x
                         </div>
 
-                        <div style="
-                            margin:10px 0;
-                            color:#93c5fd;
-                        ">
+                        <div style="margin:10px 0;">
                             de
                         </div>
 
@@ -876,6 +941,124 @@ function render(){
 
     document.getElementById('foundationInstallments').innerHTML =
     installmentsHTML;
+
+    // SOCIAL
+
+    if(document.getElementById('c-social').checked){
+
+        const posts =
+        document.getElementById('n-posts').value;
+
+        const reels =
+        document.getElementById('n-reels').value;
+
+        const stories =
+        document.getElementById('n-stories').value;
+
+        document.getElementById('socialCards').innerHTML = `
+
+            <div class="card">
+
+                <h3>
+                    Gestão Estratégica de Conteúdo
+                </h3>
+
+                <ul>
+
+                    <li>${posts} posts estratégicos mensais</li>
+
+                    <li>${reels} roteiros de reels</li>
+
+                    <li>${stories} stories estratégicos</li>
+
+                    <li>Copywriting persuasivo</li>
+
+                    <li>Calendário editorial</li>
+
+                    <li>Análise contínua de métricas</li>
+
+                </ul>
+
+            </div>
+
+        `;
+
+        document.getElementById('socialPrice').innerText =
+        money(
+            document.getElementById('v-social').value
+        );
+
+    }
+
+    // ADS
+
+    let adsHTML = '';
+    let adsTotal = 0;
+
+    if(document.getElementById('c-meta').checked){
+
+        adsTotal += parseFloat(
+            document.getElementById('v-meta').value || 0
+        );
+
+        adsHTML += `
+
+            <div class="card">
+
+                <h3>Meta Ads</h3>
+
+                <ul>
+
+                    <li>Campanhas Instagram/Facebook</li>
+
+                    <li>Remarketing estratégico</li>
+
+                    <li>Segmentação geográfica</li>
+
+                </ul>
+
+            </div>
+
+        `;
+    }
+
+    if(document.getElementById('c-google').checked){
+
+        adsTotal += parseFloat(
+            document.getElementById('v-google').value || 0
+        );
+
+        adsHTML += `
+
+            <div class="card">
+
+                <h3>Google Ads</h3>
+
+                <ul>
+
+                    <li>Google Pesquisa e Maps</li>
+
+                    <li>Palavras-chave estratégicas</li>
+
+                    <li>Captação qualificada</li>
+
+                </ul>
+
+            </div>
+
+        `;
+    }
+
+    document.getElementById('adsCards').innerHTML =
+    adsHTML;
+
+    document.getElementById('adsPrice').innerText =
+    money(adsTotal);
+
+    document.getElementById('adBudgetOut').innerText =
+    money(
+        document.getElementById('adBudget').value
+    );
 
 }
 
