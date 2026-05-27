@@ -112,11 +112,12 @@
             <label>Condição de Pagamento (Fundação)</label>
             <select id="parc-fundacao" onchange="atualizar()">
                 <option value="1">À vista (1x no Pix)</option>
-                <option value="2">2x no Cartão</option>
-                <option value="3">3x no Cartão</option>
-                <option value="4">4x no Cartão</option>
-                <option value="6">6x no Cartão</option>
-                <option value="10">10x no Cartão</option>
+                <option value="2">2x no Cartão (NuTap)</option>
+                <option value="3">3x no Cartão (NuTap)</option>
+                <option value="4">4x no Cartão (NuTap)</option>
+                <option value="5">5x no Cartão (NuTap)</option>
+                <option value="6">6x no Cartão (NuTap)</option>
+                <option value="10">10x no Cartão (NuTap)</option>
                 <option value="12" selected>12x no Cartão (Recomendado)</option>
             </select>
         </div>
@@ -146,14 +147,14 @@
             <label>Condição de Pagamento (Presença)</label>
             <select id="parc-presenca" onchange="atualizar()">
                 <option value="1">Mensalidade Recorrente (Pix)</option>
-                <option value="3">Trimestral em 3x (Cartão)</option>
-                <option value="6">Semestral em 6x (Cartão)</option>
+                <option value="3">Trimestral em 3x (Cartão NuTap)</option>
+                <option value="6">Semestral em 6x (Cartão NuTap)</option>
             </select>
         </div>
 
         <div class="service-card">
             <div class="service-header"><input type="checkbox" id="chk-social" checked onchange="atualizar()"> <label for="chk-social" style="margin:0;">Gestão de Social Media</label></div>
-            <input type="number" id="val-social" value="897" placeholder="R$ Valor base" oninput="atualizar()">
+            <input type="number" id="val-social" value="897" placeholder="R$ Valor Mensal" oninput="atualizar()">
             
             <div class="sub-options">
                 <label style="font-weight:700; font-size:11px;">Qtd de Posts no Feed/Mês:</label>
@@ -278,40 +279,40 @@
     </div>
 
     <script>
-        // Tabela aproximada de taxas totais do NuTap (Intermédio + Parcelamento repassado)
-        // Se o cliente paga em 12x, o valor líquido que você recebe precisa ser o valor à vista.
-        // Fator de multiplicação baseado no repasse de juros para manter seu lucro cheio.
+        // Tabela de taxas exatas do NuTap atualizadas (Antecipado 2 Dias)
+        // Para que o valor caia líquido (repasse), a fórmula correta é dividir por (1 - Taxa).
         const taxasNuTap = {
-            1: 1.000,   // À vista sem juros adicionais além da taxa base (Pix/Débito)
-            2: 1.055,   // Exemplo: Adiciona aprox 5.5% no total para diluir em 2x
-            3: 1.070,
-            4: 1.082,
-            6: 1.110,   // Adiciona aprox 11% no total para diluir em 6x
-            10: 1.155,
-            12: 1.189   // Adiciona aprox 18.9% no total para compensar a taxa de 12x do NuTap
+            2: 0.0579,  // 5,79%
+            3: 0.0609,  // 6,09%
+            4: 0.0799,  // 7,99%
+            5: 0.0809,  // 8,09%
+            6: 0.0819,  // 8,19%
+            10: 0.1105, // 11,05%
+            12: 0.1238  // 12,38%
         };
 
         function formataBRL(valor) {
             return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
 
-        function renderPrecoEstrategico(valorAvista, parcelas, tipo) {
-            if(valorAvista === 0) return "";
+        // Nova função matemática de repasse real (Para não perder centavos na maquininha)
+        function renderPrecoEstrategico(valorLiquidoAvista, parcelas, tipo) {
+            if(valorLiquidoAvista === 0) return "";
             
             if(parcelas > 1) {
-                // Aplica o fator de juros correspondente às parcelas do NuTap
-                let fator = taxasNuTap[parcelas] || 1;
-                let valorTotalComJuros = valorAvista * fator;
-                let valorParcela = valorTotalComJuros / parcelas;
+                // Aplica a fórmula matemática correta de repasse: Valor Líquido / (1 - Taxa da Maquininha)
+                let taxaSelecionada = taxasNuTap[parcelas] || 0;
+                let valorTotalComJuros = valorLiquidoAvista / (1 - taxaSelecionada);
+                let valorDaParcela = valorTotalComJuros / parcelas;
                 
                 return `
-                    <div class="val-destaque">${parcelas}x de ${formataBRL(valorParcela)}</div>
-                    <div class="val-sub">ou ${formataBRL(valorAvista)} à vista no Pix</div>
+                    <div class="val-destaque">${parcelas}x de ${formataBRL(valorDaParcela)}</div>
+                    <div class="val-sub">Total repassado: ${formataBRL(valorTotalComJuros)} (ou ${formataBRL(valorLiquidoAvista)} no Pix)</div>
                 `;
             } else {
-                let subtexto = tipo === 'recorrente' ? "Mensal no Pix" : "Investimento Único no Pix";
+                let subtexto = tipo === 'recorrente' ? "Mensalidade no Pix" : "Investimento Único no Pix";
                 return `
-                    <div class="val-destaque">${formataBRL(valorAvista)}</div>
+                    <div class="val-destaque">${formataBRL(valorLiquidoAvista)}</div>
                     <div class="val-sub">${subtexto}</div>
                 `;
             }
@@ -350,10 +351,9 @@
                 let v = parseFloat(document.getElementById('val-social').value || 0);
                 let parcPresenca = parseInt(document.getElementById('parc-presenca').value);
                 
-                // Se for trimestral/semestral parcelado, multiplica o valor mensal pelo total de meses antes de calcular o parcelamento
                 let valorBasePresenca = v;
                 if(parcPresenca > 1) {
-                    valorBasePresenca = v * parcPresenca; // Ex: 897 * 6 meses
+                    valorBasePresenca = v * parcPresenca; // Se for pacote semestral, multiplica o valor x6 antes de gerar o parcelamento
                 }
                 
                 document.getElementById('val-box-presenca').innerHTML = renderPrecoEstrategico(valorBasePresenca, parcPresenca, 'recorrente');
@@ -366,7 +366,7 @@
                 let txtSocial = `Desenvolvimento visual focado em engajamento local. Contempla a criação estratégica de <strong>${qtdPosts} postagens mensais</strong> para o feed.`;
                 let extras = [];
                 if(optReels) extras.push("elaboração de roteiros para vídeos curtos (Reels)");
-                if(optStories) extras.push("gestão activa de Stories");
+                if(optStories) extras.push("gestão ativa de Stories");
                 if(optSazonal) extras.push("planejamento sazonal");
                 
                 if(extras.length > 0) txtSocial += " Inclui também: " + extras.join(", ") + ".";
