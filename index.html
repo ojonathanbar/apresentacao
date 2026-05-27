@@ -4,88 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador Pro Builder - Papo de Alcance</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
-            --dark: #0f172a; --blue: #2563eb; --gray: #f1f5f9; --border: #cbd5e1;
+            --dark: #1e293b; --blue: #2563eb; --blue-light: #eff6ff; --gray: #f8fafc; --border: #e2e8f0; --accent: #10b981;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: 'Inter', sans-serif; background-color: #94a3b8; display: flex; min-height: 100vh;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #cbd5e1; display: flex; min-height: 100vh; }
 
         /* PAINEL DE CONTROLE */
         #painel {
-            width: 420px; background: #fff; padding: 25px; border-right: 1px solid var(--border);
-            height: 100vh; overflow-y: auto; position: fixed; box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            width: 450px; background: #fff; padding: 25px; border-right: 1px solid var(--border);
+            height: 100vh; overflow-y: auto; position: fixed; box-shadow: 2px 0 15px rgba(0,0,0,0.1); z-index: 10;
         }
 
-        /* SCROLLBAR CUSTOMIZADA */
         #painel::-webkit-scrollbar { width: 6px; }
         #painel::-webkit-scrollbar-thumb { background-color: var(--border); border-radius: 4px; }
 
-        h2.title { font-family: 'Montserrat', sans-serif; font-size: 18px; color: var(--dark); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .brand-panel { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid var(--blue-light); }
+        .brand-panel h2 { font-family: 'Montserrat', sans-serif; font-size: 20px; color: var(--blue); font-weight: 800; display: flex; align-items: center; gap: 8px;}
+        .brand-panel p { font-size: 12px; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;}
 
+        .section-title { font-size: 13px; font-weight: 700; color: var(--dark); text-transform: uppercase; margin: 25px 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px;}
+        
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 5px; text-transform: uppercase; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
         .form-group input[type="text"], .form-group input[type="number"], .form-group select { 
             width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 14px;
         }
 
-        .service-card {
-            background: var(--gray); border: 1px solid var(--border); padding: 15px; border-radius: 8px; margin-bottom: 15px;
-        }
+        .service-card { background: var(--gray); border: 1px solid var(--border); padding: 15px; border-radius: 8px; margin-bottom: 12px; }
         .service-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-weight: 700; font-size: 13px; color: var(--dark);}
         .service-header input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--blue);}
 
-        /* SUB-OPÇÕES SOCIAL MEDIA */
-        .sub-options { background: #fff; padding: 10px; border-radius: 6px; border: 1px solid var(--border); margin-top: 10px; font-size: 12px;}
+        .sub-options { background: #fff; padding: 10px; border-radius: 6px; border: 1px dashed var(--border); margin-top: 10px; font-size: 12px;}
         .sub-options label { text-transform: none; font-weight: 500; font-size: 13px; display: flex; align-items: center; gap: 6px; margin-bottom: 8px; cursor: pointer;}
-        .sub-options input[type="number"] { padding: 6px; margin-bottom: 10px;}
 
         .btn-gerar {
-            width: 100%; background: var(--dark); color: white; border: none; padding: 15px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 15px; margin-top: 10px; margin-bottom: 30px; transition: 0.2s;
+            width: 100%; background: var(--blue); color: white; border: none; padding: 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin-top: 20px; margin-bottom: 30px; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
-        .btn-gerar:hover { background: var(--blue); }
+        .btn-gerar:hover { background: #1d4ed8; transform: translateY(-1px); }
 
         /* PREVIEW PDF */
-        #preview { margin-left: 420px; flex: 1; padding: 40px; display: flex; justify-content: center; }
+        #preview { margin-left: 450px; flex: 1; padding: 40px; display: flex; justify-content: center; }
 
-        .page {
-            background: white; width: 800px; min-height: 1131px; padding: 60px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: relative;
-        }
-
-        .header-prop { border-bottom: 3px solid var(--blue); padding-bottom: 20px; margin-bottom: 35px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .brand h1 { font-family: 'Montserrat', sans-serif; font-size: 26px; color: var(--dark); letter-spacing: -0.5px;}
-        .brand span { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;}
-        .client { text-align: right; font-size: 14px; color: #334155; }
-
-        .doc-title { font-family: 'Montserrat', sans-serif; font-size: 20px; text-align: center; margin-bottom: 40px; color: var(--dark); text-transform: uppercase;}
-
-        .item-servico { margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px dashed var(--border); display: none; }
-        .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 16px; color: var(--blue); margin-bottom: 8px; font-weight: 700;}
-        .item-servico p { font-size: 14px; color: #334155; line-height: 1.6; margin-bottom: 12px; text-align: justify; }
+        .page { background: white; width: 800px; min-height: 1131px; padding: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; }
         
-        .item-valor { font-weight: 600; color: var(--dark); font-size: 14px; display: flex; justify-content: space-between; align-items: center; background: var(--gray); padding: 12px 15px; border-radius: 6px; }
-        .valor-destaque { font-size: 16px; font-weight: 700; color: var(--blue);}
-        .valor-sub { font-size: 12px; color: #64748b; font-weight: 400; margin-left: 8px;}
+        .page-content { padding: 50px 60px; flex-grow: 1; }
 
-        .total-box { margin-top: 40px; background: var(--dark); color: white; padding: 25px; border-radius: 8px; text-align: right; }
-        .total-box span { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; display: block; margin-bottom: 5px;}
-        .total-box h2 { font-family: 'Montserrat', sans-serif; font-size: 32px; color: #fff;}
-        .total-parcelado { font-size: 16px; color: #94a3b8; margin-top: 5px; font-weight: 500;}
+        .header-prop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .brand h1 { font-family: 'Montserrat', sans-serif; font-size: 32px; color: var(--blue); font-weight: 800; letter-spacing: -1px;}
+        .brand span { font-size: 13px; color: var(--dark); font-weight: 600; letter-spacing: 1px; display: block;}
+        
+        .client-box { background: var(--gray); padding: 15px 20px; border-radius: 8px; border-right: 4px solid var(--blue); text-align: right;}
+        .client-box span { font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 3px;}
+        .client-box strong { font-size: 18px; color: var(--dark); font-family: 'Montserrat', sans-serif;}
 
-        .footer { position: absolute; bottom: 40px; left: 60px; right: 60px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid var(--border); padding-top: 20px; }
+        /* CATEGORIAS NO PDF */
+        .category-block { margin-bottom: 35px; display: none; }
+        .cat-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: var(--dark); border-bottom: 2px solid var(--blue-light); padding-bottom: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;}
+        
+        .item-servico { margin-bottom: 20px; padding-left: 15px; border-left: 2px solid var(--border); }
+        .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--blue); margin-bottom: 6px; font-weight: 700;}
+        .item-servico p { font-size: 13px; color: #475569; line-height: 1.6; text-align: justify; }
+
+        /* BOX DE PREÇO ESTRATÉGICO */
+        .price-box { background: var(--blue-light); border-radius: 8px; padding: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #dbeafe;}
+        .price-label { font-size: 13px; color: #1e3a8a; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
+        .price-value { text-align: right; }
+        .val-destaque { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; color: var(--blue); line-height: 1;}
+        .val-sub { font-size: 12px; color: #64748b; margin-top: 4px; font-weight: 500;}
+
+        /* FOOTER DE CONTATO */
+        .footer-contato { background: var(--dark); color: white; padding: 25px 60px; display: flex; justify-content: space-between; align-items: center; margin-top: auto; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+        .f-brand { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px;}
+        .f-brand span { font-size: 11px; font-weight: 400; display: block; opacity: 0.7; margin-top: 2px;}
+        .f-whats { font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px; color: var(--accent);}
 
         @media print {
             body { background: white; }
             #painel { display: none; }
             #preview { margin-left: 0; padding: 0; }
-            .page { box-shadow: none; width: 100%; min-height: auto; padding: 15mm; }
+            .page { box-shadow: none; width: 100%; min-height: auto; }
             @page { size: A4; margin: 0; }
         }
     </style>
@@ -93,24 +97,23 @@
 <body>
 
     <div id="painel">
-        <h2 class="title"><i class="fa-solid fa-sliders"></i> Setup da Proposta</h2>
+        <div class="brand-panel">
+            <h2><i class="fa-solid fa-bolt"></i> Papo de Alcance</h2>
+            <p>Gerador de Propostas Pro</p>
+        </div>
         
         <div class="form-group">
-            <label>Nome do Cliente / Empresa</label>
+            <label>Empresa Prospectada</label>
             <input type="text" id="nomeCliente" value="Barbearia No Trato!" oninput="atualizar()">
         </div>
 
+        <div class="section-title"><i class="fa-solid fa-cubes"></i> Módulo 1: Fundação & Estrutura</div>
         <div class="form-group">
-            <label>Exibição de Valores (Parcelamento)</label>
-            <select id="parcelas" onchange="atualizar()">
+            <label>Condição de Pagamento (Fundação)</label>
+            <select id="parc-fundacao" onchange="atualizar()">
                 <option value="1">À vista (1x)</option>
-                <option value="2">2x</option>
-                <option value="3">3x</option>
-                <option value="4">4x</option>
-                <option value="5">5x</option>
-                <option value="6">6x</option>
-                <option value="10">10x</option>
-                <option value="12">12x</option>
+                <option value="6">Em até 6x</option>
+                <option value="12" selected>Em até 12x (Recomendado)</option>
             </select>
         </div>
 
@@ -130,101 +133,141 @@
         </div>
 
         <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-ecom" onchange="atualizar()"> <label for="chk-ecom" style="margin:0;">E-commerce / Loja Virtual</label></div>
+            <div class="service-header"><input type="checkbox" id="chk-ecom" onchange="atualizar()"> <label for="chk-ecom" style="margin:0;">E-commerce</label></div>
             <input type="number" id="val-ecom" value="2500" placeholder="R$ Valor" oninput="atualizar()">
         </div>
 
+        <div class="section-title"><i class="fa-solid fa-hashtag"></i> Módulo 2: Presença & Autoridade</div>
+        <div class="form-group">
+            <label>Condição de Pagamento (Presença)</label>
+            <select id="parc-presenca" onchange="atualizar()">
+                <option value="1">Mensalidade Recorrente</option>
+                <option value="6">Pacote Semestral (6x)</option>
+            </select>
+        </div>
+
         <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-social" checked onchange="atualizar()"> <label for="chk-social" style="margin:0;">Social Media (Personalizado)</label></div>
-            <input type="number" id="val-social" value="897" placeholder="R$ Valor Mensal" oninput="atualizar()">
+            <div class="service-header"><input type="checkbox" id="chk-social" checked onchange="atualizar()"> <label for="chk-social" style="margin:0;">Gestão de Social Media</label></div>
+            <input type="number" id="val-social" value="897" placeholder="R$ Valor" oninput="atualizar()">
             
             <div class="sub-options">
                 <label style="font-weight:700; font-size:11px;">Qtd de Posts no Feed/Mês:</label>
                 <input type="number" id="qtd-posts" value="12" oninput="atualizar()">
-                
                 <label><input type="checkbox" id="opt-reels" checked onchange="atualizar()"> Roteirização de Reels</label>
                 <label><input type="checkbox" id="opt-stories" checked onchange="atualizar()"> Gestão de Stories</label>
                 <label><input type="checkbox" id="opt-sazonal" checked onchange="atualizar()"> Calendário Sazonal</label>
             </div>
         </div>
 
+        <div class="section-title"><i class="fa-solid fa-chart-line"></i> Módulo 3: Escala & Vendas</div>
+        <div class="form-group">
+            <label>Condição de Pagamento (Tráfego)</label>
+            <select id="parc-trafego" onchange="atualizar()">
+                <option value="1">Mensalidade Recorrente</option>
+            </select>
+        </div>
+
         <div class="service-card">
             <div class="service-header"><input type="checkbox" id="chk-ads" checked onchange="atualizar()"> <label for="chk-ads" style="margin:0;">Tráfego Pago (Ads)</label></div>
-            <input type="number" id="val-ads" value="697" placeholder="R$ Valor Mensal" oninput="atualizar()">
+            <input type="number" id="val-ads" value="697" placeholder="R$ Honorários" oninput="atualizar()">
             
             <div class="sub-options">
                 <label style="font-weight:700; font-size:11px; margin-bottom:5px;">Plataforma de Captação:</label>
                 <select id="tipo-ads" onchange="atualizar()" style="margin-bottom:0; padding:8px;">
-                    <option value="meta">Apenas Meta Ads (Insta/FB)</option>
-                    <option value="google">Apenas Google Ads (Pesquisa)</option>
+                    <option value="meta">Meta Ads (Insta/FB)</option>
+                    <option value="google">Google Ads (Pesquisa)</option>
                     <option value="ambos">Multi-canal (Meta + Google)</option>
                 </select>
             </div>
         </div>
 
-        <button class="btn-gerar" onclick="window.print()"><i class="fa-solid fa-print"></i> Imprimir / Gerar PDF</button>
+        <button class="btn-gerar" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Salvar Proposta em PDF</button>
     </div>
 
     <div id="preview">
         <div class="page">
-            <div class="header-prop">
-                <div class="brand">
-                    <h1>Papo de Alcance</h1>
-                    <span>Consultoria Estratégica Digital</span>
+            <div class="page-content">
+                <div class="header-prop">
+                    <div class="brand">
+                        <h1>Papo de Alcance</h1>
+                        <span>Consultoria Estratégica Digital</span>
+                    </div>
+                    <div class="client-box">
+                        <span>Proposta estruturada para:</span>
+                        <strong id="display-cliente">Barbearia No Trato!</strong>
+                    </div>
                 </div>
-                <div class="client">
-                    Proposta exclusiva para:<br>
-                    <strong id="display-cliente" style="color: var(--dark); font-size: 16px;">Barbearia No Trato!</strong>
+
+                <div id="cat-fundacao" class="category-block">
+                    <h2 class="cat-title"><i class="fa-solid fa-cubes"></i> Fase 1: Fundação & Estrutura Técnica</h2>
+                    
+                    <div id="box-gmn" class="item-servico">
+                        <h3>Otimização Avançada no Google Meu Negócio</h3>
+                        <p>Estruturação técnica do perfil da empresa no Google Maps para dominar as buscas locais. Inclui mapeamento de palavras-chave estratégicas, reestruturação de categorias e configuração de mecanismos para atração orgânica.</p>
+                    </div>
+
+                    <div id="box-lp" class="item-servico">
+                        <h3>Desenvolvimento de Landing Page de Conversão</h3>
+                        <p>Criação de uma página web veloz e focada 100% em conversão (mobile-first). Estruturada com gatilhos mentais visuais e botões diretos para facilitar o agendamento do cliente sem atritos.</p>
+                    </div>
+
+                    <div id="box-inst" class="item-servico">
+                        <h3>Desenvolvimento de Site Institucional Corporativo</h3>
+                        <p>Construção de um portal completo focado em transmitir credibilidade, apresentar portfólio de serviços e estruturar um canal formal. Inclui otimização SEO técnica para indexação nos motores de busca.</p>
+                    </div>
+
+                    <div id="box-ecom" class="item-servico">
+                        <h3>Implementação de E-commerce (Loja Virtual)</h3>
+                        <p>Estruturação de plataforma de vendas online. Inclui cadastro inicial de catálogo, integração com gateways de pagamento seguros, gestão de estoque e configuração de logística de envios.</p>
+                    </div>
+
+                    <div class="price-box">
+                        <div class="price-label">Investimento de Estruturação</div>
+                        <div class="price-value" id="val-box-fundacao">
+                            </div>
+                    </div>
                 </div>
+
+                <div id="cat-presenca" class="category-block">
+                    <h2 class="cat-title"><i class="fa-solid fa-hashtag"></i> Fase 2: Gestão de Presença & Autoridade</h2>
+                    
+                    <div id="box-social" class="item-servico">
+                        <h3>Social Media: Gestão Estratégica de Conteúdo</h3>
+                        <p id="desc-social">Texto gerado via JS.</p>
+                    </div>
+
+                    <div class="price-box" style="background: #f8fafc; border-color: #e2e8f0;">
+                        <div class="price-label" style="color: #475569;">Honorários de Gestão</div>
+                        <div class="price-value" id="val-box-presenca">
+                            </div>
+                    </div>
+                </div>
+
+                <div id="cat-trafego" class="category-block">
+                    <h2 class="cat-title"><i class="fa-solid fa-chart-line"></i> Fase 3: Escala & Captação Ativa</h2>
+                    
+                    <div id="box-ads" class="item-servico">
+                        <h3 id="title-ads">Gestão de Tráfego Pago</h3>
+                        <p id="desc-ads">Texto gerado via JS.</p>
+                    </div>
+
+                    <div class="price-box" style="background: #f8fafc; border-color: #e2e8f0;">
+                        <div class="price-label" style="color: #475569;">Honorários de Aceleração</div>
+                        <div class="price-value" id="val-box-trafego">
+                            </div>
+                    </div>
+                </div>
+
             </div>
 
-            <h2 class="doc-title">Escopo Comercial de Serviços</h2>
-
-            <div id="box-gmn" class="item-servico">
-                <h3>Estruturação Google Meu Negócio (SEO Local)</h3>
-                <p>Otimização completa do perfil da empresa no Google Maps para dominar as buscas locais. Inclui o mapeamento de palavras-chave estratégicas, reestruturação de categorias, atualização de contato e configuração de mecanismos de ranqueamento orgânico.</p>
-                <div class="item-valor"><span>Investimento Único de Estruturação:</span> <span class="valor-destaque" id="out-gmn">R$ 0,00</span></div>
-            </div>
-
-            <div id="box-lp" class="item-servico">
-                <h3>Desenvolvimento de Landing Page de Conversão</h3>
-                <p>Criação de uma página web estruturada especificamente para capturar a atenção do usuário e facilitar a ação (agendamento/compra) de forma intuitiva. Design responsivo focado 100% na experiência mobile, com botões de conversão integrados.</p>
-                <div class="item-valor"><span>Investimento Único de Desenvolvimento:</span> <span class="valor-destaque" id="out-lp">R$ 0,00</span></div>
-            </div>
-
-            <div id="box-inst" class="item-servico">
-                <h3>Desenvolvimento de Site Institucional</h3>
-                <p>Construção de um portal corporativo completo (Múltiplas Páginas) focado em transmitir credibilidade, apresentar a história da empresa, portfólio de serviços e estruturar um canal formal de contato. Inclui otimização SEO técnica para indexação nos motores de busca.</p>
-                <div class="item-valor"><span>Investimento Único de Desenvolvimento:</span> <span class="valor-destaque" id="out-inst">R$ 0,00</span></div>
-            </div>
-
-            <div id="box-ecom" class="item-servico">
-                <h3>Desenvolvimento de E-commerce (Loja Virtual)</h3>
-                <p>Estruturação de plataforma de vendas online completa. Inclui cadastro inicial de catálogo de produtos, integração com gateways de pagamento (Cartão/Pix), painel de gestão de estoque, configuração de frete (Correios/Transportadoras) e layout focado em conversão de vendas.</p>
-                <div class="item-valor"><span>Investimento Único de Desenvolvimento:</span> <span class="valor-destaque" id="out-ecom">R$ 0,00</span></div>
-            </div>
-
-            <div id="box-social" class="item-servico">
-                <h3>Gestão de Redes Sociais e Posicionamento</h3>
-                <p id="desc-social">Texto gerado via JS.</p>
-                <div class="item-valor"><span>Mensalidade de Gestão Estratégica:</span> <span class="valor-destaque" id="out-social">R$ 0,00</span></div>
-            </div>
-
-            <div id="box-ads" class="item-servico">
-                <h3 id="title-ads">Gestão de Tráfego Pago</h3>
-                <p id="desc-ads">Texto gerado via JS.</p>
-                <div class="item-valor"><span>Honorários de Gestão (Mensal):</span> <span class="valor-destaque" id="out-ads">R$ 0,00</span></div>
-            </div>
-
-            <div class="total-box">
-                <span>Resumo Financeiro do Projeto</span>
-                <h2 id="total-geral">R$ 0,00</h2>
-                <div id="total-parcelado" class="total-parcelado"></div>
-            </div>
-
-            <div class="footer">
-                Documento gerado por Papo de Alcance. Os valores apresentados são válidos por 15 dias corridos.<br>
-                As condições de pagamento parcelado estão sujeitas a aprovação. Contato: +55 41 99816-1160
+            <div class="footer-contato">
+                <div class="f-brand">
+                    Papo de Alcance
+                    <span>CNPJ / Consultoria em Vendas Locais</span>
+                </div>
+                <div class="f-whats">
+                    <i class="fa-brands fa-whatsapp"></i> +55 41 99816-1160
+                </div>
             </div>
         </div>
     </div>
@@ -234,113 +277,103 @@
             return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
 
-        // Função para formatar exibição com parcelas
-        function renderValor(valorTotal, parcelas) {
+        // Nova função de renderização estratégica de preço (Foca na parcela)
+        function renderPrecoEstrategico(valorTotal, parcelas, tipo) {
+            if(valorTotal === 0) return "";
+            
             if(parcelas > 1) {
                 let valorParcela = valorTotal / parcelas;
-                return `${parcelas}x de ${formataBRL(valorParcela)} <span class="valor-sub">(ou ${formataBRL(valorTotal)} à vista)</span>`;
+                return `
+                    <div class="val-destaque">${parcelas}x de ${formataBRL(valorParcela)}</div>
+                    <div class="val-sub">Investimento total: ${formataBRL(valorTotal)}</div>
+                `;
+            } else {
+                let subtexto = tipo === 'recorrente' ? "Valor Mensal" : "Pagamento Único";
+                return `
+                    <div class="val-destaque">${formataBRL(valorTotal)}</div>
+                    <div class="val-sub">${subtexto}</div>
+                `;
             }
-            return formataBRL(valorTotal);
         }
 
         function atualizar() {
-            // 1. Atualizar Cliente
-            document.getElementById('display-cliente').innerText = document.getElementById('nomeCliente').value || "Cliente";
+            document.getElementById('display-cliente').innerText = document.getElementById('nomeCliente').value || "Empresa Cliente";
 
-            let parcelas = parseInt(document.getElementById('parcelas').value);
-            let total = 0;
+            // --- CÁLCULO FUNDAÇÃO ---
+            let totalFundacao = 0;
+            let parcFundacao = parseInt(document.getElementById('parc-fundacao').value);
+            let hasFundacao = false;
 
-            // 2. GMN
-            if(document.getElementById('chk-gmn').checked) {
-                document.getElementById('box-gmn').style.display = 'block';
-                let v = parseFloat(document.getElementById('val-gmn').value || 0);
-                document.getElementById('out-gmn').innerHTML = renderValor(v, parcelas);
-                total += v;
-            } else { document.getElementById('box-gmn').style.display = 'none'; }
+            ['gmn', 'lp', 'inst', 'ecom'].forEach(item => {
+                if(document.getElementById(`chk-${item}`).checked) {
+                    document.getElementById(`box-${item}`).style.display = 'block';
+                    totalFundacao += parseFloat(document.getElementById(`val-${item}`).value || 0);
+                    hasFundacao = true;
+                } else {
+                    document.getElementById(`box-${item}`).style.display = 'none';
+                }
+            });
 
-            // 3. Landing Page
-            if(document.getElementById('chk-lp').checked) {
-                document.getElementById('box-lp').style.display = 'block';
-                let v = parseFloat(document.getElementById('val-lp').value || 0);
-                document.getElementById('out-lp').innerHTML = renderValor(v, parcelas);
-                total += v;
-            } else { document.getElementById('box-lp').style.display = 'none'; }
+            if(hasFundacao) {
+                document.getElementById('cat-fundacao').style.display = 'block';
+                document.getElementById('val-box-fundacao').innerHTML = renderPrecoEstrategico(totalFundacao, parcFundacao, 'unico');
+            } else {
+                document.getElementById('cat-fundacao').style.display = 'none';
+            }
 
-            // 4. Site Institucional
-            if(document.getElementById('chk-inst').checked) {
-                document.getElementById('box-inst').style.display = 'block';
-                let v = parseFloat(document.getElementById('val-inst').value || 0);
-                document.getElementById('out-inst').innerHTML = renderValor(v, parcelas);
-                total += v;
-            } else { document.getElementById('box-inst').style.display = 'none'; }
 
-            // 5. E-commerce
-            if(document.getElementById('chk-ecom').checked) {
-                document.getElementById('box-ecom').style.display = 'block';
-                let v = parseFloat(document.getElementById('val-ecom').value || 0);
-                document.getElementById('out-ecom').innerHTML = renderValor(v, parcelas);
-                total += v;
-            } else { document.getElementById('box-ecom').style.display = 'none'; }
-
-            // 6. Social Media Builder
+            // --- CÁLCULO PRESENÇA ---
             if(document.getElementById('chk-social').checked) {
-                document.getElementById('box-social').style.display = 'block';
+                document.getElementById('cat-presenca').style.display = 'block';
+                
                 let v = parseFloat(document.getElementById('val-social').value || 0);
-                document.getElementById('out-social').innerText = formataBRL(v); // Mensalidade não parcela
-                total += v;
+                let parcPresenca = parseInt(document.getElementById('parc-presenca').value);
+                document.getElementById('val-box-presenca').innerHTML = renderPrecoEstrategico(v, parcPresenca, 'recorrente');
 
                 let qtdPosts = document.getElementById('qtd-posts').value || 0;
                 let optReels = document.getElementById('opt-reels').checked;
                 let optStories = document.getElementById('opt-stories').checked;
                 let optSazonal = document.getElementById('opt-sazonal').checked;
 
-                let txtSocial = `O escopo deste serviço foi desenhado sob medida para garantir constância e conversão. Ele engloba a criação criativa de <strong>${qtdPosts} postagens mensais</strong> para o Feed. `;
-                
+                let txtSocial = `Desenvolvimento visual focado em engajamento local. Contempla a criação estratégica de <strong>${qtdPosts} postagens mensais</strong> para o feed.`;
                 let extras = [];
-                if(optReels) extras.push("elaboração de roteiros estruturados para vídeos curtos (Reels)");
-                if(optStories) extras.push("gestão ativa e roteirização estratégica de Stories diários");
-                if(optSazonal) extras.push("planejamento de calendário sazonal para datas comemorativas e promoções");
+                if(optReels) extras.push("elaboração de roteiros para vídeos curtos (Reels)");
+                if(optStories) extras.push("gestão ativa de Stories");
+                if(optSazonal) extras.push("planejamento sazonal");
                 
-                if(extras.length > 0) {
-                    txtSocial += "Além disso, o pacote contempla: " + extras.join(", ") + ".";
-                }
-                
+                if(extras.length > 0) txtSocial += " Inclui também: " + extras.join(", ") + ".";
                 document.getElementById('desc-social').innerHTML = txtSocial;
 
-            } else { document.getElementById('box-social').style.display = 'none'; }
+            } else {
+                document.getElementById('cat-presenca').style.display = 'none';
+            }
 
-            // 7. Tráfego Pago Builder
+
+            // --- CÁLCULO TRÁFEGO ---
             if(document.getElementById('chk-ads').checked) {
-                document.getElementById('box-ads').style.display = 'block';
+                document.getElementById('cat-trafego').style.display = 'block';
+                
                 let v = parseFloat(document.getElementById('val-ads').value || 0);
-                document.getElementById('out-ads').innerText = formataBRL(v); // Mensalidade não parcela
-                total += v;
+                let parcTrafego = parseInt(document.getElementById('parc-trafego').value);
+                document.getElementById('val-box-trafego').innerHTML = renderPrecoEstrategico(v, parcTrafego, 'recorrente');
 
                 let tipoAds = document.getElementById('tipo-ads').value;
                 let titleAds = document.getElementById('title-ads');
                 let descAds = document.getElementById('desc-ads');
 
                 if(tipoAds === 'meta') {
-                    titleAds.innerText = "Gestão de Tráfego Pago (Meta Ads)";
-                    descAds.innerText = "Aceleração de captação de clientes através de anúncios patrocinados no Instagram e Facebook. Criação de campanhas visuais geolocalizadas, testes A/B de criativos e otimização diária de verba para garantir o menor custo por conversão. (Verba paga direto à plataforma não inclusa).";
+                    titleAds.innerText = "Captação Ativa via Meta Ads";
+                    descAds.innerText = "Criação e gestão de campanhas geolocalizadas no Instagram e Facebook. Otimização diária de verba para buscar o menor custo por agendamento/venda da região. (Orçamento da plataforma definido pelo cliente).";
                 } else if(tipoAds === 'google') {
-                    titleAds.innerText = "Gestão de Tráfego Pago (Google Ads)";
-                    descAds.innerText = "Captação direta na Rede de Pesquisa do Google. Vamos interceptar os clientes no exato momento em que eles buscam pelos seus serviços na sua cidade. Inclui pesquisa de palavras-chave, negativação de termos ruins e gestão de lances diários. (Verba paga direto à plataforma não inclusa).";
+                    titleAds.innerText = "Rede de Pesquisa Google Ads";
+                    descAds.innerText = "Interceptação de clientes com alta intenção de compra. Estruturação de lances para colocar a empresa no topo do Google quando pesquisarem pelo seu serviço na cidade. (Orçamento da plataforma definido pelo cliente).";
                 } else {
-                    titleAds.innerText = "Estratégia Omnichannel (Google + Meta Ads)";
-                    descAds.innerText = "Domínio total das plataformas de captação. Combinamos a intenção de compra da Rede de Pesquisa do Google com a criação de desejo visual dos anúncios no Instagram/Facebook. Uma máquina completa de aquisição de novos clientes e remarketing. (Verba paga direto à plataforma não inclusa).";
+                    titleAds.innerText = "Estratégia Omnichannel (Google + Meta)";
+                    descAds.innerText = "Presença onipresente. Unimos a intenção de compra da pesquisa do Google com a criação de desejo visual do Instagram. Máquina completa de aquisição de novos clientes e remarketing. (Orçamento da plataforma definido pelo cliente).";
                 }
 
-            } else { document.getElementById('box-ads').style.display = 'none'; }
-
-            // 8. Totais
-            if(parcelas > 1) {
-                let valorParcelaTotal = total / parcelas;
-                document.getElementById('total-geral').innerText = `${parcelas}x de ${formataBRL(valorParcelaTotal)}`;
-                document.getElementById('total-parcelado').innerText = `Total à vista: ${formataBRL(total)}`;
             } else {
-                document.getElementById('total-geral').innerText = formataBRL(total);
-                document.getElementById('total-parcelado').innerText = "";
+                document.getElementById('cat-trafego').style.display = 'none';
             }
         }
 
