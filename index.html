@@ -8,457 +8,101 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        :root {
-            --dark: #1e293b; --blue: #2563eb; --blue-light: #eff6ff; --gray: #f8fafc; --border: #e2e8f0; --accent: #10b981;
-        }
-
+        :root { --dark: #1e293b; --blue: #2563eb; --blue-light: #eff6ff; --gray: #f8fafc; --border: #e2e8f0; --accent: #10b981; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body { font-family: 'Inter', sans-serif; background-color: #cbd5e1; display: flex; min-height: 100vh; }
-
-        /* PAINEL DE CONTROLE */
-        #painel {
-            width: 450px; background: #fff; padding: 25px; border-right: 1px solid var(--border);
-            height: 100vh; overflow-y: auto; position: fixed; box-shadow: 2px 0 15px rgba(0,0,0,0.1); z-index: 10;
-        }
-
-        #painel::-webkit-scrollbar { width: 6px; }
-        #painel::-webkit-scrollbar-thumb { background-color: var(--border); border-radius: 4px; }
-
-        .brand-panel { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid var(--blue-light); }
-        .brand-panel h2 { font-family: 'Montserrat', sans-serif; font-size: 20px; color: var(--blue); font-weight: 800; display: flex; align-items: center; gap: 8px;}
-        .brand-panel p { font-size: 12px; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;}
-
-        .section-title { font-size: 13px; font-weight: 700; color: var(--dark); text-transform: uppercase; margin: 25px 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px;}
         
+        /* PAINEL DE CONTROLE */
+        #painel { width: 450px; background: #fff; padding: 25px; border-right: 1px solid var(--border); height: 100vh; overflow-y: auto; position: fixed; box-shadow: 2px 0 15px rgba(0,0,0,0.1); z-index: 10; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
-        .form-group input[type="text"], .form-group input[type="number"], .form-group select { 
-            width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 14px;
-        }
-
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter'; }
+        
         .service-card { background: var(--gray); border: 1px solid var(--border); padding: 15px; border-radius: 8px; margin-bottom: 12px; }
-        .service-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-weight: 700; font-size: 13px; color: var(--dark);}
-        .service-header input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--blue);}
-
-        .sub-options { background: #fff; padding: 10px; border-radius: 6px; border: 1px dashed var(--border); margin-top: 10px; font-size: 12px;}
-        .sub-options label { text-transform: none; font-weight: 500; font-size: 13px; display: flex; align-items: center; gap: 6px; margin-bottom: 8px; cursor: pointer;}
-
-        .btn-gerar {
-            width: 100%; background: var(--blue); color: white; border: none; padding: 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin-top: 20px; margin-bottom: 30px; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-        }
-        .btn-gerar:hover { background: #1d4ed8; transform: translateY(-1px); }
+        .sub-options { background: #fff; padding: 10px; border-radius: 6px; border: 1px dashed var(--border); margin-top: 10px; }
+        .sub-options .input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 12px; }
+        .sub-options input { width: 60px; padding: 4px; }
+        
+        .btn-gerar { width: 100%; background: var(--blue); color: white; border: none; padding: 16px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 20px; }
 
         /* PREVIEW PDF */
         #preview { margin-left: 450px; flex: 1; padding: 40px; display: flex; justify-content: center; }
-
-        .page { background: white; width: 800px; min-height: 1131px; padding: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; }
+        .page { background: white; width: 800px; min-height: 1131px; padding: 50px 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
         
-        .page-content { padding: 50px 60px; flex-grow: 1; }
-
-        .header-prop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .brand h1 { font-family: 'Montserrat', sans-serif; font-size: 32px; color: var(--blue); font-weight: 800; letter-spacing: -1px;}
-        .brand span { font-size: 13px; color: var(--dark); font-weight: 600; letter-spacing: 1px; display: block;}
-        
-        .client-box { background: var(--gray); padding: 15px 20px; border-radius: 8px; border-right: 4px solid var(--blue); text-align: right;}
-        .client-box span { font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 3px;}
-        .client-box strong { font-size: 18px; color: var(--dark); font-family: 'Montserrat', sans-serif;}
-
-        /* CATEGORIAS NO PDF */
         .category-block { margin-bottom: 35px; display: none; }
-        .cat-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: var(--dark); border-bottom: 2px solid var(--blue-light); padding-bottom: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;}
+        .cat-title { font-family: 'Montserrat', sans-serif; font-size: 18px; color: var(--dark); border-bottom: 2px solid var(--blue-light); padding-bottom: 8px; margin-bottom: 20px; }
+        .serv-list { list-style: none; padding-left: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
+        .serv-list li { font-size: 12.5px; color: #334155; position: relative; padding-left: 20px; }
+        .serv-list li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--accent); position: absolute; left: 0; }
         
-        .item-servico { margin-bottom: 20px; padding-left: 15px; border-left: 2px solid var(--border); }
-        .item-servico h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--blue); margin-bottom: 12px; font-weight: 700;}
-        
-        /* LAYOUT DE LISTAS EM DUAS COLUNAS */
-        .serv-list {
-            list-style: none;
-            padding-left: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px 20px;
-            margin-bottom: 5px;
-        }
-        .serv-list li {
-            font-size: 12.5px;
-            color: #334155;
-            position: relative;
-            padding-left: 20px;
-            line-height: 1.4;
-        }
-        .serv-list li::before {
-            content: '\f058'; /* fa-circle-check FontAwesome */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--accent); /* Verde destaque */
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 13px;
-        }
-        .serv-list-note {
-            font-size: 11px; color: #94a3b8; margin-top: 8px; font-style: italic;
-        }
+        .price-box { background: var(--blue-light); border-radius: 8px; padding: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .val-destaque { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; color: var(--blue); }
+        .footer-contato { background: var(--dark); color: white; padding: 25px 60px; position: absolute; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center;}
 
-        /* BOX DE PREÇO ESTRATÉGICO */
-        .price-box { background: var(--blue-light); border-radius: 8px; padding: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #dbeafe;}
-        .price-label { font-size: 13px; color: #1e3a8a; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
-        .price-value { text-align: right; }
-        .val-destaque { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; color: var(--blue); line-height: 1;}
-        .val-sub { font-size: 12px; color: #64748b; margin-top: 4px; font-weight: 500;}
-
-        /* FOOTER DE CONTATO */
-        .footer-contato { background: var(--dark); color: white; padding: 25px 60px; display: flex; justify-content: space-between; align-items: center; margin-top: auto; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
-        .f-brand { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px;}
-        .f-brand span { font-size: 11px; font-weight: 400; display: block; opacity: 0.7; margin-top: 2px;}
-        .f-whats { font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px; color: var(--accent);}
-
-        @media print {
-            body { background: white; }
-            #painel { display: none; }
-            #preview { margin-left: 0; padding: 0; }
-            .page { box-shadow: none; width: 100%; min-height: auto; }
-            @page { size: A4; margin: 0; }
-        }
+        @media print { #painel { display: none; } #preview { margin-left: 0; padding: 0; } .page { box-shadow: none; } }
     </style>
 </head>
 <body>
 
     <div id="painel">
-        <div class="brand-panel">
-            <h2><i class="fa-solid fa-bolt"></i> Papo de Alcance</h2>
-            <p>Gerador de Propostas Pro</p>
-        </div>
+        <h2>Papo de Alcance</h2>
+        <div class="form-group"><label>Cliente</label><input type="text" id="nomeCliente" value="Barbearia No Trato!" oninput="atualizar()"></div>
         
-        <div class="form-group">
-            <label>Empresa Prospectada</label>
-            <input type="text" id="nomeCliente" value="Barbearia No Trato!" oninput="atualizar()">
-        </div>
-
-        <div class="section-title"><i class="fa-solid fa-cubes"></i> Módulo 1: Fundação & Estrutura</div>
-        <div class="form-group">
-            <label>Condição de Pagamento (Fundação)</label>
-            <select id="parc-fundacao" onchange="atualizar()">
-                <option value="1">À vista (1x no Pix)</option>
-                <option value="2">2x no Cartão (NuTap)</option>
-                <option value="3">3x no Cartão (NuTap)</option>
-                <option value="4">4x no Cartão (NuTap)</option>
-                <option value="5">5x no Cartão (NuTap)</option>
-                <option value="6">6x no Cartão (NuTap)</option>
-                <option value="10">10x no Cartão (NuTap)</option>
-                <option value="12" selected>12x no Cartão (Recomendado)</option>
-            </select>
-        </div>
-
         <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-gmn" checked onchange="atualizar()"> <label for="chk-gmn" style="margin:0;">Google Meu Negócio</label></div>
-            <input type="number" id="val-gmn" value="597" placeholder="R$ Valor à vista" oninput="atualizar()">
-        </div>
-
-        <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-lp" checked onchange="atualizar()"> <label for="chk-lp" style="margin:0;">Landing Page</label></div>
-            <input type="number" id="val-lp" value="797" placeholder="R$ Valor à vista" oninput="atualizar()">
-        </div>
-
-        <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-inst" onchange="atualizar()"> <label for="chk-inst" style="margin:0;">Site Institucional</label></div>
-            <input type="number" id="val-inst" value="1500" placeholder="R$ Valor à vista" oninput="atualizar()">
-        </div>
-
-        <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-ecom" onchange="atualizar()"> <label for="chk-ecom" style="margin:0;">E-commerce</label></div>
-            <input type="number" id="val-ecom" value="2500" placeholder="R$ Valor à vista" oninput="atualizar()">
-        </div>
-
-        <div class="section-title"><i class="fa-solid fa-hashtag"></i> Módulo 2: Presença & Autoridade</div>
-        <div class="form-group">
-            <label>Condição de Pagamento (Presença)</label>
-            <select id="parc-presenca" onchange="atualizar()">
-                <option value="1">Mensalidade Recorrente (Pix)</option>
-                <option value="3">Trimestral em 3x (Cartão NuTap)</option>
-                <option value="6">Semestral em 6x (Cartão NuTap)</option>
-            </select>
-        </div>
-
-        <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-social" checked onchange="atualizar()"> <label for="chk-social" style="margin:0;">Gestão de Social Media</label></div>
-            <input type="number" id="val-social" value="897" placeholder="R$ Valor Mensal" oninput="atualizar()">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <input type="checkbox" id="chk-social" checked onchange="atualizar()"> <strong>Gestão de Social Media</strong>
+            </div>
+            <input type="number" id="val-social" value="897" oninput="atualizar()" placeholder="Valor Mensal">
             
             <div class="sub-options">
-                <label style="font-weight:700; font-size:11px;">Qtd de Posts no Feed/Mês:</label>
-                <input type="number" id="qtd-posts" value="12" oninput="atualizar()">
-                <label><input type="checkbox" id="opt-reels" checked onchange="atualizar()"> Roteirização de Reels</label>
-                <label><input type="checkbox" id="opt-stories" checked onchange="atualizar()"> Gestão de Stories</label>
-                <label><input type="checkbox" id="opt-sazonal" checked onchange="atualizar()"> Calendário Sazonal</label>
+                <div class="input-row"><input type="number" id="qtd-posts" value="12" oninput="atualizar()"> Posts no Feed</div>
+                <div class="input-row"><input type="number" id="qtd-reels" value="4" oninput="atualizar()"> Roteiros de Reels</div>
+                <div class="input-row"><input type="number" id="qtd-stories" value="20" oninput="atualizar()"> Stories Mensais</div>
             </div>
         </div>
 
-        <div class="section-title"><i class="fa-solid fa-chart-line"></i> Módulo 3: Escala & Vendas</div>
-        <div class="form-group">
-            <label>Condição de Pagamento (Tráfego)</label>
-            <select id="parc-trafego" onchange="atualizar()">
-                <option value="1">Mensalidade Recorrente (Pix)</option>
-            </select>
-        </div>
-
-        <div class="service-card">
-            <div class="service-header"><input type="checkbox" id="chk-ads" checked onchange="atualizar()"> <label for="chk-ads" style="margin:0;">Tráfego Pago (Ads)</label></div>
-            <input type="number" id="val-ads" value="697" placeholder="R$ Honorários" oninput="atualizar()">
-            
-            <div class="sub-options">
-                <label style="font-weight:700; font-size:11px; margin-bottom:5px;">Plataforma de Captação:</label>
-                <select id="tipo-ads" onchange="atualizar()" style="margin-bottom:0; padding:8px;">
-                    <option value="meta">Meta Ads (Insta/FB)</option>
-                    <option value="google">Google Ads (Pesquisa)</option>
-                    <option value="ambos">Multi-canal (Meta + Google)</option>
-                </select>
-            </div>
-        </div>
-
-        <button class="btn-gerar" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Salvar Proposta em PDF</button>
+        <button class="btn-gerar" onclick="window.print()">Salvar PDF</button>
     </div>
 
     <div id="preview">
         <div class="page">
-            <div class="page-content">
-                <div class="header-prop">
-                    <div class="brand">
-                        <h1>Papo de Alcance</h1>
-                        <span>Consultoria Estratégica Digital</span>
-                    </div>
-                    <div class="client-box">
-                        <span>Proposta estruturada para:</span>
-                        <strong id="display-cliente">Barbearia No Trato!</strong>
-                    </div>
-                </div>
+            <h1 id="display-cliente">Barbearia No Trato!</h1>
+            
+            <div id="cat-presenca" class="category-block" style="display:block;">
+                <h2 class="cat-title"><i class="fa-solid fa-hashtag"></i> Fase 2: Gestão de Presença</h2>
+                <h3>Social Media: Gestão Estratégica</h3>
+                <div id="desc-social"></div>
 
-                <div id="cat-fundacao" class="category-block">
-                    <h2 class="cat-title"><i class="fa-solid fa-cubes"></i> Fase 1: Fundação & Estrutura Técnica</h2>
-                    
-                    <div id="box-gmn" class="item-servico">
-                        <h3>Otimização Avançada no Google Meu Negócio</h3>
-                        <ul class="serv-list">
-                            <li>Mapeamento estratégico de palavras-chave locais.</li>
-                            <li>Reestruturação técnica de categorias comerciais.</li>
-                            <li>Ajuste de geolocalização e área de cobertura.</li>
-                            <li>Configuração de gatilhos para atração orgânica.</li>
-                        </ul>
-                    </div>
-
-                    <div id="box-lp" class="item-servico">
-                        <h3>Desenvolvimento de Landing Page de Conversão</h3>
-                        <ul class="serv-list">
-                            <li>Design mobile-first de altíssima velocidade.</li>
-                            <li>Estruturação de fluxo com gatilhos mentais visuais.</li>
-                            <li>Botões diretos (WhatsApp/Agendamento) sem atritos.</li>
-                            <li>Design focado exclusivamente em geração de leads.</li>
-                        </ul>
-                    </div>
-
-                    <div id="box-inst" class="item-servico">
-                        <h3>Desenvolvimento de Site Institucional Corporativo</h3>
-                        <ul class="serv-list">
-                            <li>Páginas estruturadas para transmitir autoridade e credibilidade.</li>
-                            <li>Apresentação visual avançada de portfólio de serviços.</li>
-                            <li>Estruturação de múltiplos canais formais de contato e rotas.</li>
-                            <li>Otimização técnica (SEO On-Page) para os motores de busca.</li>
-                        </ul>
-                    </div>
-
-                    <div id="box-ecom" class="item-servico">
-                        <h3>Implementação de E-commerce (Loja Virtual)</h3>
-                        <ul class="serv-list">
-                            <li>Cadastro e estruturação inicial de catálogo de produtos.</li>
-                            <li>Integração com gateways avançados e seguros de pagamento.</li>
-                            <li>Configuração do painel de controle e gestão de estoque.</li>
-                            <li>Integração com sistemas logísticos para cálculo de frete.</li>
-                        </ul>
-                    </div>
-
-                    <div class="price-box">
-                        <div class="price-label">Investimento de Estruturação</div>
-                        <div class="price-value" id="val-box-fundacao">
-                            </div>
-                    </div>
-                </div>
-
-                <div id="cat-presenca" class="category-block">
-                    <h2 class="cat-title"><i class="fa-solid fa-hashtag"></i> Fase 2: Gestão de Presença & Autoridade</h2>
-                    
-                    <div id="box-social" class="item-servico">
-                        <h3>Social Media: Gestão Estratégica de Conteúdo</h3>
-                        <div id="desc-social">Texto gerado via JS.</div>
-                    </div>
-
-                    <div class="price-box" style="background: #f8fafc; border-color: #e2e8f0;">
-                        <div class="price-label" style="color: #475569;">Honorários de Gestão</div>
-                        <div class="price-value" id="val-box-presenca">
-                            </div>
-                    </div>
-                </div>
-
-                <div id="cat-trafego" class="category-block">
-                    <h2 class="cat-title"><i class="fa-solid fa-chart-line"></i> Fase 3: Escala & Captação Ativa</h2>
-                    
-                    <div id="box-ads" class="item-servico">
-                        <h3 id="title-ads">Gestão de Tráfego Pago</h3>
-                        <div id="desc-ads">Texto gerado via JS.</div>
-                    </div>
-
-                    <div class="price-box" style="background: #f8fafc; border-color: #e2e8f0;">
-                        <div class="price-label" style="color: #475569;">Honorários de Aceleração</div>
-                        <div class="price-value" id="val-box-trafego">
-                            </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="footer-contato">
-                <div class="f-brand">
-                    Papo de Alcance
-                    <span>Consultoria Especializada em Vendas Locais</span>
-                </div>
-                <div class="f-whats">
-                    <i class="fa-brands fa-whatsapp"></i> +55 41 99816-1160
+                <div class="price-box">
+                    <div>Investimento Mensal</div>
+                    <div id="val-box-presenca" class="val-destaque">R$ 897</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const taxasNuTap = {
-            2: 0.0579,
-            3: 0.0609,
-            4: 0.0799,
-            5: 0.0809,
-            6: 0.0819,
-            10: 0.1105,
-            12: 0.1238
-        };
-
-        function formataBRL(valor) {
-            return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        }
-
-        function renderPrecoEstrategico(valorLiquidoAvista, parcelas, tipo) {
-            if(valorLiquidoAvista === 0) return "";
-            
-            if(parcelas > 1) {
-                let taxaSelecionada = taxasNuTap[parcelas] || 0;
-                let valorTotalComJuros = valorLiquidoAvista / (1 - taxaSelecionada);
-                let valorDaParcela = valorTotalComJuros / parcelas;
-                
-                return `
-                    <div class="val-destaque">${parcelas}x de ${formataBRL(valorDaParcela)}</div>
-                    <div class="val-sub">ou ${formataBRL(valorLiquidoAvista)} à vista no Pix</div>
-                `;
-            } else {
-                let subtexto = tipo === 'recorrente' ? "Mensalidade no Pix" : "Investimento Único no Pix";
-                return `
-                    <div class="val-destaque">${formataBRL(valorLiquidoAvista)}</div>
-                    <div class="val-sub">${subtexto}</div>
-                `;
-            }
-        }
+        function formataBRL(valor) { return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
 
         function atualizar() {
-            document.getElementById('display-cliente').innerText = document.getElementById('nomeCliente').value || "Empresa Cliente";
+            document.getElementById('display-cliente').innerText = document.getElementById('nomeCliente').value;
+            
+            // Lógica Social Media
+            let posts = document.getElementById('qtd-posts').value;
+            let reels = document.getElementById('qtd-reels').value;
+            let stories = document.getElementById('qtd-stories').value;
+            let valor = document.getElementById('val-social').value;
 
-            // --- CÁLCULO FUNDAÇÃO ---
-            let totalFundacao = 0;
-            let parcFundacao = parseInt(document.getElementById('parc-fundacao').value);
-            let hasFundacao = false;
-
-            ['gmn', 'lp', 'inst', 'ecom'].forEach(item => {
-                if(document.getElementById(`chk-${item}`).checked) {
-                    document.getElementById(`box-${item}`).style.display = 'block';
-                    totalFundacao += parseFloat(document.getElementById(`val-${item}`).value || 0);
-                    hasFundacao = true;
-                } else {
-                    document.getElementById(`box-${item}`).style.display = 'none';
-                }
-            });
-
-            if(hasFundacao) {
-                document.getElementById('cat-fundacao').style.display = 'block';
-                document.getElementById('val-box-fundacao').innerHTML = renderPrecoEstrategico(totalFundacao, parcFundacao, 'unico');
-            } else {
-                document.getElementById('cat-fundacao').style.display = 'none';
-            }
-
-            // --- CÁLCULO PRESENÇA ---
-            if(document.getElementById('chk-social').checked) {
-                document.getElementById('cat-presenca').style.display = 'block';
-                
-                let v = parseFloat(document.getElementById('val-social').value || 0);
-                let parcPresenca = parseInt(document.getElementById('parc-presenca').value);
-                
-                let valorBasePresenca = v;
-                if(parcPresenca > 1) {
-                    valorBasePresenca = v * parcPresenca; 
-                }
-                
-                document.getElementById('val-box-presenca').innerHTML = renderPrecoEstrategico(valorBasePresenca, parcPresenca, 'recorrente');
-
-                let qtdPosts = document.getElementById('qtd-posts').value || 0;
-                let optReels = document.getElementById('opt-reels').checked;
-                let optStories = document.getElementById('opt-stories').checked;
-                let optSazonal = document.getElementById('opt-sazonal').checked;
-
-                let txtSocial = `<ul class="serv-list">`;
-                txtSocial += `<li>Criação visual de <strong>${qtdPosts} postagens mensais</strong> (Artes e Carrosséis).</li>`;
-                txtSocial += `<li><strong>Copywriting persuasivo:</strong> Legendas desenvolvidas para reter e converter clientes.</li>`;
-                
-                if(optReels) txtSocial += `<li>Roteirização estratégica direcionada para vídeos curtos (Reels).</li>`;
-                if(optStories) txtSocial += `<li>Gestão ativa com estratégias diárias para retenção nos Stories.</li>`;
-                if(optSazonal) txtSocial += `<li>Planejamento de calendário comercial focado em datas comemorativas.</li>`;
-                
-                txtSocial += `</ul>`;
-                document.getElementById('desc-social').innerHTML = txtSocial;
-
-            } else {
-                document.getElementById('cat-presenca').style.display = 'none';
-            }
-
-            // --- CÁLCULO TRÁFEGO ---
-            if(document.getElementById('chk-ads').checked) {
-                document.getElementById('cat-trafego').style.display = 'block';
-                
-                let v = parseFloat(document.getElementById('val-ads').value || 0);
-                let parcTrafego = parseInt(document.getElementById('parc-trafego').value);
-                document.getElementById('val-box-trafego').innerHTML = renderPrecoEstrategico(v, parcTrafego, 'recorrente');
-
-                let tipoAds = document.getElementById('tipo-ads').value;
-                let titleAds = document.getElementById('title-ads');
-                
-                let descAds = `<ul class="serv-list">`;
-                if(tipoAds === 'meta') {
-                    titleAds.innerText = "Captação Ativa via Meta Ads (Instagram/FB)";
-                    descAds += `<li>Configuração de campanhas geolocalizadas em raio estipulado (Ex: 5km a 10km).</li>`;
-                    descAds += `<li>Testes A/B avançados de criativos (imagens vs vídeos) e chamadas para ação.</li>`;
-                    descAds += `<li>Otimização diária de orçamento voltada para menor custo por lead/agendamento.</li>`;
-                } else if(tipoAds === 'google') {
-                    titleAds.innerText = "Captação via Rede de Pesquisa (Google Ads)";
-                    descAds += `<li>Interceptação de alta intenção de compra no exato momento da busca local.</li>`;
-                    descAds += `<li>Mapeamento avançado, inclusão e negativação diária de palavras-chave.</li>`;
-                    descAds += `<li>Gestão de lances estratégicos para posicionar a marca nas primeiras posições.</li>`;
-                } else {
-                    titleAds.innerText = "Estratégia Omnichannel (Google + Meta Ads)";
-                    descAds += `<li>Ativação de campanhas de intenção imediata através do Google Ads.</li>`;
-                    descAds += `<li>Criação de desejo e branding visual na região através de Meta Ads.</li>`;
-                    descAds += `<li>Estratégias de Remarketing cruzado (Perseguir e recapturar visitantes).</li>`;
-                    descAds += `<li>Análise e otimização global e unificada da verba entre as plataformas.</li>`;
-                }
-                descAds += `</ul><div class="serv-list-note">*A verba direcionada para veiculação de mídia é paga diretamente à respectiva plataforma pelo cliente, não estando inclusa nestes honorários de prestação de serviço.</div>`;
-                document.getElementById('desc-ads').innerHTML = descAds;
-
-            } else {
-                document.getElementById('cat-trafego').style.display = 'none';
-            }
+            let html = `<ul class="serv-list">
+                <li><strong>${posts} Postagens no Feed:</strong> Design autoral e copy persuasiva.</li>
+                <li><strong>${reels} Roteiros de Reels:</strong> Direcionados para atração e viralização.</li>
+                <li><strong>${stories} Stories:</strong> Sequência estratégica para engajamento diário.</li>
+                <li><strong>Copywriting Persuasivo:</strong> Legendas focadas em converter leitura em agendamento.</li>
+            </ul>`;
+            
+            document.getElementById('desc-social').innerHTML = html;
+            document.getElementById('val-box-presenca').innerText = formataBRL(valor);
         }
-
         window.onload = atualizar;
     </script>
 </body>
