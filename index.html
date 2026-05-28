@@ -4,11 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Papo de Alcance — Proposta Estratégica</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-
 :root{
   --bg:#f1f5f9;
   --panel:#0f172a;
@@ -19,1110 +16,476 @@
   --primary:#1d4ed8;
   --accent:#10b981;
 }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); display:flex; min-height:100vh; }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  display:flex;
-  min-height:100vh;
-}
-
-/* ───────────────────────── */
-/* PAINEL */
-/* ───────────────────────── */
-
+/* ── PAINEL ── */
 #panel{
-  width:420px;
-  background:var(--panel);
-  color:white;
-  padding:28px;
-  position:fixed;
-  height:100vh;
-  overflow-y:auto;
-  left:0;
-  top:0;
+  width:420px; background:var(--panel); color:white; padding:28px;
+  position:fixed; height:100vh; overflow-y:auto; left:0; top:0;
 }
-
-.logo h1{
-  font-family:'Montserrat',sans-serif;
-  font-size:34px;
-  line-height:1;
-  font-weight:800;
-}
-
-.logo span{
-  color:var(--accent);
-}
-
-.logo p{
-  margin-top:10px;
-  color:#94a3b8;
-  line-height:1.7;
-  font-size:14px;
-}
-
-.block{
-  margin-top:22px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:16px;
-  padding:18px;
-}
-
-.block-title{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:#cbd5e1;
-  margin-bottom:16px;
-  font-weight:700;
-}
-
-.form-group{
-  margin-bottom:16px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:6px;
-  font-size:12px;
-  color:#94a3b8;
-  font-weight:600;
-}
-
+.logo h1{ font-family:'Montserrat',sans-serif; font-size:34px; line-height:1; font-weight:800; }
+.logo span{ color:var(--accent); }
+.logo p{ margin-top:10px; color:#94a3b8; line-height:1.7; font-size:14px; }
+.block{ margin-top:22px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:18px; }
+.block-title{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#cbd5e1; margin-bottom:16px; font-weight:700; }
+.form-group{ margin-bottom:16px; }
+.form-group label{ display:block; margin-bottom:6px; font-size:12px; color:#94a3b8; font-weight:600; }
 .form-group input,
-.form-group textarea{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  background:#111827;
-  color:white;
-  border:1px solid rgba(255,255,255,.08);
-  font-family:'Inter',sans-serif;
-}
-
-.form-group textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.check{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:12px;
-  background:rgba(255,255,255,.03);
-  padding:12px;
-  border-radius:12px;
-}
-
-.check-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:14px;
-}
-
-.check input[type="number"]{
-  width:110px;
-  padding:10px;
-  border-radius:8px;
-  background:#111827;
-  color:white;
-  border:1px solid rgba(255,255,255,.08);
-  font-family:'Inter',sans-serif;
-}
-
-.metric-input{
-  margin-bottom:12px;
-}
-
-.metric-input label{
-  display:block;
-  margin-bottom:6px;
-  font-size:12px;
-  color:#94a3b8;
-}
-
-.metric-input input{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  background:#111827;
-  color:white;
-  border:1px solid rgba(255,255,255,.08);
-  font-family:'Inter',sans-serif;
-}
-
+.form-group textarea{ width:100%; padding:12px; border-radius:10px; background:#111827; color:white; border:1px solid rgba(255,255,255,.08); font-family:'Inter',sans-serif; }
+.form-group textarea{ min-height:100px; resize:vertical; }
+.check{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; background:rgba(255,255,255,.03); padding:12px; border-radius:12px; }
+.check-left{ display:flex; align-items:center; gap:10px; font-size:14px; }
+.check input[type="number"]{ width:110px; padding:10px; border-radius:8px; background:#111827; color:white; border:1px solid rgba(255,255,255,.08); font-family:'Inter',sans-serif; }
+.metric-input{ margin-bottom:12px; }
+.metric-input label{ display:block; margin-bottom:6px; font-size:12px; color:#94a3b8; }
+.metric-input input{ width:100%; padding:12px; border-radius:10px; background:#111827; color:white; border:1px solid rgba(255,255,255,.08); font-family:'Inter',sans-serif; }
 .generate-btn{
-  width:100%;
-  margin-top:24px;
-  padding:18px;
-  border:none;
-  border-radius:14px;
-  background:linear-gradient(135deg,#2563eb,#1d4ed8);
-  color:white;
-  font-weight:700;
-  cursor:pointer;
-  font-size:15px;
-  font-family:'Inter',sans-serif;
+  width:100%; margin-top:24px; padding:18px; border:none; border-radius:14px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8); color:white;
+  font-weight:700; cursor:pointer; font-size:15px; font-family:'Inter',sans-serif;
 }
+.generate-btn:hover{ background:linear-gradient(135deg,#1d4ed8,#1e40af); }
 
-.generate-btn:hover{
-  background:linear-gradient(135deg,#1d4ed8,#1e40af);
-}
-
-/* ───────────────────────── */
-/* PREVIEW */
-/* ───────────────────────── */
-
-#preview{
-  flex:1;
-  margin-left:420px;
-  padding:40px;
-  display:flex;
-  justify-content:center;
-  background:var(--bg);
-}
-
+/* ── PREVIEW ── */
+#preview{ flex:1; margin-left:420px; padding:40px; display:flex; justify-content:center; background:var(--bg); }
 .page{
-  width:210mm;
-  min-height:297mm;
-  background:white;
-  box-shadow:
-  0 0 0 1px rgba(0,0,0,.05),
-  0 20px 40px rgba(0,0,0,.08);
+  width:210mm; min-height:297mm; background:white;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.05), 0 20px 40px rgba(0,0,0,.08);
 }
 
-/* ───────────────────────── */
-/* HERO */
-/* ───────────────────────── */
-
+/* ── HERO ── */
 .hero{
-  background:#020617;
-  color:white;
-  padding:52px;
-  -webkit-print-color-adjust:exact;
-  print-color-adjust:exact;
+  background:#020617; color:white; padding:52px;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact;
 }
+.brand{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:40px; }
+.brand h2{ font-family:'Montserrat',sans-serif; font-size:40px; font-weight:800; line-height:1; }
+.brand h2 span{ color:var(--accent); }
+.brand p{ margin-top:12px; color:#cbd5e1; }
+.whatsapp{ text-align:right; }
+.whatsapp small{ display:block; color:#94a3b8; margin-bottom:6px; }
+.whatsapp strong{ font-size:20px; font-family:'Montserrat',sans-serif; }
+.hero h1{ font-size:46px; line-height:1.1; font-family:'Montserrat',sans-serif; margin-bottom:18px; }
+.hero > p{ color:#cbd5e1; line-height:1.8; max-width:700px; }
+.client-box{ margin-top:32px; border-top:1px solid rgba(255,255,255,.08); padding-top:24px; }
+.client-box strong{ color:#cbd5e1; }
+.client-name{ font-size:30px; margin-top:8px; font-weight:800; }
 
-.brand{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  margin-bottom:40px;
+/* ── CONTENT ── */
+.content{ padding:52px; }
+
+/* ── SECTION DIVIDER ── */
+.section-divider{
+  display:flex; align-items:center; gap:16px;
+  margin: 0 0 48px;
 }
-
-.brand h2{
-  font-family:'Montserrat',sans-serif;
-  font-size:40px;
-  font-weight:800;
-  line-height:1;
-}
-
-.brand h2 span{
-  color:var(--accent);
-}
-
-.brand p{
-  margin-top:12px;
-  color:#cbd5e1;
-}
-
-.whatsapp{
-  text-align:right;
-}
-
-.whatsapp small{
+.section-divider::before{
+  content:'';
   display:block;
-  color:#94a3b8;
-  margin-bottom:6px;
+  width:40px; height:3px;
+  background:var(--accent);
+  border-radius:2px;
+  flex-shrink:0;
+}
+.section-divider::after{
+  content:'';
+  display:block;
+  flex:1; height:1px;
+  background:var(--border);
 }
 
-.whatsapp strong{
-  font-size:20px;
-  font-family:'Montserrat',sans-serif;
-}
-
-.hero h1{
-  font-size:46px;
-  line-height:1.1;
-  font-family:'Montserrat',sans-serif;
-  margin-bottom:18px;
-}
-
-.hero > p{
-  color:#cbd5e1;
-  line-height:1.8;
-  max-width:700px;
-}
-
-.client-box{
-  margin-top:32px;
-  border-top:1px solid rgba(255,255,255,.08);
-  padding-top:24px;
-}
-
-.client-box strong{
-  color:#cbd5e1;
-}
-
-.client-name{
-  font-size:30px;
-  margin-top:8px;
-  font-weight:800;
-}
-
-/* ───────────────────────── */
-/* CONTENT */
-/* ───────────────────────── */
-
-.content{
-  padding:52px;
-}
-
-.section{
-  margin-bottom:48px;
-}
-
+/* ── SECTION ── */
+.section{ margin-bottom:56px; }
 .section-title{
-  font-family:'Montserrat',sans-serif;
-  font-size:30px;
-  margin-bottom:10px;
+  font-family:'Montserrat',sans-serif; font-size:30px;
+  margin-bottom:8px; position:relative;
 }
-
 .section-title::after{
   content:'';
   display:block;
-  width:46px;
-  height:3px;
+  width:48px; height:3px;
   background:var(--accent);
+  border-radius:2px;
   margin-top:10px;
-  border-radius:999px;
-}
-
-.section-sub{
-  color:#64748b;
-  line-height:1.8;
-  margin-top:14px;
-  margin-bottom:26px;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.card{
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:24px;
-}
-
-.card h3{
-  margin-bottom:14px;
-  font-size:18px;
-}
-
-.card ul{
-  list-style:none;
-}
-
-.card li{
-  margin-bottom:10px;
-  padding-left:22px;
-  position:relative;
-  color:#475569;
-  line-height:1.6;
-}
-
-.card li::before{
-  content:'•';
-  color:var(--accent);
-  position:absolute;
-  left:0;
-  font-weight:bold;
-}
-
-/* ───────────────────────── */
-/* PREÇOS */
-/* ───────────────────────── */
-
-.price-area{
-  margin-top:22px;
-  padding-top:18px;
-  border-top:1px solid var(--border);
-}
-
-.installment-line{
-  font-size:22px;
-  font-weight:700;
-  color:#111827;
-  font-family:'Montserrat',sans-serif;
   margin-bottom:4px;
 }
+.section-sub{ color:#64748b; line-height:1.8; margin-bottom:28px; margin-top:14px; }
 
-.full-price{
-  font-size:14px;
-  color:#64748b;
+/* ── CARDS ── */
+.cards{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.card{ border:1px solid var(--border); border-radius:16px; padding:24px; }
+.card h3{ margin-bottom:14px; font-size:18px; }
+.card ul{ list-style:none; }
+.card li{
+  margin-bottom:10px; padding-left:22px; position:relative;
+  color:#475569; line-height:1.6;
 }
+.card li::before{ content:'•'; color:var(--accent); position:absolute; left:0; font-weight:bold; }
 
-.price-note{
-  margin-top:8px;
-  font-size:13px;
-  color:#64748b;
-}
+/* ── PREÇOS ── */
+.price-area{ margin-top:24px; padding-top:18px; border-top:1px solid var(--border); }
+.installment-line{ font-size:20px; font-weight:700; color:#111827; margin-bottom:6px; font-family:'Montserrat',sans-serif; }
+.full-price{ font-size:14px; color:#64748b; }
+.full-price strong{ font-weight:600; }
+.price-note{ margin-top:8px; color:#64748b; font-size:13px; }
 
-/* ───────────────────────── */
-/* TIMELINE */
-/* ───────────────────────── */
-
-.timeline{
-  border-left:2px solid #dbeafe;
-  padding-left:24px;
-}
-
-.timeline-item{
-  position:relative;
-  margin-bottom:28px;
-}
-
+/* ── TIMELINE ── */
+.timeline{ border-left:2px solid #dbeafe; padding-left:24px; }
+.timeline-item{ position:relative; margin-bottom:30px; }
 .timeline-item::before{
-  content:'';
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:#2563eb;
-  position:absolute;
-  left:-32px;
-  top:5px;
+  content:''; width:14px; height:14px; border-radius:50%;
+  background:#2563eb; position:absolute; left:-32px; top:5px;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact;
 }
+.timeline-item h4{ margin-bottom:8px; font-size:18px; }
+.timeline-item [contenteditable]{ outline:none; padding:2px 4px; border-radius:4px; }
+.timeline-item [contenteditable]:hover{ background:#f8fafc; }
 
-.timeline-item h4{
-  margin-bottom:8px;
-  font-size:18px;
-}
-
-.timeline-item [contenteditable]{
-  outline:none;
-  padding:2px 4px;
-  border-radius:4px;
-}
-
-.timeline-item [contenteditable]:hover{
-  background:#f8fafc;
-}
-
-/* ───────────────────────── */
-/* CTA */
-/* ───────────────────────── */
-
+/* ── CTA ── */
 .cta{
-  background:#020617;
-  color:white;
-  padding:52px;
-  text-align:center;
-  -webkit-print-color-adjust:exact;
-  print-color-adjust:exact;
+  background:#020617; color:white; padding:52px; text-align:center;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact;
 }
+.cta h2{ font-size:34px; margin-bottom:18px; font-family:'Montserrat',sans-serif; }
+.cta p{ color:#cbd5e1; line-height:1.8; max-width:700px; margin:0 auto 24px; }
 
-.cta h2{
-  font-size:34px;
-  margin-bottom:18px;
-  font-family:'Montserrat',sans-serif;
-}
-
-.cta p{
-  color:#cbd5e1;
-  line-height:1.8;
-  max-width:700px;
-  margin:0 auto 24px;
-}
-
-/* ───────────────────────── */
-/* PRINT */
-/* ───────────────────────── */
-
+/* ── PRINT ── */
 @page{
   size:A4;
-  margin:14mm;
+  margin: 20mm 18mm;
 }
 
 @media print{
-
   body{
     background:white;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
+    color-adjust:exact;
   }
+  #panel{ display:none; }
+  #preview{ margin:0; padding:0; background:white; }
+  .page{ width:100%; box-shadow:none; min-height:auto; }
 
-  #panel{
-    display:none;
+  .hero{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    color-adjust:exact;
   }
-
-  #preview{
-    margin:0;
-    padding:0;
-    background:white;
-  }
-
-  .page{
-    width:100%;
-    min-height:auto;
-    box-shadow:none;
-  }
-
-  .hero,
   .cta{
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
+    color-adjust:exact;
+  }
+  .timeline-item::before{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    color-adjust:exact;
   }
 
-  .section{
-    margin-bottom:34px;
-  }
+  /* Quebras de página entre fases */
+  #foundationSection{ break-before:page; }
+  #socialSection{ break-before:auto; }
+  #adsSection{ break-before:auto; }
+  .cta{ break-before:page; }
 
-  .card{
-    margin-bottom:14px;
-  }
-
-  /* REMOVE QUEBRAS FORÇADAS */
-  #foundationSection,
-  #socialSection,
-  #adsSection,
-  .cta{
-    break-before:auto !important;
-    page-break-before:auto !important;
-  }
-
-  /* EVITA CORTES FEIOS */
-  .card,
-  .timeline-item{
-    break-inside:avoid;
-    page-break-inside:avoid;
-  }
-
+  /* Evita cortar elementos no meio */
+  .section, .card, .timeline-item{ break-inside:avoid; page-break-inside:avoid; }
+  p, li{ orphans:3; widows:3; }
 }
 
-/* ───────────────────────── */
-/* RESPONSIVO */
-/* ───────────────────────── */
-
+/* ── RESPONSIVO ── */
 @media(max-width:1200px){
-
-  body{
-    flex-direction:column;
-  }
-
-  #panel{
-    position:relative;
-    width:100%;
-    height:auto;
-  }
-
-  #preview{
-    margin-left:0;
-    padding:20px;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-  }
-
+  body{ flex-direction:column; }
+  #panel{ position:relative; width:100%; height:auto; }
+  #preview{ margin-left:0; padding:20px; }
+  .cards{ grid-template-columns:1fr; }
 }
-
 </style>
 </head>
-
 <body>
 
-<!-- ───────────────────────── -->
-<!-- PAINEL -->
-<!-- ───────────────────────── -->
-
+<!-- ── PAINEL ── -->
 <div id="panel">
-
   <div class="logo">
     <h1>Papo de <span>Alcance</span></h1>
     <p>Gerador de propostas comerciais profissionais.</p>
   </div>
 
-  <!-- CLIENTE -->
-
   <div class="block">
-
     <div class="block-title">Cliente</div>
-
     <div class="form-group">
       <label>Nome da Empresa</label>
       <input type="text" id="clientName" value="Barbearia No Trato" oninput="render()">
     </div>
-
     <div class="form-group">
       <label>Diagnóstico Estratégico</label>
       <textarea id="diagnostic" oninput="render()">Identificamos oportunidades para fortalecer posicionamento digital, aumentar autoridade local e gerar aquisição previsível de clientes.</textarea>
     </div>
-
   </div>
 
-  <!-- FUNDAÇÃO -->
-
   <div class="block">
-
     <div class="block-title">Fundação Digital</div>
-
     <div class="check">
-      <div class="check-left">
-        <input type="checkbox" id="c-gmn" checked onchange="render()">
-        GMN
-      </div>
-      <input type="number" id="v-gmn" value="597" oninput="render()">
+      <div class="check-left"><input type="checkbox" id="c-gmn" checked onchange="render()"> GMN</div>
+      <input type="number" id="v-gmn" value="597" min="0" oninput="render()">
     </div>
-
     <div class="check">
-      <div class="check-left">
-        <input type="checkbox" id="c-lp" checked onchange="render()">
-        Landing Page
-      </div>
-      <input type="number" id="v-lp" value="997" oninput="render()">
+      <div class="check-left"><input type="checkbox" id="c-lp" checked onchange="render()"> Landing Page</div>
+      <input type="number" id="v-lp" value="997" min="0" oninput="render()">
     </div>
-
     <div class="check">
-      <div class="check-left">
-        <input type="checkbox" id="c-site" onchange="render()">
-        Site Institucional
-      </div>
-      <input type="number" id="v-site" value="2497" oninput="render()">
+      <div class="check-left"><input type="checkbox" id="c-site" onchange="render()"> Site Institucional</div>
+      <input type="number" id="v-site" value="2497" min="0" oninput="render()">
     </div>
-
     <div class="check">
-      <div class="check-left">
-        <input type="checkbox" id="c-ecom" onchange="render()">
-        E-commerce
-      </div>
-      <input type="number" id="v-ecom" value="3997" oninput="render()">
+      <div class="check-left"><input type="checkbox" id="c-ecom" onchange="render()"> E-commerce</div>
+      <input type="number" id="v-ecom" value="3997" min="0" oninput="render()">
     </div>
-
   </div>
 
-  <!-- SOCIAL -->
-
   <div class="block">
-
     <div class="block-title">Social Media</div>
-
     <div class="check">
-      <div class="check-left">
-        <input type="checkbox" id="c-social" checked onchange="render()">
-        Gestão de Conteúdo
-      </div>
-      <input type="number" id="v-social" value="1497" oninput="render()">
+      <div class="check-left"><input type="checkbox" id="c-social" checked onchange="render()"> Gestão de Conteúdo</div>
+      <input type="number" id="v-social" value="1497" min="0" oninput="render()">
     </div>
-
-    <div class="metric-input">
-      <label>Posts</label>
-      <input type="number" id="n-posts" value="12" oninput="render()">
-    </div>
-
-    <div class="metric-input">
-      <label>Reels</label>
-      <input type="number" id="n-reels" value="8" oninput="render()">
-    </div>
-
-    <div class="metric-input">
-      <label>Stories</label>
-      <input type="number" id="n-stories" value="20" oninput="render()">
-    </div>
-
+    <div class="metric-input"><label>Posts</label><input type="number" id="n-posts" value="12" min="0" oninput="render()"></div>
+    <div class="metric-input"><label>Reels</label><input type="number" id="n-reels" value="8" min="0" oninput="render()"></div>
+    <div class="metric-input"><label>Stories</label><input type="number" id="n-stories" value="20" min="0" oninput="render()"></div>
   </div>
 
-  <!-- ADS -->
-
   <div class="block">
-
     <div class="block-title">Tráfego Pago</div>
-
     <div class="check">
-      <div class="check-left">
-        <input type="checkbox" id="c-meta" checked onchange="render()">
-        Meta Ads
-      </div>
-      <input type="number" id="v-meta" value="997" oninput="render()">
+      <div class="check-left"><input type="checkbox" id="c-meta" checked onchange="render()"> Meta Ads</div>
+      <input type="number" id="v-meta" value="997" min="0" oninput="render()">
     </div>
-
     <div class="check">
-      <div class="check-left">
-        <input type="checkbox" id="c-google" checked onchange="render()">
-        Google Ads
-      </div>
-      <input type="number" id="v-google" value="997" oninput="render()">
+      <div class="check-left"><input type="checkbox" id="c-google" checked onchange="render()"> Google Ads</div>
+      <input type="number" id="v-google" value="997" min="0" oninput="render()">
     </div>
-
     <div class="form-group">
       <label>Verba Recomendada</label>
-      <input type="number" id="adBudget" value="1500" oninput="render()">
+      <input type="number" id="adBudget" value="1500" min="0" oninput="render()">
     </div>
-
   </div>
 
-  <button class="generate-btn" onclick="window.print()">
-    GERAR PDF
-  </button>
-
+  <button class="generate-btn" onclick="window.print()">GERAR PDF</button>
 </div>
 
-<!-- ───────────────────────── -->
-<!-- PREVIEW -->
-<!-- ───────────────────────── -->
-
+<!-- ── PREVIEW ── -->
 <div id="preview">
-
 <div class="page">
 
-<!-- HERO -->
-
-<section class="hero">
-
-  <div class="brand">
-
-    <div>
-      <h2>Papo de <span>Alcance</span></h2>
-      <p>Estratégia • Posicionamento • Crescimento</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="brand">
+      <div>
+        <h2>Papo de <span>Alcance</span></h2>
+        <p>Estratégia • Posicionamento • Crescimento</p>
+      </div>
+      <div class="whatsapp">
+        <small>WhatsApp</small>
+        <strong>(41) 99816-1160</strong>
+      </div>
     </div>
-
-    <div class="whatsapp">
-      <small>WhatsApp</small>
-      <strong>(41) 99816-1160</strong>
+    <h1>Estratégia Digital<br>Orientada para Resultado</h1>
+    <p>Estruturação completa da presença digital da empresa, fortalecendo autoridade, aquisição e crescimento previsível.</p>
+    <div class="client-box">
+      <strong>Proposta desenvolvida para:</strong>
+      <div class="client-name" id="out-client"></div>
     </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- DIAGNÓSTICO -->
+    <section class="section">
+      <h2 class="section-title">Diagnóstico Estratégico</h2>
+      <p class="section-sub" id="out-diagnostic"></p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FUNDAÇÃO -->
+    <section class="section" id="foundationSection">
+      <h2 class="section-title">Fundação Digital</h2>
+      <p class="section-sub">Estruturação dos ativos digitais essenciais para posicionamento, autoridade e conversão.</p>
+      <div class="cards" id="foundationCards"></div>
+    </section>
+
+    <div class="section-divider" id="dividerSocial"></div>
+
+    <!-- SOCIAL -->
+    <section class="section" id="socialSection">
+      <h2 class="section-title">Social Media</h2>
+      <p class="section-sub">Conteúdo estratégico para posicionamento, retenção e geração contínua de demanda.</p>
+      <div class="cards" id="socialCards"></div>
+    </section>
+
+    <div class="section-divider" id="dividerAds"></div>
+
+    <!-- ADS -->
+    <section class="section" id="adsSection">
+      <h2 class="section-title">Tráfego Pago</h2>
+      <p class="section-sub">Campanhas orientadas para geração de leads e aquisição previsível.</p>
+      <div class="cards" id="adsCards"></div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CRONOGRAMA -->
+    <section class="section">
+      <h2 class="section-title">Cronograma de Execução</h2>
+      <div class="timeline" style="margin-top:28px;">
+        <div class="timeline-item">
+          <h4 contenteditable="true">Semana 1 — Planejamento Estratégico</h4>
+          <p contenteditable="true">Diagnóstico aprofundado, definição de objetivos e estrutura estratégica inicial.</p>
+        </div>
+        <div class="timeline-item">
+          <h4 contenteditable="true">Semana 2 — Estruturação Digital</h4>
+          <p contenteditable="true">Desenvolvimento dos ativos digitais e implementação operacional.</p>
+        </div>
+        <div class="timeline-item">
+          <h4 contenteditable="true">Semana 3 — Ativação de Campanhas</h4>
+          <p contenteditable="true">Início das campanhas e publicação do calendário estratégico.</p>
+        </div>
+        <div class="timeline-item">
+          <h4 contenteditable="true">Semana 4 — Otimização & Escala</h4>
+          <p contenteditable="true">Ajustes de performance, análise de métricas e otimização de resultados.</p>
+        </div>
+      </div>
+    </section>
 
   </div>
 
-  <h1>
-    Estratégia Digital<br>
-    Orientada para Resultado
-  </h1>
-
-  <p>
-    Estruturação completa da presença digital da empresa,
-    fortalecendo autoridade, aquisição e crescimento previsível.
-  </p>
-
-  <div class="client-box">
-    <strong>Proposta desenvolvida para:</strong>
-    <div class="client-name" id="out-client"></div>
-  </div>
-
-</section>
-
-<!-- CONTENT -->
-
-<div class="content">
-
-  <!-- DIAGNÓSTICO -->
-
-  <section class="section">
-
-    <h2 class="section-title">
-      Diagnóstico Estratégico
-    </h2>
-
-    <p class="section-sub" id="out-diagnostic"></p>
-
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Vamos iniciar seu crescimento digital?</h2>
+    <p>Após aprovação da proposta, iniciaremos imediatamente o planejamento estratégico e implementação operacional.</p>
+    <p style="margin-top:30px;font-size:14px;">WhatsApp: <strong style="color:white;">(41) 99816-1160</strong></p>
   </section>
-
-  <!-- FUNDAÇÃO -->
-
-  <section class="section" id="foundationSection">
-
-    <h2 class="section-title">
-      Fundação Digital
-    </h2>
-
-    <p class="section-sub">
-      Estruturação dos ativos digitais essenciais para posicionamento, autoridade e conversão.
-    </p>
-
-    <div class="cards" id="foundationCards"></div>
-
-  </section>
-
-  <!-- SOCIAL -->
-
-  <section class="section" id="socialSection">
-
-    <h2 class="section-title">
-      Social Media
-    </h2>
-
-    <p class="section-sub">
-      Conteúdo estratégico para posicionamento, retenção e geração contínua de demanda.
-    </p>
-
-    <div class="cards" id="socialCards"></div>
-
-  </section>
-
-  <!-- ADS -->
-
-  <section class="section" id="adsSection">
-
-    <h2 class="section-title">
-      Tráfego Pago
-    </h2>
-
-    <p class="section-sub">
-      Campanhas orientadas para geração de leads e aquisição previsível.
-    </p>
-
-    <div class="cards" id="adsCards"></div>
-
-  </section>
-
-  <!-- CRONOGRAMA -->
-
-  <section class="section">
-
-    <h2 class="section-title">
-      Cronograma de Execução
-    </h2>
-
-    <div class="timeline" style="margin-top:28px;">
-
-      <div class="timeline-item">
-        <h4 contenteditable="true">Semana 1 — Planejamento Estratégico</h4>
-        <p contenteditable="true">Diagnóstico aprofundado, definição de objetivos e estrutura estratégica inicial.</p>
-      </div>
-
-      <div class="timeline-item">
-        <h4 contenteditable="true">Semana 2 — Estruturação Digital</h4>
-        <p contenteditable="true">Desenvolvimento dos ativos digitais e implementação operacional.</p>
-      </div>
-
-      <div class="timeline-item">
-        <h4 contenteditable="true">Semana 3 — Ativação de Campanhas</h4>
-        <p contenteditable="true">Início das campanhas e publicação do calendário estratégico.</p>
-      </div>
-
-      <div class="timeline-item">
-        <h4 contenteditable="true">Semana 4 — Otimização & Escala</h4>
-        <p contenteditable="true">Ajustes de performance, análise de métricas e otimização de resultados.</p>
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
-
-<!-- CTA -->
-
-<section class="cta">
-
-  <h2>
-    Vamos iniciar seu crescimento digital?
-  </h2>
-
-  <p>
-    Após aprovação da proposta,
-    iniciaremos imediatamente o planejamento estratégico
-    e implementação operacional.
-  </p>
-
-  <p style="margin-top:30px;font-size:14px;">
-    WhatsApp:
-    <strong style="color:white;">
-      (41) 99816-1160
-    </strong>
-  </p>
-
-</section>
 
 </div>
 </div>
 
 <script>
-
 function money(v){
-  return Number(v).toLocaleString(
-    'pt-BR',
-    {
-      style:'currency',
-      currency:'BRL'
-    }
-  );
+  return Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 }
 
 function render(){
+  document.getElementById('out-client').innerText = document.getElementById('clientName').value;
+  document.getElementById('out-diagnostic').innerText = document.getElementById('diagnostic').value;
 
-  document.getElementById('out-client').innerText =
-  document.getElementById('clientName').value;
-
-  document.getElementById('out-diagnostic').innerText =
-  document.getElementById('diagnostic').value;
-
-  /* FUNDAÇÃO */
-
+  /* ── FOUNDATION ── */
   const foundation = [
-
-    {
-      id:'gmn',
-      title:'Google Meu Negócio Estratégico',
-      items:[
-        'SEO local e posicionamento',
-        'Otimização de descoberta',
-        'Gestão de reputação',
-        'Aumento de conversão'
-      ]
-    },
-
-    {
-      id:'lp',
-      title:'Landing Page de Conversão',
-      items:[
-        'Copy persuasiva',
-        'Estrutura de vendas',
-        'Integração WhatsApp',
-        'Experiência premium'
-      ]
-    },
-
-    {
-      id:'site',
-      title:'Site Institucional Premium',
-      items:[
-        'Design responsivo',
-        'Estrutura profissional',
-        'SEO técnico',
-        'Alta performance'
-      ]
-    },
-
-    {
-      id:'ecom',
-      title:'E-commerce Profissional',
-      items:[
-        'Catálogo otimizado',
-        'Checkout estratégico',
-        'Integrações completas',
-        'Escalabilidade'
-      ]
-    }
-
+    { id:'gmn',  title:'Google Meu Negócio Estratégico', items:['SEO local e posicionamento','Otimização de descoberta','Gestão de reputação','Aumento de conversão'] },
+    { id:'lp',   title:'Landing Page de Conversão',       items:['Copy persuasiva','Estrutura de vendas','Integração WhatsApp','Experiência premium'] },
+    { id:'site', title:'Site Institucional Premium',       items:['Design responsivo','Estrutura profissional','SEO técnico','Alta performance'] },
+    { id:'ecom', title:'E-commerce Profissional',          items:['Catálogo otimizado','Checkout estratégico','Integrações completas','Escalabilidade'] }
   ];
 
   let foundationHTML = '';
-
   foundation.forEach(s => {
-
     if(document.getElementById(`c-${s.id}`).checked){
-
-      const value =
-      parseFloat(
-        document.getElementById(`v-${s.id}`).value || 0
-      );
-
+      const value = parseFloat(document.getElementById(`v-${s.id}`).value || 0);
       foundationHTML += `
-
-      <div class="card">
-
-        <h3>${s.title}</h3>
-
-        <ul>
-          ${s.items.map(i => `<li>${i}</li>`).join('')}
-        </ul>
-
-        <div class="price-area">
-
-          <div class="installment-line">
-            12x de ${money(value / 12)}
+        <div class="card">
+          <h3>${s.title}</h3>
+          <ul>${s.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+          <div class="price-area">
+            <div class="installment-line">12x de ${money(value/12)}</div>
+            <div class="full-price">ou à vista por <strong>${money(value)}</strong></div>
+            <div class="price-note">Parcelamento disponível via Nubank Tap.</div>
           </div>
-
-          <div class="full-price">
-            ou à vista por <strong>${money(value)}</strong>
-          </div>
-
-          <div class="price-note">
-            Parcelamento disponível via Nubank Tap.
-          </div>
-
-        </div>
-
-      </div>
-
-      `;
-
+        </div>`;
     }
-
   });
+  document.getElementById('foundationCards').innerHTML = foundationHTML;
+  document.getElementById('foundationSection').style.display = foundationHTML ? 'block' : 'none';
 
-  document.getElementById('foundationCards').innerHTML =
-  foundationHTML;
-
-  document.getElementById('foundationSection').style.display =
-  foundationHTML ? 'block' : 'none';
-
-  /* SOCIAL */
-
-  const hasSocial =
-  document.getElementById('c-social').checked;
-
+  /* ── SOCIAL ── */
+  const hasSocial = document.getElementById('c-social').checked;
   if(hasSocial){
-
-    const posts =
-    document.getElementById('n-posts').value;
-
-    const reels =
-    document.getElementById('n-reels').value;
-
-    const stories =
-    document.getElementById('n-stories').value;
-
-    const val =
-    document.getElementById('v-social').value;
-
+    const posts  = document.getElementById('n-posts').value;
+    const reels  = document.getElementById('n-reels').value;
+    const stories= document.getElementById('n-stories').value;
+    const val    = document.getElementById('v-social').value;
     document.getElementById('socialCards').innerHTML = `
-
-    <div class="card">
-
-      <h3>Posicionamento & Conteúdo</h3>
-
-      <ul>
-        <li>${posts} posts estratégicos mensais</li>
-        <li>${reels} roteiros de reels</li>
-        <li>${stories} stories estratégicos</li>
-        <li>Copywriting persuasivo</li>
-        <li>Calendário editorial</li>
-        <li>Análise contínua de métricas</li>
-      </ul>
-
-      <div class="price-area">
-
-        <div class="full-price">
-          Investimento mensal:
-          <strong>${money(val)}</strong>
+      <div class="card">
+        <h3>Posicionamento & Conteúdo</h3>
+        <ul>
+          <li>${posts} posts estratégicos mensais</li>
+          <li>${reels} roteiros de reels</li>
+          <li>${stories} stories estratégicos</li>
+          <li>Copywriting persuasivo</li>
+          <li>Calendário editorial</li>
+          <li>Análise contínua de métricas</li>
+        </ul>
+        <div class="price-area">
+          <div class="full-price">Investimento mensal: <strong>${money(val)}</strong></div>
         </div>
-
-      </div>
-
-    </div>
-
-    `;
-
+      </div>`;
   }
+  document.getElementById('socialSection').style.display = hasSocial ? 'block' : 'none';
+  document.getElementById('dividerSocial').style.display = hasSocial ? 'flex' : 'none';
 
-  document.getElementById('socialSection').style.display =
-  hasSocial ? 'block' : 'none';
-
-  /* ADS */
-
-  const hasMeta =
-  document.getElementById('c-meta').checked;
-
-  const hasGoogle =
-  document.getElementById('c-google').checked;
-
-  let adsHTML = '';
+  /* ── ADS ── */
+  const hasMeta   = document.getElementById('c-meta').checked;
+  const hasGoogle = document.getElementById('c-google').checked;
+  let adsHTML  = '';
   let adsTotal = 0;
 
   if(hasMeta){
-
-    adsTotal += parseFloat(
-      document.getElementById('v-meta').value || 0
-    );
-
+    adsTotal += parseFloat(document.getElementById('v-meta').value || 0);
     adsHTML += `
-
-    <div class="card">
-
-      <h3>Meta Ads</h3>
-
-      <ul>
-        <li>Campanhas Instagram/Facebook</li>
-        <li>Remarketing estratégico</li>
-        <li>Segmentação geográfica</li>
-        <li>Otimização para conversão</li>
-      </ul>
-
-    </div>
-
-    `;
-
+      <div class="card">
+        <h3>Meta Ads</h3>
+        <ul>
+          <li>Campanhas Instagram/Facebook</li>
+          <li>Remarketing estratégico</li>
+          <li>Segmentação geográfica</li>
+          <li>Otimização para conversão</li>
+        </ul>
+      </div>`;
   }
 
   if(hasGoogle){
-
-    adsTotal += parseFloat(
-      document.getElementById('v-google').value || 0
-    );
-
+    adsTotal += parseFloat(document.getElementById('v-google').value || 0);
     adsHTML += `
-
-    <div class="card">
-
-      <h3>Google Ads</h3>
-
-      <ul>
-        <li>Google Pesquisa e Maps</li>
-        <li>Captação qualificada</li>
-        <li>Estratégia de palavras-chave</li>
-        <li>Otimização contínua</li>
-      </ul>
-
-    </div>
-
-    `;
-
+      <div class="card">
+        <h3>Google Ads</h3>
+        <ul>
+          <li>Google Pesquisa e Maps</li>
+          <li>Captação qualificada</li>
+          <li>Estratégia de palavras-chave</li>
+          <li>Otimização contínua</li>
+        </ul>
+      </div>`;
   }
 
+  /* Card de investimento apenas se houver ao menos uma plataforma selecionada */
   if(hasMeta || hasGoogle){
-
     adsHTML += `
-
-    <div class="card">
-
-      <h3>Investimento em Gestão</h3>
-
-      <div class="price-area">
-
-        <div class="full-price">
-          Gestão mensal:
-          <strong>${money(adsTotal)}</strong>
+      <div class="card">
+        <h3>Investimento em Gestão</h3>
+        <div class="price-area">
+          <div class="full-price">Gestão mensal: <strong>${money(adsTotal)}</strong></div>
+          <div class="price-note">Verba recomendada para anúncios: <strong>${money(document.getElementById('adBudget').value)}</strong></div>
         </div>
-
-        <div class="price-note">
-          Verba recomendada para anúncios:
-          <strong>${money(document.getElementById('adBudget').value)}</strong>
-        </div>
-
-      </div>
-
-    </div>
-
-    `;
-
+      </div>`;
   }
 
-  document.getElementById('adsCards').innerHTML =
-  adsHTML;
-
-  document.getElementById('adsSection').style.display =
-  (hasMeta || hasGoogle) ? 'block' : 'none';
-
+  const hasAds = hasMeta || hasGoogle;
+  document.getElementById('adsCards').innerHTML   = adsHTML;
+  document.getElementById('adsSection').style.display   = hasAds ? 'block' : 'none';
+  document.getElementById('dividerAds').style.display   = hasAds ? 'flex'  : 'none';
 }
 
 render();
-
 </script>
-
 </body>
 </html>
