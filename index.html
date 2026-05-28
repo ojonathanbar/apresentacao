@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Papo de Alcance — Proposta Estratégica</title>
+<title>Papo de Alcance — Proposal Builder</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -48,6 +48,10 @@ body{
     height:100vh;
     overflow-y:auto;
 }
+
+/* Estilização da barra de rolagem do painel */
+#panel::-webkit-scrollbar { width: 6px; }
+#panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
 
 .logo h1{
     font-family:'Montserrat',sans-serif;
@@ -170,6 +174,11 @@ body{
     font-weight:700;
     cursor:pointer;
     font-size:15px;
+    transition: 0.2s;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
 }
 
 /* ========================= */
@@ -279,9 +288,17 @@ body{
     padding:52px;
 }
 
+/* Divisória visual entre as seções */
 .section{
-    margin-bottom:70px;
+    margin-bottom:50px;
+    padding-bottom:50px;
+    border-bottom: 1px dashed #cbd5e1;
     page-break-inside:avoid;
+}
+.section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .section-title{
@@ -332,6 +349,7 @@ body{
     position:absolute;
     left:0;
     font-weight:bold;
+    font-size: 16px;
 }
 
 /* ========================= */
@@ -359,12 +377,14 @@ body{
 
 .full-price strong{
     font-weight:600;
+    color:#0f172a;
 }
 
 .price-note{
     margin-top:8px;
     color:#64748b;
-    font-size:13px;
+    font-size:12px;
+    font-style: italic;
 }
 
 /* ========================= */
@@ -433,12 +453,12 @@ body{
 }
 
 /* ========================= */
-/* PRINT */
+/* PRINT CONFIG */
 /* ========================= */
 
 @page{
     size:A4;
-    margin:16mm;
+    margin:20mm; /* Aumentado para gerar uma moldura natural na folha */
 }
 
 @media print{
@@ -461,6 +481,18 @@ body{
     .page{
         width:100%;
         box-shadow:none;
+        border-radius:0;
+    }
+    
+    /* Zera o padding no print para deixar a @page ditar a margem */
+    .content {
+        padding: 40px 0; 
+    }
+
+    /* Arredonda o Hero para não sangrar cru nas bordas se tiver margem */
+    .hero, .cta {
+        border-radius: 16px;
+        margin-bottom: 20px;
     }
 
     .section,
@@ -468,6 +500,12 @@ body{
     .timeline-item{
         break-inside:avoid;
         page-break-inside:avoid;
+    }
+
+    /* Remove outline de elementos editáveis na impressão */
+    [contenteditable] {
+        border: none !important;
+        background: transparent !important;
     }
 
 }
@@ -504,18 +542,12 @@ body{
 
 <body>
 
-<!-- ========================= -->
-<!-- PAINEL -->
-<!-- ========================= -->
-
 <div id="panel">
 
     <div class="logo">
         <h1>Papo de <span>Alcance</span></h1>
         <p>Gerador de propostas comerciais profissionais.</p>
     </div>
-
-    <!-- CLIENTE -->
 
     <div class="block">
 
@@ -532,8 +564,6 @@ body{
         </div>
 
     </div>
-
-    <!-- FUNDAÇÃO -->
 
     <div class="block">
 
@@ -573,8 +603,6 @@ body{
 
     </div>
 
-    <!-- SOCIAL -->
-
     <div class="block">
 
         <div class="block-title">Social Media</div>
@@ -604,8 +632,6 @@ body{
 
     </div>
 
-    <!-- ADS -->
-
     <div class="block">
 
         <div class="block-title">Tráfego Pago</div>
@@ -634,20 +660,14 @@ body{
     </div>
 
     <button class="generate-btn" onclick="window.print()">
-        GERAR PDF
+        GERAR PDF E IMPRIMIR
     </button>
 
 </div>
 
-<!-- ========================= -->
-<!-- PREVIEW -->
-<!-- ========================= -->
-
 <div id="preview">
 
 <div class="page">
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -685,11 +705,7 @@ body{
 
 </section>
 
-<!-- CONTENT -->
-
 <div class="content">
-
-    <!-- DIAGNÓSTICO -->
 
     <section class="section">
 
@@ -698,8 +714,6 @@ body{
         <p class="section-sub" id="out-diagnostic"></p>
 
     </section>
-
-    <!-- FUNDAÇÃO -->
 
     <section class="section" id="foundationSection">
 
@@ -714,8 +728,6 @@ body{
 
     </section>
 
-    <!-- SOCIAL -->
-
     <section class="section" id="socialSection">
 
         <h2 class="section-title">Social Media</h2>
@@ -729,8 +741,6 @@ body{
 
     </section>
 
-    <!-- ADS -->
-
     <section class="section" id="adsSection">
 
         <h2 class="section-title">Tráfego Pago</h2>
@@ -743,8 +753,6 @@ body{
         <div class="cards" id="adsCards"></div>
 
     </section>
-
-    <!-- CRONOGRAMA -->
 
     <section class="section">
 
@@ -800,8 +808,6 @@ body{
 
 </div>
 
-<!-- CTA -->
-
 <section class="cta">
 
     <h2>Vamos iniciar seu crescimento digital?</h2>
@@ -827,7 +833,6 @@ body{
 <script>
 
 function money(v){
-
     return Number(v).toLocaleString(
         'pt-BR',
         {
@@ -835,13 +840,11 @@ function money(v){
             currency:'BRL'
         }
     );
-
 }
 
 function render(){
 
     // CLIENTE
-
     document.getElementById('out-client').innerText =
     document.getElementById('clientName').value;
 
@@ -849,11 +852,9 @@ function render(){
     document.getElementById('diagnostic').value;
 
     // FOUNDATION
-
     let foundationHTML = '';
 
     const foundation = [
-
         {
             id:'gmn',
             title:'Google Meu Negócio Estratégico',
@@ -864,7 +865,6 @@ function render(){
                 'Aumento de conversão'
             ]
         },
-
         {
             id:'lp',
             title:'Landing Page de Conversão',
@@ -875,7 +875,6 @@ function render(){
                 'Experiência premium'
             ]
         },
-
         {
             id:'site',
             title:'Site Institucional Premium',
@@ -886,7 +885,6 @@ function render(){
                 'Alta performance'
             ]
         },
-
         {
             id:'ecom',
             title:'E-commerce Profissional',
@@ -897,213 +895,129 @@ function render(){
                 'Escalabilidade'
             ]
         }
-
     ];
 
     foundation.forEach(s=>{
 
         if(document.getElementById(`c-${s.id}`).checked){
 
-            const value =
-            parseFloat(
-                document.getElementById(`v-${s.id}`).value || 0
-            );
+            const value = parseFloat(document.getElementById(`v-${s.id}`).value || 0);
 
-            const installment = value / 12;
+            // Matemática Real Nubank Tap (Taxa de 12.38% para 12x)
+            // Fórmula do repasse: Valor Líquido / (1 - Taxa)
+            const taxaNuTap12x = 0.1238; 
+            const valorTotalComJuros = value / (1 - taxaNuTap12x);
+            const installment = valorTotalComJuros / 12;
 
             foundationHTML += `
-
                 <div class="card">
-
                     <h3>${s.title}</h3>
-
                     <ul>
                         ${s.items.map(i=>`<li>${i}</li>`).join('')}
                     </ul>
-
                     <div class="price-area">
-
                         <div class="installment-line">
                             12x de ${money(installment)}
                         </div>
-
                         <div class="full-price">
-                            ou à vista por <strong>${money(value)}</strong>
+                            ou à vista (Pix) por <strong>${money(value)}</strong>
                         </div>
-
                         <div class="price-note">
-                            Parcelamento disponível via Nubank Tap.
+                            *Parcelamento via Nubank Tap c/ repasse.
                         </div>
-
                     </div>
-
                 </div>
-
             `;
-
         }
-
     });
 
-    document.getElementById('foundationCards').innerHTML =
-    foundationHTML;
-
-    document.getElementById('foundationSection').style.display =
-    foundationHTML ? 'block' : 'none';
+    document.getElementById('foundationCards').innerHTML = foundationHTML;
+    document.getElementById('foundationSection').style.display = foundationHTML ? 'block' : 'none';
 
     // SOCIAL
-
     if(document.getElementById('c-social').checked){
-
-        const posts =
-        document.getElementById('n-posts').value;
-
-        const reels =
-        document.getElementById('n-reels').value;
-
-        const stories =
-        document.getElementById('n-stories').value;
-
-        const socialValue =
-        document.getElementById('v-social').value;
+        const posts = document.getElementById('n-posts').value;
+        const reels = document.getElementById('n-reels').value;
+        const stories = document.getElementById('n-stories').value;
+        const socialValue = document.getElementById('v-social').value;
 
         document.getElementById('socialCards').innerHTML = `
-
             <div class="card">
-
                 <h3>Posicionamento & Conteúdo</h3>
-
                 <ul>
-
                     <li>${posts} posts estratégicos mensais</li>
-
                     <li>${reels} roteiros de reels</li>
-
-                    <li>${stories} stories estratégicos</li>
-
+                    <li>${stories} stories de retenção</li>
                     <li>Copywriting persuasivo</li>
-
-                    <li>Calendário editorial</li>
-
-                    <li>Análise contínua de métricas</li>
-
+                    <li>Calendário editorial e análises</li>
                 </ul>
-
                 <div class="price-area">
-
                     <div class="full-price">
                         Investimento mensal:
                         <strong>${money(socialValue)}</strong>
                     </div>
-
                 </div>
-
             </div>
-
         `;
-
-        document.getElementById('socialSection').style.display =
-        'block';
-
-    }else{
-
-        document.getElementById('socialSection').style.display =
-        'none';
-
+        document.getElementById('socialSection').style.display = 'block';
+    } else {
+        document.getElementById('socialSection').style.display = 'none';
     }
 
     // ADS
-
     let adsHTML = '';
     let adsTotal = 0;
 
     if(document.getElementById('c-meta').checked){
-
-        adsTotal += parseFloat(
-            document.getElementById('v-meta').value || 0
-        );
-
+        adsTotal += parseFloat(document.getElementById('v-meta').value || 0);
         adsHTML += `
-
             <div class="card">
-
                 <h3>Meta Ads</h3>
-
                 <ul>
-
                     <li>Campanhas Instagram/Facebook</li>
-
                     <li>Remarketing estratégico</li>
-
                     <li>Segmentação geográfica</li>
-
                     <li>Otimização para conversão</li>
-
                 </ul>
-
             </div>
-
         `;
     }
 
     if(document.getElementById('c-google').checked){
-
-        adsTotal += parseFloat(
-            document.getElementById('v-google').value || 0
-        );
-
+        adsTotal += parseFloat(document.getElementById('v-google').value || 0);
         adsHTML += `
-
             <div class="card">
-
                 <h3>Google Ads</h3>
-
                 <ul>
-
                     <li>Google Pesquisa e Maps</li>
-
                     <li>Captação qualificada</li>
-
                     <li>Estratégia de palavras-chave</li>
-
-                    <li>Otimização contínua</li>
-
+                    <li>Otimização contínua de CPC</li>
                 </ul>
-
             </div>
-
         `;
     }
 
-    adsHTML += `
-
-        <div class="card">
-
-            <h3>Investimento em Gestão</h3>
-
-            <div class="price-area">
-
-                <div class="full-price">
-                    Gestão mensal:
-                    <strong>${money(adsTotal)}</strong>
+    if (adsHTML !== '') {
+        adsHTML += `
+            <div class="card" style="grid-column: 1 / -1; background: linear-gradient(135deg, #eff6ff, #f8fafc); border: 2px solid #dbeafe;">
+                <h3>Investimento em Gestão</h3>
+                <div class="price-area" style="border-top-color: #bfdbfe;">
+                    <div class="full-price" style="font-size: 16px;">
+                        Gestão mensal:
+                        <strong style="color: #1d4ed8; font-size: 24px;">${money(adsTotal)}</strong>
+                    </div>
+                    <div class="price-note" style="margin-top: 12px; font-size: 14px;">
+                        Verba recomendada para anúncios (paga à plataforma):
+                        <strong>${money(document.getElementById('adBudget').value)}</strong>
+                    </div>
                 </div>
-
-                <div class="price-note">
-                    Verba recomendada para anúncios:
-                    <strong>${money(document.getElementById('adBudget').value)}</strong>
-                </div>
-
             </div>
+        `;
+    }
 
-        </div>
-
-    `;
-
-    document.getElementById('adsCards').innerHTML =
-    adsHTML;
-
-    document.getElementById('adsSection').style.display =
-    adsHTML ? 'block' : 'none';
+    document.getElementById('adsCards').innerHTML = adsHTML;
+    document.getElementById('adsSection').style.display = adsHTML ? 'block' : 'none';
 
 }
 
