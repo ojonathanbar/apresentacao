@@ -293,7 +293,6 @@ body{
     margin-bottom:50px;
     padding-bottom:50px;
     border-bottom: 1px dashed #cbd5e1;
-    page-break-inside:avoid;
 }
 .section:last-child {
     border-bottom: none;
@@ -323,7 +322,6 @@ body{
     border:1px solid var(--border);
     border-radius:16px;
     padding:24px;
-    page-break-inside:avoid;
 }
 
 .card h3{
@@ -399,7 +397,6 @@ body{
 .timeline-item{
     position:relative;
     margin-bottom:30px;
-    page-break-inside:avoid;
 }
 
 .timeline-item::before{
@@ -458,7 +455,7 @@ body{
 
 @page{
     size:A4;
-    margin:20mm; /* Aumentado para gerar uma moldura natural na folha */
+    margin:20mm; /* Mantém a moldura do papel */
 }
 
 @media print{
@@ -484,22 +481,28 @@ body{
         border-radius:0;
     }
     
-    /* Zera o padding no print para deixar a @page ditar a margem */
-    .content {
-        padding: 40px 0; 
+    /* Remove padding excessivo na impressão e compacta as seções */
+    .content { padding: 20px 0; }
+    .hero { padding: 40px; border-radius: 12px; margin-bottom: 20px; }
+    .cta { padding: 40px; border-radius: 12px; margin-top: 20px; }
+    
+    .section {
+        margin-bottom: 30px !important;
+        padding-bottom: 30px !important;
     }
 
-    /* Arredonda o Hero para não sangrar cru nas bordas se tiver margem */
-    .hero, .cta {
-        border-radius: 16px;
-        margin-bottom: 20px;
-    }
-
-    .section,
+    /* Impede que os cartões e itens do cronograma quebrem ao meio */
     .card,
-    .timeline-item{
-        break-inside:avoid;
-        page-break-inside:avoid;
+    .timeline-item,
+    .client-box {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* Impede que os títulos fiquem isolados no final de uma página */
+    h2, h3, h4, .section-title, .section-sub {
+        break-after: avoid;
+        page-break-after: avoid;
     }
 
     /* Remove outline de elementos editáveis na impressão */
@@ -542,12 +545,18 @@ body{
 
 <body>
 
+<!-- ========================= -->
+<!-- PAINEL -->
+<!-- ========================= -->
+
 <div id="panel">
 
     <div class="logo">
         <h1>Papo de <span>Alcance</span></h1>
         <p>Gerador de propostas comerciais profissionais.</p>
     </div>
+
+    <!-- CLIENTE -->
 
     <div class="block">
 
@@ -564,6 +573,8 @@ body{
         </div>
 
     </div>
+
+    <!-- FUNDAÇÃO -->
 
     <div class="block">
 
@@ -603,6 +614,8 @@ body{
 
     </div>
 
+    <!-- SOCIAL -->
+
     <div class="block">
 
         <div class="block-title">Social Media</div>
@@ -631,6 +644,8 @@ body{
         </div>
 
     </div>
+
+    <!-- ADS -->
 
     <div class="block">
 
@@ -665,9 +680,15 @@ body{
 
 </div>
 
+<!-- ========================= -->
+<!-- PREVIEW -->
+<!-- ========================= -->
+
 <div id="preview">
 
 <div class="page">
+
+<!-- HERO -->
 
 <section class="hero">
 
@@ -705,7 +726,11 @@ body{
 
 </section>
 
+<!-- CONTENT -->
+
 <div class="content">
+
+    <!-- DIAGNÓSTICO -->
 
     <section class="section">
 
@@ -714,6 +739,8 @@ body{
         <p class="section-sub" id="out-diagnostic"></p>
 
     </section>
+
+    <!-- FUNDAÇÃO -->
 
     <section class="section" id="foundationSection">
 
@@ -728,6 +755,8 @@ body{
 
     </section>
 
+    <!-- SOCIAL -->
+
     <section class="section" id="socialSection">
 
         <h2 class="section-title">Social Media</h2>
@@ -741,6 +770,8 @@ body{
 
     </section>
 
+    <!-- ADS -->
+
     <section class="section" id="adsSection">
 
         <h2 class="section-title">Tráfego Pago</h2>
@@ -753,6 +784,8 @@ body{
         <div class="cards" id="adsCards"></div>
 
     </section>
+
+    <!-- CRONOGRAMA -->
 
     <section class="section">
 
@@ -807,6 +840,8 @@ body{
     </section>
 
 </div>
+
+<!-- CTA -->
 
 <section class="cta">
 
