@@ -34,6 +34,16 @@ body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); d
 .form-group input,
 .form-group textarea{ width:100%; padding:12px; border-radius:10px; background:#111827; color:white; border:1px solid rgba(255,255,255,.08); font-family:'Inter',sans-serif; }
 .form-group textarea{ min-height:100px; resize:vertical; }
+
+/* Novo estilo para os blocos com Parcela (Fundação) */
+.check-box { margin-bottom:12px; background:rgba(255,255,255,.03); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,.04); }
+.check-box .check-title { display:flex; align-items:center; gap:10px; font-size:14px; margin-bottom:12px; font-weight:500; }
+.check-box .inputs { display:flex; gap:12px; }
+.check-box .input-group { flex:1; }
+.check-box .input-group label { display:block; margin-bottom:6px; font-size:11px; color:#94a3b8; }
+.check-box .input-group input { width:100%; padding:10px; border-radius:8px; background:#111827; color:white; border:1px solid rgba(255,255,255,.08); font-family:'Inter',sans-serif; }
+
+/* Estilo antigo mantido para Social e Ads */
 .check{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; background:rgba(255,255,255,.03); padding:12px; border-radius:12px; }
 .check-left{ display:flex; align-items:center; gap:10px; font-size:14px; }
 .check input[type="number"]{ width:110px; padding:10px; border-radius:8px; background:#111827; color:white; border:1px solid rgba(255,255,255,.08); font-family:'Inter',sans-serif; }
@@ -225,22 +235,62 @@ body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); d
   </div>
 
   <div class="block">
-    <div class="block-title">Fundação Digital</div>
-    <div class="check">
-      <div class="check-left"><input type="checkbox" id="c-gmn" checked onchange="render()"> GMN</div>
-      <input type="number" id="v-gmn" value="597" min="0" oninput="render()">
+    <div class="block-title">Fundação Digital (Nubank Tap)</div>
+    
+    <div class="check-box">
+      <div class="check-title"><input type="checkbox" id="c-gmn" checked onchange="render()"> GMN</div>
+      <div class="inputs">
+        <div class="input-group">
+          <label>À vista (R$)</label>
+          <input type="number" id="v-gmn" value="597" min="0" oninput="render()">
+        </div>
+        <div class="input-group">
+          <label>Parcela 12x (R$)</label>
+          <input type="number" id="p-gmn" value="62.40" min="0" step="0.01" oninput="render()">
+        </div>
+      </div>
     </div>
-    <div class="check">
-      <div class="check-left"><input type="checkbox" id="c-lp" checked onchange="render()"> Landing Page</div>
-      <input type="number" id="v-lp" value="997" min="0" oninput="render()">
+
+    <div class="check-box">
+      <div class="check-title"><input type="checkbox" id="c-lp" checked onchange="render()"> Landing Page</div>
+      <div class="inputs">
+        <div class="input-group">
+          <label>À vista (R$)</label>
+          <input type="number" id="v-lp" value="997" min="0" oninput="render()">
+        </div>
+        <div class="input-group">
+          <label>Parcela 12x (R$)</label>
+          <input type="number" id="p-lp" value="104.20" min="0" step="0.01" oninput="render()">
+        </div>
+      </div>
     </div>
-    <div class="check">
-      <div class="check-left"><input type="checkbox" id="c-site" onchange="render()"> Site Institucional</div>
-      <input type="number" id="v-site" value="2497" min="0" oninput="render()">
+
+    <div class="check-box">
+      <div class="check-title"><input type="checkbox" id="c-site" onchange="render()"> Site Institucional</div>
+      <div class="inputs">
+        <div class="input-group">
+          <label>À vista (R$)</label>
+          <input type="number" id="v-site" value="2497" min="0" oninput="render()">
+        </div>
+        <div class="input-group">
+          <label>Parcela 12x (R$)</label>
+          <input type="number" id="p-site" value="260.90" min="0" step="0.01" oninput="render()">
+        </div>
+      </div>
     </div>
-    <div class="check">
-      <div class="check-left"><input type="checkbox" id="c-ecom" onchange="render()"> E-commerce</div>
-      <input type="number" id="v-ecom" value="3997" min="0" oninput="render()">
+
+    <div class="check-box">
+      <div class="check-title"><input type="checkbox" id="c-ecom" onchange="render()"> E-commerce</div>
+      <div class="inputs">
+        <div class="input-group">
+          <label>À vista (R$)</label>
+          <input type="number" id="v-ecom" value="3997" min="0" oninput="render()">
+        </div>
+        <div class="input-group">
+          <label>Parcela 12x (R$)</label>
+          <input type="number" id="p-ecom" value="417.70" min="0" step="0.01" oninput="render()">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -383,7 +433,7 @@ function render(){
   /* ── FOUNDATION ── */
   const foundation = [
     { id:'gmn',  title:'Google Meu Negócio Estratégico', items:['SEO local e posicionamento','Otimização de descoberta','Gestão de reputação','Aumento de conversão'] },
-    { id:'lp',   title:'Landing Page de Conversão',       items:['Copy persuasiva','Estrutura de vendas','Integração WhatsApp','Experiência premium'] },
+    { id:'lp',   title:'Landing Page de Conversão',      items:['Copy persuasiva','Estrutura de vendas','Integração WhatsApp','Experiência premium'] },
     { id:'site', title:'Site Institucional Premium',       items:['Design responsivo','Estrutura profissional','SEO técnico','Alta performance'] },
     { id:'ecom', title:'E-commerce Profissional',          items:['Catálogo otimizado','Checkout estratégico','Integrações completas','Escalabilidade'] }
   ];
@@ -392,12 +442,14 @@ function render(){
   foundation.forEach(s => {
     if(document.getElementById(`c-${s.id}`).checked){
       const value = parseFloat(document.getElementById(`v-${s.id}`).value || 0);
+      const installment = parseFloat(document.getElementById(`p-${s.id}`).value || 0);
+      
       foundationHTML += `
         <div class="card">
           <h3>${s.title}</h3>
           <ul>${s.items.map(i=>`<li>${i}</li>`).join('')}</ul>
           <div class="price-area">
-            <div class="installment-line">12x de ${money(value/12)}</div>
+            <div class="installment-line">12x de ${money(installment)}</div>
             <div class="full-price">ou à vista por <strong>${money(value)}</strong></div>
             <div class="price-note">Parcelamento disponível via Nubank Tap.</div>
           </div>
